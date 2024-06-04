@@ -2,7 +2,7 @@ clear
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Modeling parameters
-param.nRaySPECT = 1+6%+12+18+24; % Number of rays: for example 7 for centre and all hexagon corners
+param.nRaySPECT = 1+6+12+18+24; % Number of rays: for example 7 for centre and all hexagon corners
 param.coneMethod = 1;
 ix = 0; % Pixel index
 iy = 0; % Pixel index
@@ -79,7 +79,7 @@ grid on
 title('Kollimaattorin malli 2')
 
 f2.Position = [100 100 640 480];
-% exportgraphics(f2, "2d-kollimaattori.pdf", 'resolution', 1500, 'contenttype', 'vector')
+% exportgraphics(f2, "../kuvat/2d-kollimaattori.pdf", 'resolution', 1500, 'contenttype', 'vector')
 
 %% 3D Plot
 param.coneMethod = 1;
@@ -149,7 +149,7 @@ ax.ZLabel.Position = 1.1 * [-xlimits, -ylimits, 0];
 ax.ZLabel.Rotation = 0;
 
 f3.Position = [100 100 640 480];
-% exportgraphics(f3, "3d-kollimaattori2.pdf", 'resolution', 1500, 'contenttype', 'vector')
+% exportgraphics(f3, "../kuvat/3d-kollimaattori2.pdf", 'resolution', 1500, 'contenttype', 'vector')
 
 %%
 function hexShifts = computeHexShifts2D(nPoints, startAngle, diameter)
