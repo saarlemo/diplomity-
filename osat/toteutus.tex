@@ -4,9 +4,7 @@ Säteen lävistämien kuva-alueen vokseleiden laskentaan Siddonin algoritmilla t
 \subsection{Kollimaattorin mallinnus}
 Työssä toteutettiin kaksi eri mallia kollimaattorille, jonka reiät ovat suoria särmiöitä kuusikulmaisella pohjalla. Toinen malli on kehitetty mahdollisimman todenmukaista rekonstruktiota varten ja toinen laskentatehokkuutta ajatellen.
 
-Parametreinä kummassakin mallissa ovat detektorin pikselin koko, kollimaattorin reiän halkaisija, reiän pituus, reikien välinen etäisyys (\textit{septal width}) ja kuusikulmaisen reiän suuntaus.
-
-Molemmissa malleissa kollimaattorin yksittäisen reiän ajatellaan koostuvan sisäkkäisistä kuusikulmaisista suorista särmiöistä. Jokaiselle särmiölle muodostetaan kuusi avaruuslävistäjää, jotka toimivat projektion laskennassa tarvittavina säteinä. Ennen laskentaa kuitenkin tarkistetaan vielä, että säteet osuvat oikeaan pikseliin detektorissa. \hyperref[fig:ray1]{Kuva \ref*{fig:ray1}} havainnollistaa detektoripaneelin tasoa ja kollimaattorin malleja. Tasolle on rajattu detektorin pikselit punaisella viivalla ja säteiden päätepisteet sinisillä pisteillä.
+Kummassakin mallissa kollimaattorin yksittäisen reiän ajatellaan koostuvan sisäkkäisistä kuusikulmaisista suorista särmiöistä. Jokaiselle särmiölle muodostetaan kuusi avaruuslävistäjää, jotka toimivat projektion laskennassa tarvittavina säteinä. Ennen laskentaa kuitenkin tarkistetaan vielä, että säteet osuvat oikeaan pikseliin detektorissa. \hyperref[fig:ray1]{Kuva \ref*{fig:ray1}} havainnollistaa detektoripaneelin tasoa ja kollimaattorin malleja. Tasolle on rajattu detektorin pikselit punaisella viivalla ja säteiden päätepisteet sinisillä pisteillä.
 
 \begin{figure}[t]
     \centering
@@ -39,9 +37,42 @@ Kuviin \ref{fig:ray2} ja \ref{fig:ray3} on piirretty kuva-alue kolmiulotteisessa
 \end{figure}
 
 \subsection{Koodin toiminta}
-\textcolor{red}{Apufunktiot \hyperref[appendix:apufunktiot]{Liite \ref*{appendix:apufunktiot}}}
+Kollimaattorin mallintava koodi kehitettiin MATLAB-ympäristössä (R2023b, Mathworks Inc) testauksen nopeuden ja helppouden vuoksi. Toimivassa versiossa hyödynnettiin eräitä MATLABin funktioita, joita ei ole C++:n vakiokirjastossa. Näitä ovat muun muuassa trigonometriset funktiot, joiden argumenttina on kulma asteina sekä \texttt{floorDiv}, joka laskee ensin kahden luvun osamäärän ja pyöristää sen alaspäin lähimpään kokonaislukuun. Koodin luettavuuden kannalta on helpompaa toteuttaa nämä erillisinä apufunktioina C++:ssa. Apufunktiot kokonaisuudessaan ovat esitetty \hyperref[appendix:apufunktiot]{liitteessä \ref*{appendix:apufunktiot}}.
 
 \textcolor{red}{2D siirto \hyperref[appendix:2Dsiirto]{Liite \ref*{appendix:2Dsiirto}}}
+
+Parametreinä kummassakin mallissa ovat detektorin pikselin koko, pikselin indeksi detektoripaneelissa, kollimaattorin reiän halkaisija, reiän pituus, reikien välinen etäisyys (\textit{septal width}), kuusikulmaisen reiän suuntaus ja säteiden lukumäärä. Reiän suuntauksessa arvo 1 asettaa kuusikulmion kärjet detektoripaneelin tason $x$-akselin suuntaisesti ja arvo 2 $y$-akselin suuntaisesti.
+
+Pääfunktion \texttt{computeSpectHexShifts} parametrit ovat esitetty myös \hyperref[tbl:parametrit]{Taulukossa \ref*{tbl:parametrit}}.
+\begin{table}[H]
+    \centering
+    \captionsetup{width=.9\textwidth}
+    \caption{Funktion \texttt{computeSpectHexShifts} parametrit}
+    \resizebox{\columnwidth}{!}{%
+        \begin{tabular}{lcc}
+            \toprule
+            Parametrin nimi & Arvo & Kuvaus \\
+            \midrule
+            \texttt{param.coneMethod} & $\left\{ 1, 2 \right\}$ & Mallin valinta \\
+            \texttt{param.hexOrientation} & $\left\{ 1, 2 \right\}$ & Kuusikulmion pohjan suuntaus \\
+            \texttt{param.nRaySPECT} & $\mathbb{N}$ & Säteiden lukumäärä yhdessä kollimaattorin reiässä \\
+            \texttt{param.dPitchXY} & $>0$ & Detektorin pikselin reunan pituus \\
+            \texttt{param.colL} & $>0$ & Kollimaattorin reiän pituus \\
+            \texttt{param.colD} & $>0$ & Kollimaattorin reiän halkaisija \\
+            \texttt{param.dSeptal} & $>0$ & Kollimaattorin reikien välinen etäisyys \\
+            \texttt{detectors.xd} & $\mathbb{R}$ & Detektorin pikselin keskipisteen $x$-koordinaatti \\
+            \texttt{detectors.yd} & $\mathbb{R}$ & Detektorin pikselin keskipisteen $y$-koordinaatti \\
+            \texttt{detectors.zd} & $\mathbb{R}$ & Detektorin pikselin keskipisteen $z$-koordinaatti \\
+            \texttt{detectors.xs} & $\mathbb{R}$ & \texttt{detectors.xd} + detektoripaneelin sisänormaalivektorin $x$-komponentti \\
+            \texttt{detectors.ys} & $\mathbb{R}$ & \texttt{detectors.yd} + detektoripaneelin sisänormaalivektorin $y$-komponentti \\
+            \texttt{detectors.zs} & $\mathbb{R}$ & \texttt{detectors.zd} + detektoripaneelin sisänormaalivektorin $z$-komponentti \\
+            \texttt{ix} & $\mathbb{N}$ & Detektorin pikselin indeksi paneelin $x$-suunnassa \\
+            \texttt{iy} & $\mathbb{N}$ & Detektorin pikselin indeksi paneelin $y$-suunnassa \\
+            \bottomrule
+        \end{tabular}
+    }
+    \label{tbl:parametrit}
+\end{table}
 
 \textcolor{red}{3D siirto \hyperref[appendix:3Dsiirto]{Liite \ref*{appendix:3Dsiirto}}}
 
