@@ -37,7 +37,7 @@ Kuviin \ref{fig:ray2} ja \ref{fig:ray3} on piirretty kuva-alue kolmiulotteisessa
 \end{figure}
 
 \subsection{Koodin toiminta}
-Kollimaattorin mallintava koodi kehitettiin MATLAB-ympäristössä (R2023b, Mathworks Inc) testauksen nopeuden ja helppouden vuoksi. Toimivassa versiossa hyödynnettiin eräitä MATLABin funktioita, joita ei ole C++:n vakiokirjastossa. Näitä ovat muun muuassa trigonometriset funktiot, joiden argumenttina on kulma asteina sekä \texttt{floorDiv}, joka laskee ensin kahden luvun osamäärän ja pyöristää sen alaspäin lähimpään kokonaislukuun. Koodin luettavuuden kannalta on helpompaa toteuttaa nämä erillisinä apufunktioina C++:ssa. Apufunktiot kokonaisuudessaan ovat esitetty \hyperref[appendix:apufunktiot]{liitteessä \ref*{appendix:apufunktiot}}.
+Kollimaattorin mallintava koodi kehitettiin MATLAB-ympäristössä \textcolor{red}{(R2023b, Mathworks Inc.)} testauksen nopeuden ja helppouden vuoksi. Toimivassa versiossa hyödynnettiin eräitä MATLABin funktioita, joita ei ole C++:n vakiokirjastossa. Näitä ovat muun muuassa trigonometriset funktiot, joiden argumenttina on kulma asteina sekä \texttt{floorDiv}, joka laskee ensin kahden luvun osamäärän ja pyöristää sen alaspäin lähimpään kokonaislukuun. Koodin luettavuuden kannalta on helpompaa toteuttaa nämä erillisinä apufunktioina C++:ssa. Apufunktiot kokonaisuudessaan ovat esitetty \hyperref[appendix:apufunktiot]{liitteessä \ref*{appendix:apufunktiot}}.
 
 \textcolor{red}{2D siirto \hyperref[appendix:2Dsiirto]{Liite \ref*{appendix:2Dsiirto}}}
 
