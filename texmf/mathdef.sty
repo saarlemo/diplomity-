@@ -1,0 +1,49 @@
+\ProvidesPackage{texmf/mathdef}
+
+\newcommand{\pd}[2]{ %Osittaisderivaatta \pd{}{}
+    \frac{\partial #1}{\partial #2}
+}
+
+%\newcommand{\qed}{\hfill$\square$} %Todistusneliö \qed
+\newcommand{\cmark}{{\color{green}\checkmark}} %Vihreä oikein-merkki \cmark
+\newcommand*\conj[1]{\overline{#1}} %Kompleksikonjugaatti \conj{}
+\newcommand{\RR}{\mathbb{R}} %Reaaliluvut \RR
+\newcommand{\CC}{\mathbb{C}} %Kompleksiluvut \CC
+\newcommand{\NN}{\mathbb{N}} %Luonnolliset luvut \NN
+\newcommand{\ZZ}{\mathbb{Z}} %Kokonaisluvut \ZZ
+\newcommand{\QQ}{\mathbb{Q}} %Rationaaliluvut \QQ
+\newcommand{\PP}{\mathbb{P}} %P-kirjain (todennäköisyys) \PP
+%\newcommand{\SSS}{\mathbb{S}}
+
+\newcommand{\substitution}[2]{ %Sijoitus integraalissa \substitution{}{}
+    \bigg\slash_{\!\!\!\!\!#1}^{#2}
+}
+
+\newcommand\osubset{ %Avoin osajoukko \osubset
+    \mathrel{
+        \ooalign{
+            $\subset$
+            \cr
+            \hidewidth
+            \raise.0ex
+            \hbox{$\circ\mkern.9mu$}
+            \cr
+        }
+    }
+}
+
+\newcommand{\upRiemannint}[2]{ %Yläintegraali
+    \overline{\int_{#1}^{#2}}
+}
+\newcommand{\loRiemannint}[2]{ %Alaintegraali 
+    \underline{\int_{#1}^{#2}}
+}
+\newcommand{\Riemannint}[2]{ %Integraali
+    \int_{#1}^{#2}
+}
+\newcommand{\Pathint}[1]{ %Polkuintegraali
+    \oint_{#1}
+}
+
+\newcommand{\viiva}{\mathop{\bigg/}}
+\newcommand{\sij}[3]{\viiva\limits_{\hspace*{-5mm}{#1}}^{\hspace*{5mm}{#2}}{#3}}

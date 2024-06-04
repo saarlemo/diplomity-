@@ -1,0 +1,167 @@
+\ProvidesPackage{texmf/preamble}
+
+\usepackage[finnish]{babel}
+\usepackage[finnish]{datetime2}
+\usepackage[
+    a4paper,
+    top=3cm,
+    bottom=3cm,
+    left=1.5in,
+    right=1.5in,
+    includeheadfoot,
+]{geometry}
+\usepackage[font=small,labelfont=bf,justification=justified,
+format=plain]{caption}
+\usepackage{amsmath}
+
+\usepackage{subcaption}
+
+\makeatletter %% Laajennettu matriisi
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother %%
+
+\usepackage{amssymb}
+\usepackage{systeme}
+
+\allowdisplaybreaks
+
+\usepackage[ % Liite
+    title,
+    titletoc
+]{appendix}
+
+\usepackage{marginnote} % Sivuhuomautukset
+\usepackage{marginfix} % Sivuhuomautukset
+
+\usepackage{setspace} % Riviväli
+\onehalfspacing % Riviväli 1.5
+
+\usepackage{hyperref} % Viittaukset kuviin ja taulukoihin
+\hypersetup{
+    hidelinks,
+}
+
+\usepackage{microtype} % Parannuksia tekstin asetteluun
+\usepackage{float} % Kuva tai taulukko esimerkkiympäristön sisään
+\usepackage{csquotes} % Babel- ja biblatex-paketteja varten lainausmerkkien asettelu
+\usepackage[version=4]{mhchem} % Kemia
+\usepackage{systeme} % Yhtälöryhmät
+\usepackage[shortlabels]{enumitem} %Luettelointi
+\setlist[description]{font=\normalfont} % description-ympäristön tummennus
+\renewcommand{\labelenumi}{\theenumi)} % enumerate-ympäristö
+
+
+\usepackage[ %Värejä
+    svgnames,
+    usenames,    
+    dvipsnames,
+]{xcolor}
+\definecolor{chocolate(traditional)}{rgb}{0.48, 0.25, 0.0}
+
+\usepackage{graphicx} % Kuvien liittäminen
+\usepackage{svg} % Vektorigrafiikkaa
+
+\usepackage{tikz} % Tikz-kaaviot
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{
+    decorations.markings,
+    calc,
+    decorations.pathreplacing,
+    calligraphy,
+    shapes.geometric,
+}
+
+\usepackage[framemethod=TikZ]{mdframed} % Kehykset laatikoihin
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI} % Yhtälöihin hienot lukuarvot ja muuttujat
+\usepackage{siunitx}
+\DeclareSIUnit\curie{Ci}
+\DeclareSIUnit\year{y}
+\DeclareSIUnit\atomicmassunit{u}
+\sisetup{
+    per-mode=fraction,
+%   exponent-mode = scientific
+}
+
+%\usepackage{mathtools} % Yhtälöiden numerointiin tummennus
+%\newtagform{bbrackets}[\textbf]{\textbf{(}}{\textbf{)}}
+%\usetagform{bbrackets}
+
+\usepackage{chngcntr} % Kuvien ja yhtälöiden numerointi
+%\counterwithin{figure}{section}
+\counterwithin{equation}{section}
+%\counterwithin{equation}{subsection}
+
+\usepackage[automark]{scrlayer-scrpage} % Header and footer
+\pagestyle{scrheadings} 
+\clearpairofpagestyles % Clear the default settings
+\cfoot{\normalfont\thepage} % Set the center footer to display the page number
+
+\setlength{\abovecaptionskip}{10pt} % Kuvatekstin etäisyys kuvaan
+\setlength{\belowcaptionskip}{15pt plus 3pt minus 2pt} % Kuvatekstin etäisyys kuvaan
+
+\usepackage{booktabs} % Taulukot
+\usepackage{pdfpages} %PDF-tiedoston liittäminen
+\setkomafont{disposition}{\normalfont\bfseries} %Otsikoiden fontti
+%\usepackage{stackrel} %Päällekkäiset symbolit
+%\usepackage[thinc]{esdiff} %Derivaatta
+
+\usepackage[ %Viittaukset
+    style=numeric-comp,
+    sorting=nyt,
+    sortcites=true,
+    doi=false,
+    useeditor=false,
+    isbn=false,
+    url=false,
+    eprint=false,
+    giveninits=true,
+    date=year,
+]{biblatex} 
+
+\DeclareSourcemap{ % Remove editor
+  \maps[datatype=bibtex, overwrite]{
+    \map{
+      \step[fieldset=editor, null]
+    }
+  }
+}
+
+\renewcommand\multicitedelim{\addsemicolon\space}
+\DeclareFieldFormat[unpublished]{title}{\textit{#1}}
+%\DeclareFieldFormat[unpublished]{url}{\url{#1}}
+%\DeclareFieldFormat*{url}{}
+%\DeclareFieldFormat[unpublished]{url}{\mkbibacro{URL}\addcolon\space\url{#1}}
+\DeclareFieldFormat*{urldate}{}
+\DeclareFieldFormat[unpublished, online]{urldate}{\mkbibparens{\bibstring{urlseen}\space#1}}
+
+\DeclareNameAlias{author}{family-given}
+\DeclareNameAlias{editor}{family-given}
+\DeclareNameAlias{translator}{family-given}
+\DefineBibliographyStrings{finnish}{andothers={ym.}}
+%\AtEveryCitekey{\clearlist{location}}
+%\AtEveryBibitem{\clearlist{location}}
+\AtEveryBibitem{\clearfield{series}}
+\AtEveryBibitem{\clearfield{edition}}
+\AtEveryBibitem{\clearfield{month}}
+\AtEveryCitekey{\clearfield{month}}
+
+\renewbibmacro*{publisher+location+date}{%
+    \printlist{publisher}%
+    \iflistundef{location}
+        {\setunit*{\addcomma\space}}
+        {\setunit*{\addcomma\space}}%
+    \printlist{location}%
+    \setunit*{\addcomma\space}%
+    \usebibmacro{date}%
+    \newunit
+}
+\addbibresource{viitteet.bib}
+
+%\usepackage[intoc]{nomencl} % Merkinnät
+%\makenomenclature
+%\renewcommand{\nomname}{Käytetyt merkinnät}

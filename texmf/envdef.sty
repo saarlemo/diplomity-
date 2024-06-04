@@ -1,0 +1,59 @@
+\ProvidesPackage{texmf/envdef}
+
+\usepackage{amsthm}
+
+%Tehtävä- ja ratkaisuympäristöt
+\newenvironment{todistus}
+{\noindent{\textit{Todistus.}}}{\hfill $\Box$\par\vspace{2.5mm}}
+
+\newtheoremstyle{usrplain}
+    {\topsep}
+    {\topsep}
+    {\itshape}
+    {0pt}
+    {\bfseries}
+    {.}
+    {5pt plus 1pt minus 1pt}
+    {\thmname{#1}\thmnumber{ #2}\thmnote{ \textnormal{#3}}}
+
+\newtheoremstyle{usrdefinition}
+    {\topsep}
+    {\topsep}
+    {\normalfont}
+    {0pt}
+    {\bfseries}
+    {.}
+    {5pt plus 1pt minus 1pt}
+    {\thmname{#1}\thmnumber{ #2}\thmnote{ \textnormal{#3}}}
+
+\newtheoremstyle{usrremark}
+    {0.5\topsep}
+    {0.5\topsep}
+    {\normalfont}
+    {0pt}
+    {\itshape}
+    {.}
+    {5pt plus 1pt minus 1pt}
+    {\thmname{#1}\thmnumber{ #2}\thmnote{ \textnormal{#3}}}
+
+%\theoremstyle{usrdefinition}
+%\newtheorem{exercise}{Problem}[section]
+%\counterwithout{exercise}{section}
+%
+%\newenvironment{solution}
+%{\noindent{\textit{Solution.}}}{\hfill $\Box$\par\vspace{2.5mm}}
+
+\newtheorem{lause}{Lause}[subsection]
+\newtheorem{lemma}[lause]{Lemma}
+\newtheorem{propositio}[lause]{Propositio}
+\newtheorem{seuraus}[lause]{Seuraus}
+
+\theoremstyle{usrdefinition}
+\newtheorem{määritelmä}[lause]{Määritelmä}
+\newtheorem{konjektuuri}[lause]{Konjektuuri}
+\newtheorem{esimerkki}[lause]{Esimerkki}
+
+\theoremstyle{usrremark}
+\newtheorem{huomautus}[lause]{Huomautus}
+
+\addto\captionsfinnish{\renewcommand{\contentsname}{Sisällys}} %Sisällysluettelon otsikko
