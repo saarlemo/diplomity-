@@ -1128,8 +1128,8 @@ inline std::vector<std::vector<T>> computeHexShifts2D(T nPoints, T startAngle, T
 	}
 
 	uint16_t currentPoint = 0; // Variable to keep count of current point
-	T nLayer = std::ceil(0.5 * std::sqrt(4. * ((T)nPoints - 1.) / (T)3. + 1.) - 1.); // Number of hexagon point layers
 	T radius = diameter / (T)2.; // Hexagon radius
+	T nLayer = std::ceil(0.5 * std::sqrt(4. * ((T)nPoints - 1.) / (T)3. + 1.) - 1.); // Number of hexagon point layers
 
 	T xx_s; // Temporary variable for point location
 	T yy_s; // Temporary variable for point location

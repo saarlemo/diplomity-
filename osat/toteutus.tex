@@ -37,9 +37,59 @@ Kuviin \ref{fig:ray2} ja \ref{fig:ray3} on piirretty kuva-alue kolmiulotteisessa
 \end{figure}
 
 \subsection{Koodin toiminta}
-Kollimaattorin mallintava koodi kehitettiin MATLAB-ympäristössä \textcolor{red}{(R2023b, Mathworks Inc.)} testauksen nopeuden ja helppouden vuoksi. Toimivassa versiossa hyödynnettiin eräitä MATLABin funktioita, joita ei ole C++:n vakiokirjastossa. Näitä ovat muun muuassa trigonometriset funktiot, joiden argumenttina on kulma asteina sekä \texttt{floorDiv}, joka laskee ensin kahden luvun osamäärän ja pyöristää sen alaspäin lähimpään kokonaislukuun. Koodin luettavuuden kannalta on helpompaa toteuttaa nämä erillisinä apufunktioina C++:ssa. Apufunktiot kokonaisuudessaan ovat esitetty \hyperref[appendix:apufunktiot]{liitteessä \ref*{appendix:apufunktiot}}.
+Kollimaattorin mallintava koodi kehitettiin MATLAB-ympäristössä \textcolor{red}{(R2023b, Mathworks Inc.)} testauksen nopeuden ja helppouden vuoksi. Toimivassa versiossa hyödynnettiin eräitä MATLABin funktioita, joita ei ole C++:n vakiokirjastossa. Näitä ovat muun muuassa trigonometriset funktiot, joiden argumenttina on kulma asteina sekä funktio \texttt{floorDiv}, joka laskee ensin kahden luvun osamäärän ja pyöristää sen alaspäin lähimpään kokonaislukuun. Koodin luettavuuden kannalta on helpompaa toteuttaa nämä erillisinä apufunktioina C++:ssa. Apufunktiot kokonaisuudessaan ovat esitetty \hyperref[appendix:apufunktiot]{liitteessä \ref*{appendix:apufunktiot}}.
 
-\textcolor{red}{2D siirto \hyperref[appendix:2Dsiirto]{Liite \ref*{appendix:2Dsiirto}}}
+Koska kummallekin mallille on yhteistä se, kuinka säteet asettuvat kollimaattorin yksittäiseen reikään, oli luontevaa eriyttää säteiden päätepisteiden asettava funktio omakseen. \hyperref[appendix:2Dsiirto]{Liitteen \ref*{appendix:2Dsiirto}} funktio \texttt{computeHexShifts2D} asettaa säännöllisen kuusikulmion sisälle $n\in\NN$ pistettä.
+
+Funktiolle \texttt{computeHexShifts2D} annetaan parametreinä pisteiden lukumäärä \texttt{nPoints}, kuusikulmion kärjen ja $x$-akselin välinen kulma \texttt{startAngle} ja kuusikulmion halkaisija \texttt{diameter}. Funktio palauttaa listan pisteistä $(x, y)\in\RR^2$, jotka vastaavat kuusikulmioon sijoittuvien pisteiden koordinaatteja. Tämä lista, C++:n vakiokirjaston vektori \texttt{hexShifts}, alustetaan rivillä 3. Riveillä 4-6 tarkistetaan, onko kuusikulmioon asetettavien pisteiden lukumäärä 1. Jos näin on, niin ainut palautettava piste on kuusikulmion keskipiste $(0, 0)$. Rivillä 8 asetettu muuttuja \texttt{currentPoint} pitää kirjaa siitä, kuinka monta pistettä vektoriin \texttt{hexShifts} on jo lisätty. Seuraavalla rivillä asetetaan kuusikulmion säteelle apumuuttuja \texttt{radius}, jotta sädettä ei tarvitse laskea kuin kerran.
+
+Kun kuusikulmio jaetaan tasasivuisiin kolmioihin, kolmioiden kärkipisteistä saadaan tasaisesti jakautuneita pisteitä kuusikulmion sisällä. Kolmioiden määrityksessä kuusikulmio on jaettu useampaan kerrokseen, joista jokaista rajaa kaksi sisäkkäistä kuusikulmiota. Periaate on esitetty \hyperref[fig:6kulmio]{Kuvassa \ref*{fig:6kulmio}} eri kerrosten lukumäärällä. Kuvan vasemmassa laidassa kerroksia on nolla, eli ainoa piste on kuusikulmion keskipiste. Oikealle päin seuraavassa kuvassa kerroksia on yksi eli pisteet ovat kuusikulmion keskipiste ja kaikki kulmat. Seuraavassa kuvassa kerroksia on kaksi, josta nähdään, kuinka voidaan muodostaa 24 tasasivuista kolmiota. Kärkipisteitä näillä kolmioilla on yhteensä 19. Oikeanpuolimmaisessa kuvassa kerroksia on kolme, jolloin kuusikulmio jakautuu 54 tasasivuiseen kolmioon ja 37 kärkipisteeseen.
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\textwidth}
+    \begin{subfigure}[t]{.225\textwidth}
+        \includegraphics[width=.9\linewidth]{kuvat/6kulmio0.pdf}
+        \caption{}
+    \end{subfigure}%
+    \begin{subfigure}[t]{.225\textwidth}
+        \includegraphics[width=.9\linewidth]{kuvat/6kulmio1.pdf}
+        \caption{}
+    \end{subfigure}%
+    \begin{subfigure}[t]{.225\textwidth}
+        \includegraphics[width=.9\linewidth]{kuvat/6kulmio2.pdf}
+        \caption{}
+    \end{subfigure}%
+    \begin{subfigure}[t]{.225\textwidth}
+        \includegraphics[width=.9\linewidth]{kuvat/6kulmio3.pdf}
+        \caption{}
+    \end{subfigure}%
+    \caption{Kuusikulmion jakaminen kerroksiin. Harmaa katkoviiva kuvaa kuusikulmion kehää. Siniset pisteet ovat kuusikulmion jakavien tasasivuisten kolmioiden kärkipisteitä.}
+    \label{fig:6kulmio}
+\end{figure}
+
+Havaitaan, että kerrosten lukumäärän $k$ lisääntyessä yhdellä, olettaen $k>0$, pisteiden lukumäärä lisääntyy $6k$:lla. Siis, jos kerroksia on $k$ kappaletta, niin pisteitä on
+\begin{equation}\label{eqn:pisteidenlkm}
+    n=1+\sum\limits_{i=0}^{k}6i
+\end{equation}
+kappaletta. Koska funktiolle \texttt{computeHexShifts2D} syötetään pisteiden lukumäärä, tasaista asettelua varten täytyy määrittää pienin kerrosten lukumäärä $k$, jolle kaikki pisteet mahtuvat. Käytännössä yhtälöstä (\ref{eqn:pisteidenlkm}) täytyy ratkaista muuttuja $k$, joka tapahtuu aritmeettisen summan osasumman\cite{harjulehto_analyysia_2022} avulla. Osasummasta saadaan
+\begin{equation*}
+    n-1=6\frac{k(k+1)}{2},
+\end{equation*}
+joka on muuttujan $k$ toisen asteen yhtälö. Yhtälön juuret ovat
+\begin{equation*}
+    k=\frac{1}{2}\left( \pm\sqrt{4\cdot\frac{n - 1}{3} + 1} - 1 \right)
+\end{equation*}
+ja koska kerrosten lukumäärän täytyy olla epänegatiivinen, saadaan
+\begin{equation*}
+    k=\frac{1}{2}\left( \sqrt{4\cdot\frac{n - 1}{3} + 1} - 1 \right).
+\end{equation*}
+Kerrosten lukumäärän täytyy olla myös kokonaisluku, joten pyöristetään kerrosten lukumäärä ylöspäin lähimpään kokonaislukuun. Siten
+\begin{equation}\label{eqn:kerrostenlkm}
+    k=\left\lceil\frac{1}{2}\left( \sqrt{4\cdot\frac{n - 1}{3} + 1} - 1 \right)\right\rceil.
+\end{equation}
+Yhtälö (\ref{eqn:kerrostenlkm}) on toteutettu funktion \texttt{computeHexShifts2D} rivillä 10.
+
+Riveillä 12 ja 13 asetetaan tilapäiset muuttujat kuusikulmion pisteen sijainnille. Riviltä 15 eteenpäin käydään läpi jokainen kuusikulmion kerros, jokaisen kerroksen kärki ja asetetaan tilapäisten muuttujien arvoiksi kärjen sijainti. Kerroksella $k$, $k>0$, tilapäistä muuttujaa siirretään $6k$ kertaa tasaisin välein ja pisteet tallennetaan vektoriin \texttt{hexShifts}. Joka lisäyksellä tarkistetaan, onko vektori \texttt{hexShifts} täynnä. Jos on, niin vektori palautetaan.
 
 Parametreinä kummassakin mallissa ovat detektorin pikselin koko, pikselin indeksi detektoripaneelissa, kollimaattorin reiän halkaisija, reiän pituus, reikien välinen etäisyys (\textit{septal width}), kuusikulmaisen reiän suuntaus ja säteiden lukumäärä. Reiän suuntauksessa arvo 1 asettaa kuusikulmion kärjet detektoripaneelin tason $x$-akselin suuntaisesti ja arvo 2 $y$-akselin suuntaisesti.
 
