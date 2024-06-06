@@ -18,8 +18,13 @@ Modernin SPECT-laitteen, jossa gammakamerat pyörivät kuvattavan kohteen ympär
 
 Vaikka emissiotomografiaa ja transmissiotomografiaa yhdisteltiin jo 1960-luvulla, nykyisen kaltaisia SPECT/TT-laitteita ei ollut ennen 1990-lukua. Vuosikymmenen alussa alkanut tutkimus ja kehitys johti ensimmäisen kaupallisen SPECT/TT-laitteen lanseeraamiseen vuonna 1999. Kuitenkaan ne eivät yleistyneet kliinisessä käytössä kovin nopeasti.\cite{hutton_origins_2014}
 
-Uusimmissa SPECT/TT-laitteissa käytetään puolijohdeilmaisimia, joissa havaittu säteily muuttuu suoraan mitattavaksi sähkövirraksi.Kaupalliset puolijohdeilmaisinta käyttävät SPECT/TT-laitteet julkistettiin vuosina 2009--2010.\cite{hutton_origins_2014}.
+Uusimmissa SPECT/TT-laitteissa käytetään puolijohdeilmaisimia, joissa havaittu säteily muuttuu suoraan mitattavaksi sähkövirraksi. Kaupalliset puolijohdeilmaisinta käyttävät SPECT/TT-laitteet julkistettiin vuosina 2009--2010.\cite{hutton_origins_2014}.
 
 Vuoteen 2009 asti kolmiulotteisen kuvan rekonstruktio projektioista oli tehty analyyttisilla algoritmeilla, joihin on hankala sisällyttää tunnettua tietoa aktiivisuusjakaumasta. Analyyttiset algoritmit olivat kuitenkin verrattain nopeita tuolloisella teknologialla. Rinnakkaislaskenta ja uusi näytönohjainteknologia nopeuttivat iteratiivisia rekonstruktiomenetelmiä, joista ensimmäiset hyväksyttiin kliiniseen käyttöön vuonna 2009.\cite{willemink_evolution_2019}
 
 \subsection{Työn tavoite}
+Mooren lain ydinajatus on, että transistorien määrä mikroprosessoreissa kaksinkertaistuu joka toinen vuosi. Transistorien määrä on suoraan verrannollinen laitteen laskentatehoon, joten todennäköisesti sillä laitteella, jolla luet tätä diplomityötä, voisi rekonstruoida standardikokoisen SPECT-kuvan kohtuullisessa ajassa.
+
+OMEGA (\textit{Open-source MATLAB/GNU Octave Emission and Transmission Tomography Software}) on avoimen lähdekoodin ohjelmisto, joka on suunniteltu emissio- ja transmissiotomografiakuvan rekonstruktioon. Nykyisellään OMEGA tukee positroniemissiotomografia- (PET, \textit{positron emission tomography}) ja tietokonetomografiakuvan rekonstruktiota sekä keskusyksiköllä että näytönohjaimella.\cite{wettenhovi_omegaopen-source_2021}. Toissijaisesti OMEGA on tarkoitettu alustaksi, johon on suoraviivaista toteuttaa uusia rekonstruktiomenetelmiä. 
+
+Tämän teknillisen fysiikan diplomityön tavoitteena on toteuttaa OMEGA-ohjelmistoon keskusyksiköllä ajettava rekonstruktio SPECT-kuvalle. Rekonstruktio ei rajoitu yksittäiseen laitteeseen, vaan toimii kaikissa SPECT-laitteissa joiden kollimaattorissa on kuusikulmaiset reiät.
