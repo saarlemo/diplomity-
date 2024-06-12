@@ -1,25 +1,24 @@
 \section{Yksifotoniemissiotomografia}
 \textcolor{red}{Tähän yleisesti emissiotomografiasta}
 \subsection{Säteilyfysiikka}
-Energiaa voi siirtyä usealla eri tavalla, joista yksi on säteily.
+Radioaktiivinen hajoaminen on prosessi, jossa epävakaat atomiytimet muuttuvat vakaammiksi lähettäen säteilyä. Vakainta ytimen tilaa sanotaan perustilaksi. Virittyneessä ja metastabiilissa tilassa oleva ydin voi puolestaan spontaanisti muuttua toiseksi, vakaammaksi ytimeksi. Virittyneen ja metastabiilin tilan keskinäinen ero on spontaaniin hajoamiseen kuluva keskimääräinen aika: jos hajoamiseen kuluu yli \qty{1e-12}{\second}, atomia pidetään metastabiilina\cite{cherry_basic_2012}.
 
-\textcolor{red}{Radioaktiivinen hajoaminen: säteilyn syntyminen}\\
-Atomin ytimen nukleonit, eli protonit ja neutronit, voivat olla joko perustilassa, virittyneessä tilassa tai metastabiilissa tilassa\cite{cherry_basic_2012}. Perustila on kaikkein vakain nukleonien muodostelma. Virittyneessä ja metastabiilissa tilassa oleva ydin puolestaan voi spontaanisti muuttua toiseksi, vakaammaksi ytimeksi. Hajoamisprosessia sanotaan radioaktiiviseksi hajoamiseksi.\cite{cherry_modes_2012} Virittyneen ja metastabiilin tilan ero on spontaaniin hajoamiseen keskimäärin kuluva aika: jos hajoamiseen kuluu yli \qty{1e-12}{\second}, atomi luokitellaan metastabiiliksi\cite{cherry_basic_2012}.
+Hajoamisessa syntynyt säteily voi olla hiukkassäteilyä (alfa- tai beetasäteilyä) tai sähkömagneettista säteilyä (gammasäteilyä).\cite{cherry_basic_2012, cherry_interaction_2012} Luokittelu tehdään siksi, koska energian siirtymisen periaate ja vuorovaikutus aineen kanssa eroavat oleellisesti hiukkas- ja sähkömagneettisessa säteilyssä.
 
-\textcolor{red}{Protonien, neutronien, elektronien ja atomien massan muuttumien gammakvantin energiaksi}\\
-\textcolor{red}{Hajoamislajit ja niiden merkitys isotooppilääketieteessä}
+Hiukkassäteilyssä energia siirtyy liikkuvien hiukkasten kineettisenä energiana verrattain hitaasti, noin \qtyrange{5}{7}{\percent} valon nopeudesta. Hiukkasen verrattain suuren koon vuoksi hiukkassäteily ei ole läpitunkevaa. Esimerkiksi $\alpha$-hiukkanen pysähtyy paperiarkkiin ja $\beta$-hiukkasen pysäyttämiseen riittää akryylilevy.
+
+Sähkömagneettisen säteilyn energia on sähkömagneettisessa kentässä, jossa informaatio siirtyy täsmälleen valon nopeudella.\cite{cherry_basic_2012} Sähkömagneettista säteilyä ovat esimerkiksi gammasäteily sekä näkyvä valo. Vaikka gammasäteily ja näkyvä valo ovat molemmat sähkömagneettista säteilyä, gammasäteily on merkittävästi vaarallisempaa. Ero johtuu yksittäisen kvantin energiasta, joka on tuhansia kertoja suurempi gammakvantilla kuin näkyvällä valolla. Radioaktiivisessa hajoamisessa syntyvä säteily on luonteeltaan ionisoivaa: vuorovaikuttaessaan aineen kanssa säteily voi irrottaa atomeista elektroneja\cite{cherry_interaction_2012}. Gammasäteily on erittäin läpitunkevaa korkeaenergisenä sähkömagneettisena säteilynä.
+
+Hajoamislajeista yleisimmät ovat
 \begin{itemize}
-    \item $\beta^{-}$
-    \item $\beta^{+}$
-    \item IT, IC
-    \item Elektronisieppaus
-    \item $\alpha$
+    \item $\beta^{-}$-hajoaminen, jossa neutroni muuttuu protoniksi, elektroniksi ja antineutriinoksi.  Hajoamisessa vapautuva energia siirtyy elektronin liike-energiaksi.
+    \item $\beta^{+}$-hajoaminen, jossa protoni muuttuu neutroniksi, positroniksi ja neutriinoksi. Hajoamisessa vapautuva energia siirtyy positronin liike-energiaksi. Positroni vuorovaikuttaa aineen kanssa siirtäen liike-energiaa aineeseen. Lopulta positroni annihiloituu aineen elektronin kanssa muodostaen kaksi gammakvanttia.
+    \item isomeerinen siirtymä (IT, \textit{isomeric transition}), jossa ydin siirtyy virittyneestä tilasta perustilaan emittoimalla gammakvantin.
+    \item sisäinen konversio (IC, \textit{internal conversion}), jossa ydin siirtyy virittyneestä tilasta perustilaan siirtäen energian elektronille, joka poistuu atomista.
+    \item elektronisieppaus, jossa ytimen protoni sieppaa ydintä kiertävän elektronin, muuttuen neutroniksi ja neutriinoksi. Hajoamisessa syntyvä ydin on mahdollisesti virittyneessä tilassa, joka voi purkautua joko isomeerisella siirtymällä tai sisäisellä konversiolla.
+    \item $\alpha$-hajoaminen, jossa raskas ydin emittoi $\alpha$-hiukkasen, jossa on kaksi protonia ja kaksi neutronia.
+    \item fissio, jossa raskas ydin hajoaa kahdeksi tai useammaksi kevyemmäksi ytimeksi, jolloin vapautuu energiaa ja useita neutroneja.
 \end{itemize}
-
-\textcolor{red}{Hiukkassäteily, sähkömagneettinen säteily ja niiden merkitys isotooppilääketieteessä}
-Säteily jaetaan usein kahteen luokkaan: hiukkassäteilyyn ja sähkömagneettinen säteilyyn.\cite{cherry_basic_2012, cherry_interaction_2012} Luokittelu tehdään siksi, koska energian siirtymisen tapa ja nopeus eroaa oleellisesti hiukkas- ja sähkömagneettisessa säteilyssä.
-
-Hiukkassäteilyssä energia siirtyy liikkuvien hiukkasten kineettisenä energiana verrattain hitaasti, noin \qtyrange{5}{7}{\percent} valon nopeudesta. Sähkömagneettisen säteilyn energia on sähkömagneettisessa kentässä, jossa informaatio siirtyy täsmälleen valon nopeudella.\cite{cherry_basic_2012} Hiukkassäteilystä esimerkkinä toimii raskaiden atomien hajoamisessa syntyvät $\alpha$-hiukkaset ja sähkömagneettista säteilyä ovat esimerkiksi gammasäteily sekä näkyvä valo. Vaikka gammasäteily ja näkyvä valo ovat molemmat sähkömagneettista säteilyä, gammasäteily on merkittävästi vaarallisempaa. Ero johtuu yksittäisen kvantin energiasta, joka on tuhansia kertoja suurempi gammakvantilla kuin näkyvällä valolla. Gammasäteily on luonteeltaan ionisoivaa: vuorovaikuttaessaan aineen kanssa säteilyn energia voi siirtyä gammakvantilta atomin elektronille, joka irtoaa atomista luoden varatun ionin\cite{cherry_interaction_2012}. 
 
 \textcolor{red}{Gammasäteilyn vuorovaikutus aineen kanssa}\\
 
