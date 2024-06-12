@@ -14,3 +14,4 @@ osat/*.aux
 diplomityö.pdf
 *.run.xml
 *.synctex.gz
+.vscode
