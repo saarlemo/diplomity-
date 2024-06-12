@@ -1,0 +1,16 @@
+aloitusmateriaalit/
+osat/*.aux
+*.aux
+*.bcf
+*.blg
+*.bbl
+*.nlo
+*.fdb_latexmk
+*.out
+*.toc
+*.fls
+*.log
+*.synctex(busy)
+diplomityö.pdf
+*.run.xml
+*.synctex.gz
