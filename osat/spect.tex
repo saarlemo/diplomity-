@@ -1,5 +1,5 @@
 \section{Yksifotoniemissiotomografia}
-Tietokonetomografiassa eri puolilta kuvattavaa kohdetta havaitusta säteilystä pyritään muodostamaan kolmiulotteinen kuva säteilyn vaimenemisesta. Emissiotomografiassa säteilyn lähde on kuvattavan kohteen sisällä ja menetelmällä pyritään selvittämään radioaktiivisuuden jakauma kuvattavassa kohteessa\cite{van_audenhaege_review_2015}, esimerkiksi kliinisissä sovelluksissa radionuklidi on kiinnitetty johonkin biologisesti aktiiviseen yhdisteeseen\cite{cherry_single_2012, van_audenhaege_review_2015}.
+Tietokonetomografiassa eri puolilta kuvattavaa kohdetta havaitusta säteilystä pyritään muodostamaan kolmiulotteinen kuva säteilyn vaimenemisesta. Emissiotomografiassa säteilyn lähde on kuvattavan kohteen sisällä ja menetelmällä pyritään selvittämään radioaktiivisuuden jakauma kuvattavassa kohteessa\cite{cherry_gamma_2012, van_audenhaege_review_2015}, esimerkiksi kliinisissä sovelluksissa radionuklidi on kiinnitetty johonkin biologisesti aktiiviseen yhdisteeseen\cite{cherry_single_2012, van_audenhaege_review_2015}.
 
 Emissiotomografia jaetaan yleisesti yksifotoniemissiotomografiaan ja positroniemissiotomografiaan. Positroniemissiotomografiassa havaitaan positronin annihilaatiotapahtumassa syntyvät kaksi vastakkaisiin suuntiin etenevää gammakvanttia\cite{cherry_single_2012}. Yksifotoniemissiotomografian radionuklidit lähettävät hajotessaan yhden tai useamman gammakvantin, joiden etenemissuunnat eivät korreloi keskenään\cite{cherry_single_2012, van_audenhaege_review_2015}.
 
@@ -8,7 +8,7 @@ Radioaktiivinen hajoaminen on prosessi, jossa epävakaat atomiytimet muuttuvat v
 
 Hajoamisessa syntynyt säteily voi olla hiukkassäteilyä (alfa- tai beetasäteilyä) tai sähkömagneettista säteilyä (gammasäteilyä).\cite{cherry_basic_2012, cherry_interaction_2012} Luokittelu tehdään siksi, koska energian siirtymisen periaate ja vuorovaikutus aineen kanssa eroavat oleellisesti hiukkas- ja sähkömagneettisessa säteilyssä.
 
-Hiukkassäteilyssä energia siirtyy liikkuvien hiukkasten kineettisenä energiana verrattain hitaasti, noin \qtyrange{5}{7}{\percent} valon nopeudesta. Hiukkasen verrattain suuren koon vuoksi hiukkassäteily ei ole läpitunkevaa. Esimerkiksi $\alpha$-hiukkanen pysähtyy paperiarkkiin ja $\beta$-hiukkasen pysäyttämiseen riittää akryylilevy.\cite{cherry_interaction_2012}
+Hiukkassäteilyssä energia siirtyy liikkuvien hiukkasten kineettisenä energiana verrattain hitaasti, noin \qtyrange{5}{7}{\percent} valon nopeudesta. Hiukkasen verrattain suuren koon vuoksi hiukkassäteily ei ole läpitunkevaa. Esimerkiksi $\alpha$-hiukkanen pysähtyy paperiarkkiin ja $\beta$-hiukkasen pysäyttämiseen riittää akryylilevy.\cite{cherry_interaction_2012} Tästä johtuen hiukkassäteilyä sellaisenaan ei voida käyttää kuvantamisessa\cite{cherry_gamma_2012}.
 
 Sähkömagneettisen säteilyn energia on sähkömagneettisessa kentässä, jossa informaatio siirtyy täsmälleen valon nopeudella.\cite{cherry_basic_2012} Sähkömagneettista säteilyä ovat esimerkiksi gammasäteily sekä näkyvä valo. Vaikka gammasäteily ja näkyvä valo ovat molemmat sähkömagneettista säteilyä, gammasäteily on merkittävästi vaarallisempaa. Ero johtuu yksittäisen kvantin energiasta, joka on tuhansia kertoja suurempi gammakvantilla kuin näkyvällä valolla. Radioaktiivisessa hajoamisessa syntyvä säteily on luonteeltaan ionisoivaa: vuorovaikuttaessaan aineen kanssa säteily voi irrottaa atomeista elektroneja\cite{cherry_interaction_2012}. Gammasäteily on erittäin läpitunkevaa korkeaenergisenä sähkömagneettisena säteilynä.
 
@@ -42,7 +42,8 @@ Yksifotoniemissiotomografiassa yleisimmin käytetty isotooppi on metastabiili \c
 Muita yksifotoniemissiotomografiassa yleisesti käytettyjä radioisotooppeja ovat jodi-123, xenon-133, tallium-201 ja indium-111\cite{crisan_radiopharmaceuticals_2022}.
 
 \subsection{Gammakamera}
-\textcolor{red}{Kollimaattori}\\
+Gammakuvantamisessa havaittava säteily on energialtaan \qtyrange{80}{500}{\kilo\electronvolt}. Tämän energia-alueen fotonit lävistävät ihmiskehon tehokkaasti, mutta ovat helposti pysäytettävissä tiheällä tuikeaineella ja lyijyllä.\cite{cherry_gamma_2012} Yksifotoniemissiotomografiassa käytetyn gammakameran rakenteen poikkileikkaus on esitetty \hyperref[fig:spect-detektori]{Kuvassa \ref*{fig:spect-detektori}}. Kamera koostuu valon elektroneiksi muuttavista valomonistinputkista, joiden päällä on levy säteilyn näkyväksi valoksi muuttavaa tuikeainetta. Näiden päällä on säteilyä valikoivasti läpäisevä kollimaattori.\cite{van_audenhaege_review_2015, cherry_gamma_2012}
+
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\textwidth}
@@ -50,6 +51,10 @@ Muita yksifotoniemissiotomografiassa yleisesti käytettyjä radioisotooppeja ova
     \caption{Yksifotoniemissiotomografiassa käytetyn gammakameran rakenteen poikkileikkaus. Kuvassa esitetyt gammakameran osat ovat ylhäältä alaspäin kollimaattori, joka päästää läpi vain tietystä suunnasta tulevan säteilyn, tuikeaine, joka muuttaa gammasäteilyn näkyväksi valoksi sekä valomonistinputket, jotka muuttavat näkyvän valon elektroneiksi. Punaisella värillä on havainnollistettu aluetta, jolta yksi kollimaattorin reikä kerää säteilyä detektorille.}
     \label{fig:spect-detektori}
 \end{figure}
+
+Tärkein gammakameran osa kuvan laadun kannalta on kollimaattori, joka sijaitsee säteilylähteen ja tuikeainekiteen välissä. Kollimaattorin tarkoituksena on päästää detektorille vain tietystä suunnasta tuleva säteily ja vaimentaa muista suunnista tuleva säteily. Nämä toivotut ominaisuudet toteuttaa parhaiten raskaasta alkuaineesta valmistettu reikälevy, jossa reiät ovat yleensä kuusikulmaisia, pyöreitä tai neliön muotoisia.\cite{van_audenhaege_review_2015, cherry_gamma_2012} Mahdollisia materiaaleja reikien välille ovat muun muassa lyijy, wolframi, kulta, uraani ja platina\cite{van_audenhaege_review_2015}, mutta kustannusten vuoksi\cite{van_audenhaege_review_2015} kollimaattori on lähes aina valmistettu lyijystä tai wolframista.\cite{cherry_gamma_2012}
+
+\textcolor{red}{Kollimaattori: eri tyypit}\\
 
 \textcolor{red}{Tuikeilmaisin}\\
 \textcolor{red}{Valomonistinputki}\\
