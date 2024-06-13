@@ -1,5 +1,8 @@
 \section{Yksifotoniemissiotomografia}
-\textcolor{red}{Tähän yleisesti emissiotomografiasta}
+Tietokonetomografiassa eri puolilta kuvattavaa kohdetta havaitusta säteilystä pyritään muodostamaan kolmiulotteinen kuva säteilyn vaimenemisesta. Emissiotomografiassa säteilyn lähde on kuvattavan kohteen sisällä ja menetelmällä pyritään selvittämään radioaktiivisuuden jakauma kuvattavassa kohteessa\cite{van_audenhaege_review_2015}, esimerkiksi kliinisissä sovelluksissa radionuklidi on kiinnitetty johonkin biologisesti aktiiviseen yhdisteeseen\cite{cherry_single_2012, van_audenhaege_review_2015}.
+
+Emissiotomografia jaetaan yleisesti yksifotoniemissiotomografiaan ja positroniemissiotomografiaan. Positroniemissiotomografiassa havaitaan positronin annihilaatiotapahtumassa syntyvät kaksi vastakkaisiin suuntiin etenevää gammakvanttia\cite{cherry_single_2012}. Yksifotoniemissiotomografian radionuklidit lähettävät hajotessaan yhden tai useamman gammakvantin, joiden etenemissuunnat eivät korreloi keskenään\cite{cherry_single_2012, van_audenhaege_review_2015}.
+
 \subsection{Säteilyfysiikka}
 Radioaktiivinen hajoaminen on prosessi, jossa epävakaat atomiytimet muuttuvat vakaammiksi lähettäen säteilyä. Vakainta ytimen tilaa sanotaan perustilaksi. Virittyneessä ja metastabiilissa tilassa oleva ydin voi puolestaan spontaanisti muuttua toiseksi, vakaammaksi ytimeksi. Virittyneen ja metastabiilin tilan keskinäinen ero on spontaaniin hajoamiseen kuluva puoliintumisaika. Yhden puoliintumisajan jälkeen keskimäärin puolet ytimistä on siirtynyt vakaampaan tilaan. Jos hajoamiseen kuluu yli \qty{1e-12}{\second}, atomia pidetään metastabiilina\cite{cherry_basic_2012}.
 
@@ -39,6 +42,16 @@ Yksifotoniemissiotomografiassa yleisimmin käytetty isotooppi on metastabiili \c
 Muita yksifotoniemissiotomografiassa yleisesti käytettyjä radioisotooppeja ovat jodi-123, xenon-133, tallium-201 ja indium-111\cite{crisan_radiopharmaceuticals_2022}.
 
 \subsection{Gammakamera}
-\textcolor{red}{Valomonistinputki / puolijohdeilmaisin}\\
 \textcolor{red}{Kollimaattori}\\
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\textwidth}
+    \input{kuvat/spect-detektori.tex}
+    \caption{Yksifotoniemissiotomografiassa käytetyn gammakameran rakenteen poikkileikkaus. Kuvassa esitetyt gammakameran osat ovat ylhäältä alaspäin kollimaattori, joka päästää läpi vain tietystä suunnasta tulevan säteilyn, tuikeaine, joka muuttaa gammasäteilyn näkyväksi valoksi sekä valomonistinputket, jotka muuttavat näkyvän valon elektroneiksi. Punaisella värillä on havainnollistettu aluetta, jolta yksi kollimaattorin reikä kerää säteilyä detektorille.}
+    \label{fig:spect-detektori}
+\end{figure}
+
+\textcolor{red}{Tuikeilmaisin}\\
+\textcolor{red}{Valomonistinputki}\\
+\textcolor{red}{Puolijohdeilmaisin}\\
 \textcolor{red}{Muun laitteiston toimintaperiaate pääpiirteittäin}

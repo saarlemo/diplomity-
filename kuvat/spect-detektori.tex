@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+    % Säteily
+
+    \foreach \x in {-0.1, -0.06, ..., 0.14} {
+        \draw[red] (3.5 + \x, 0) -- (3.5 - 2*4.5*\x, 5);
+    }
+
+    % Kollimaattori
+    \foreach \x in {0,0.3,...,7}
+        \fill (\x,0) rectangle (\x + 0.1,1);
+    \node[right] at (8, 0.5) {Kollimaattori};
+
+    % Tuikeaine
+    \draw (0,0) rectangle (7,-1);
+    \fill[pattern=north east lines] (0,0) rectangle (7,-1);
+    \node[right] at (8, -0.5) {Tuikeaine};
+
+    % Valomonistinputket
+    \foreach \x in {0.5,1.5,...,6.5}{
+        \fill[blue!30] 
+        (\x-0.5,-1) --
+        (\x+0.5,-1) --
+        (\x+0.4,-1.5) --
+        (\x+0.4,-3) --
+        (\x-0.4,-3) --
+        (\x-0.4,-1.5) --
+        cycle;
+    }
+    \node[right] at (8, -2) {Valomonistinputket};
+\end{tikzpicture}
