@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+    % Kollimaattori
+    \foreach \x in {-3.5, -3.2, ..., 3.5}{
+        \fill[black]
+            (\x, 0) --
+            ({\x + 0.1}, 0) --
+            ({0.8 * (\x + 0.1)}, 1) --
+            ({0.8 * \x}, 1) --
+            cycle;
+    }
+
+    % Tuikeaine
+    \draw (-3.5, 0) rectangle (3.5, -1);
+    \fill[pattern=north east lines] (-3.5, 0) rectangle (3.5, -1);
+\end{tikzpicture}

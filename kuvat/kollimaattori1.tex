@@ -1,0 +1,9 @@
+\begin{tikzpicture}
+    % Kollimaattori
+    \foreach \x in {0,0.3,...,7}
+        \fill (\x,0) rectangle (\x + 0.1,1);
+
+    % Tuikeaine
+    \draw (0,0) rectangle (7,-1);
+    \fill[pattern=north east lines] (0,0) rectangle (7,-1);
+\end{tikzpicture}

@@ -37,7 +37,7 @@ Rayleighin sironnassa gammakvantin ja atomin voidaan ajatella törmäävän tois
 \subsection{Merkkiaineet}
 Atomien välisten sidosten muodostumisen määrittää pitkälti elektronien sijanti. Koska radioaktiivinen hajoaminen tapahtuu atomin ytimessä, virittyneessä tilassa oleva ydin ei vaikuta atomin kemiallisiin sidoksiin. Vastaavasti kemialliset sidokset eivät vaikuta atomin radioaktiivisuuteen.\cite{cherry_modes_2012} Juuri tämä mahdollistaa radioisotooppien käytön isotooppilääketieteessä, kun radioaktiivinen yhdiste käyttäytyy biologisesti täsmälleen samoin kuin vakaa yhdiste. Käytännössä biologisesti vaikuttavasta molekyylistä, eli merkkiaineesta, korvataan jokin atomi sen radioaktiivisella isotoopilla tai hyvin samankaltaisesti käyttäytyvällä molekyylillä\cite{cherry_modes_2012, crisan_radiopharmaceuticals_2022}. Esimerkiksi glukoosilla on elintärkeä rooli ihmisen aineenvaihdunnassa. Korvaamalla glukoosin toinen hydroksyyliryhmä $\beta^{+}$-aktiivisella \ce{^{18}F}-atomilla saadaan fluorodeoksyglukoosi (FDG). FDG vaikuttaa elimistössä tavallisen glukoosin tavoin, joten havaitsemalla positronien annihilaatiotapahtumista syntyvät gammakvantit ihmiskehon ulkopuolelta voidaan arvioida glukoosin jakautumista kehossa.\cite{crisan_radiopharmaceuticals_2022}
 
-Yksifotoniemissiotomografiassa yleisimmin käytetty isotooppi on metastabiili \ce{^{99m}Tc}, josta voidaan vastaavasti muodostaa eri tavalla vaikuttavia merkkiaineita. \ce{^{99m}Tc}:n puoliintumisaika on \qty{6}{\hour} ja hajoamisessa syntyvän gammakvantin energia on noin \qty{141}{\kilo\electronvolt}.\cite{cherry_interaction_2012, cherry_single_2012, crisan_radiopharmaceuticals_2022} Metastabiilin technetiumin ominaisuudet tekevät siitä lähes optimaalisen gammakameralla havaitsemiseen. Tämän lisäksi, koska \ce{^{99m}Tc} muodostaa hajotessaan ainoastaan gammasäteilyä ja puoliintumisaika on suhteellisen lyhyt, kuvantamisen säteilyaltistus pysyy pienenä.\cite{cherry_modes_2012, crisan_radiopharmaceuticals_2022}
+Yksifotoniemissiotomografiassa yleisimmin käytetty isotooppi on metastabiili \ce{^{99m}Tc}, josta voidaan vastaavasti muodostaa eri tavalla vaikuttavia merkkiaineita. \ce{^{99m}Tc}:n puoliintumisaika on \qty{6}{\hour} ja hajoamisessa syntyvän gammakvantin energia on noin \qty{141}{\kilo\electronvolt}.\cite{cherry_interaction_2012, cherry_single_2012, crisan_radiopharmaceuticals_2022, van_audenhaege_review_2015} Metastabiilin technetiumin ominaisuudet tekevät siitä lähes optimaalisen gammakameralla havaitsemiseen. Tämän lisäksi, koska \ce{^{99m}Tc} muodostaa hajotessaan ainoastaan gammasäteilyä ja puoliintumisaika on suhteellisen lyhyt, kuvantamisen säteilyaltistus pysyy pienenä.\cite{cherry_modes_2012, crisan_radiopharmaceuticals_2022}
 
 Muita yksifotoniemissiotomografiassa yleisesti käytettyjä radioisotooppeja ovat jodi-123, xenon-133, tallium-201 ja indium-111\cite{crisan_radiopharmaceuticals_2022}.
 
@@ -54,9 +54,41 @@ Gammakuvantamisessa havaittava säteily on energialtaan \qtyrange{80}{500}{\kilo
 
 Tärkein gammakameran osa kuvan laadun kannalta on kollimaattori, joka sijaitsee säteilylähteen ja tuikeainekiteen välissä. Kollimaattorin tarkoituksena on päästää detektorille vain tietystä suunnasta tuleva säteily ja vaimentaa muista suunnista tuleva säteily. Nämä toivotut ominaisuudet toteuttaa parhaiten raskaasta alkuaineesta valmistettu reikälevy, jossa reiät ovat yleensä kuusikulmaisia, pyöreitä tai neliön muotoisia.\cite{van_audenhaege_review_2015, cherry_gamma_2012} Mahdollisia materiaaleja reikien välille ovat muun muassa lyijy, wolframi, kulta, uraani ja platina\cite{van_audenhaege_review_2015}, mutta kustannusten vuoksi\cite{van_audenhaege_review_2015} kollimaattori on lähes aina valmistettu lyijystä tai wolframista.\cite{cherry_gamma_2012}
 
-\textcolor{red}{Kollimaattori: eri tyypit}\\
+Koska säteily läpäisee kollimaattorin valikoivasti, kuvanmuodostuksessa jää käyttämättä suurin osa kuvattavasta kohteesta lähetetystä säteilystä. Tämä on perimmäinen syy siihen, miksi yksifotoniemissiotomografian kuvan laatu on merkittävästi huonompi kuin positroniemissiotomografian tai tietokonetomografian kaltaisissa kuvantamismenetelmissä, joissa ei käytetä kollimaattoria.\cite{cherry_gamma_2012}
 
-\textcolor{red}{Tuikeilmaisin}\\
-\textcolor{red}{Valomonistinputki}\\
-\textcolor{red}{Puolijohdeilmaisin}\\
-\textcolor{red}{Muun laitteiston toimintaperiaate pääpiirteittäin}
+Yleisesti käytössä on neljänlaisia kollimaattoreita: suora kollimaattori (\textit{parallel-hole}), suppeneva (\textit{converging}) ja hajaantuva (\textit{diverging}) kollimaattori sekä yhden reiän kollimaattori (\textit{pinhole})\cite{cherry_gamma_2012, van_audenhaege_review_2015}.
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\textwidth}
+    \begin{subfigure}[t]{.4\textwidth}
+        \resizebox{\linewidth}{!}{\input{kuvat/kollimaattori1.tex}}
+        \caption{}
+    \end{subfigure}%
+    \hspace{.1\textwidth}%
+    \begin{subfigure}[t]{.4\textwidth}
+        \resizebox{\linewidth}{!}{\input{kuvat/kollimaattori2.tex}}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}[b]{.4\textwidth}
+        \resizebox{\linewidth}{!}{\input{kuvat/kollimaattori3.tex}}
+        \caption{}
+    \end{subfigure}%
+    \hspace{.1\textwidth}%
+    \begin{subfigure}[b]{.4\textwidth}
+        \resizebox{\linewidth}{!}{\input{kuvat/kollimaattori4.tex}}
+        \caption{}
+    \end{subfigure}
+    \caption{Poikkileikkaus erilaisista kollimaattoreista. Mustien palkkien välit kuvaavat kollimaattorien reikiä ja osittain väritetty alue kuvaa tuikeainetta.}
+    \label{fig:kollimaattorit}
+\end{figure}
+
+\hyperref[fig:kollimaattorit]{Kuvassa \ref*{fig:kollimaattorit}} on havainnollistettu eri tyyppisiä kollimaattoreita. Kuvan a) kollimaattorissa reiät ovat suoria lieriöitä, kuvien b) ja c) kollimaattoreissa reiät muodostavat polttopisteen johonkin pisteeseen kollimaattorin ulkopuolelta ja kuvan c) kollimaattorissa on vain yksi reikä.
+
+Kuvantamisen kannalta huomioimisen arvoista on kollimaattorin mahdollinen suurennos tai pienennös. Kuvan c) hajaantuvassa kollimaattorissa polttopiste on tuikeaineen takana, joten kuva pienenee. Vastaavasti kuvan b) kollimaattorin polttopiste on kollimaattorin edessä, joten kuva suurenee. Kuvan a) kollimaattorin polttopiste on käytännössä äärettömän kaukana, jolloin kuvan koko pysyy samana.\cite{cherry_gamma_2012, van_audenhaege_review_2015} Yksifotoniemissiotomografialaitteen suunnittelussa kollimaattorin tyyppi määrää sen, minkä kokoisia kohteita laitteella voidaan kuvantaa. Esimerkiksi detektorin pinta-alaa pienemmän kohteen, kuten aivojen, kuvantamiseen käytetään kuvan b) kaltaista kollimaattoria\cite{van_audenhaege_review_2015, cherry_single_2012}.
+
+Kollimaattorin läpäisevä säteily pysähtyy tuikeaineeseen muodostaen näkyvää valoa. Tuikeaineen yleisin materiaali on natriumjodidi, johon on lisätty talliumia.\cite{cherry_gamma_2012, cherry_single_2012}
+
+Tuikeainelevyn takana on säännöllisesti aseteltuja valomonistinputkia, joissa valokvantin energia irrottaa elektronin putken toisesta päästä. Putkessa on useita eri sähköisissä potentiaaleissa olevia elektrodeja, joista vuorotellen irtoaa yhä enemmän elektroneja. Valomonistinputken vahvistama signaali voidaan siirtää digitaalimuuntimelle ja tallentaa tietokoneelle.
+
+Koska valo etenee tuikeaineessa joka suuntaan, käytännössä aina valo havaitaan useammalla valomonistinputkella. Tällöin valokvantin tarkka sijainti voidaan laskea vertaamalla eri putkista havaittuja signaaleja. Yleensä tuikeaine jaetaan neliön muotoisiin pikseleihin, joihin tietyssä ajassa havaitut valokvantit paikannetaan.

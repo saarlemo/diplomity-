@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+    % Kollimaattori
+    \fill[black]
+        (-3.5, 0) --
+        (-3.3, 0) --
+        (-0.05, 2) --
+        (-0.1, 2) --
+        cycle;
+    \fill[black]
+        (3.5, 0) --
+        (3.3, 0) --
+        (0.05, 2) --
+        (0.1, 2) --
+        cycle;
+
+    % Tuikeaine
+    \draw (-3.5, 0) rectangle (3.5, -1);
+    \fill[pattern=north east lines] (-3.5, 0) rectangle (3.5, -1);
+\end{tikzpicture}
