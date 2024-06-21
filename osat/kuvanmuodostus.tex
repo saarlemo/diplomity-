@@ -1,5 +1,20 @@
 \section{Tomografiakuvan muodostus}
-\textcolor{red}{Projektio ja diskreetti muoto}
+Gammakameran kollimaattorin voidaan olettaa havaitsevan ainoastaan yhdestä suunnasta saapuvaa säteilyä. Tällöin gammakameran perspektiivistä havaitaan ikään kuin kaksiulotteinen varjo radioaktiivisen merkkiaineen kolmiulotteisesta jakaumasta. Keräämällä näitä projektioiksi kutsuttuja varjoja useasta suunnasta, voidaan matemaattisin menetelmin määrittää radioaktiivisen merkkiaineen jakauma.
+
+Projektioiden matematiikka esitetään kahdessa ulottuvuudessa (jolloin projektiot ovat yksiulotteisia) ymmärrettävyyden vuoksi. Yleistys kolmeen ulottuvuuteen ja kaksiulotteiseen projektioon on suhteellisen suoraviivainen.
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\textwidth}
+    \input{kuvat/projektio.tex}
+    \caption{Aktiivisuusjakauma $f$ $xy$-tasossa (siniset pisteet), gammakamera (mustat palkit ja väritetty alue) ja projektio $g(s, \theta)$, jossa $\theta$ on $s$- ja $x$-akseleiden välinen kulma. Yhteen projektion pisteeseen vaikuttava aktiivisuusjakauman osa on havainnollistettu punaisella katkoviivalla. Kuva on muokattu lähteestä \cite{bruyant_analytic_2002}.}
+    \label{fig:projektio}
+\end{figure}
+
+Tarkastellaan $xy$-tason kaksiulotteista aktiivisuusjakaumaa $f(x, y)$. Olkoon $\theta$ gammakameran tangentin ja positiivisen $x$-akselin välinen kulma kuten \hyperref[fig:projektio]{kuvassa \ref*{fig:projektio}}. Merkitään projektiota $g(s, \theta)$, jossa $s$ on gammakameran tangentin suuntainen koordinaattiakseli.
+
+\textcolor{red}{Projektion matematiikka, radon-muunnos}\\
+\textcolor{red}{Projektion diskreetti muoto}
 
 \subsection{Analyyttiset menetelmät}
 \textcolor{red}{FBP}
