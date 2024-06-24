@@ -11,10 +11,20 @@ Projektioiden matematiikka esitetään kahdessa ulottuvuudessa (jolloin projekti
     \label{fig:projektio}
 \end{figure}
 
-Tarkastellaan $xy$-tason kaksiulotteista aktiivisuusjakaumaa $f(x, y)$. Olkoon $\theta$ gammakameran tangentin ja positiivisen $x$-akselin välinen kulma kuten \hyperref[fig:projektio]{kuvassa \ref*{fig:projektio}}. Merkitään projektiota $g(s, \theta)$, jossa $s$ on gammakameran tangentin suuntainen koordinaattiakseli.
+Tarkastellaan $xy$-tason jatkuvaa aktiivisuusjakaumaa $f\colon\RR^{2}\to\RR$. Olkoon $\theta$ gammakameran tangentin ja positiivisen $x$-akselin välinen kulma kuten \hyperref[fig:projektio]{kuvassa \ref*{fig:projektio}}. Merkitään projektiota $g(s, \theta)$, jossa $s$ on gammakameran tangentin suuntainen koordinaattiakseli.
 
-\textcolor{red}{Projektion matematiikka, radon-muunnos}\\
-\textcolor{red}{Projektion diskreetti muoto}
+Kulmalla $\theta$ ja pisteessä $s$ gammakamera havaitsee säteilyä $xy$-tason suoralta $\Omega$, jonka määrittää
+\begin{equation*}
+    \Omega=\left\{ (x, y) \mid x\cos(\theta)+y\cos(\theta)=s \right\}.
+\end{equation*}
+Projektio, eli suoralta $\Omega$ havaittu säteily voidaan esittää siten Radon-muunnokseksi kutsuttuna polkuintegraalina\cite{radon_determination_1986, bruyant_analytic_2002}
+\begin{equation}\label{eqn:radon-muunnos}
+    g(s, \theta)=\int_{\Omega}f(x, y).
+\end{equation}
+
+Tietokoneella voidaan kuitenkin käsitellä ainoastaan äärellistä määrää mitattuja projektioita. Toisin sanoen muuttujat $s$ ja $\theta$ ovat diskreettejä, jonka vuoksi on luontevaa käsitellä myös muuttujia $x$ ja $y$ diskreetteinä. Muuttujien $x$ ja $y$ arvot jaetaan käytännössä aina tasaisille väleille, jolloin muodostuu pikseleistä koostuva kuva-alue. Kuva-alueen aktiivisuusjakauma oletetaan paloittain vakioksi pikselikohtaisesti. Tällöin yhtälön (\ref{eqn:radon-muunnos}) integraali palautuu suoran $\Omega$ läpäisemien pikselien painotetuksi summaksi, jossa painokertoimet ovat suoran kulkemat matkat kussakin pikselissä.
+\textcolor{red}{Projektion diskreetti muoto}\\
+\textcolor{red}{Havaintomatriisi liian suuri muistiin tallentamiseen}
 
 \subsection{Analyyttiset menetelmät}
 \textcolor{red}{FBP}
