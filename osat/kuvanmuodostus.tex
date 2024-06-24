@@ -7,7 +7,7 @@ Projektioiden matematiikka esitetään kahdessa ulottuvuudessa (jolloin projekti
     \centering
     \captionsetup{width=.9\textwidth}
     \input{kuvat/projektio.tex}
-    \caption{Aktiivisuusjakauma $f$ $xy$-tasossa (siniset pisteet), gammakamera (mustat palkit ja väritetty alue) ja projektio $g(s, \theta)$, jossa $\theta$ on $s$- ja $x$-akseleiden välinen kulma. Yhteen projektion pisteeseen vaikuttava aktiivisuusjakauman osa on havainnollistettu punaisella katkoviivalla. Kuva on muokattu lähteestä \cite{bruyant_analytic_2002}.}
+    \caption{Aktiivisuusjakauma $f$ $xy$-tasossa (siniset pisteet), gammakamera (mustat palkit ja väritetty alue) ja projektio $g(s, \theta)$, jossa $\theta$ on $s$- ja $x$-akseleiden välinen kulma. Yhteen projektion pisteeseen vaikuttava aktiivisuusjakauman osa on piirretty punaisella katkoviivalla. Kuva on muokattu lähteestä \cite{bruyant_analytic_2002}.}
     \label{fig:projektio}
 \end{figure}
 
@@ -22,9 +22,54 @@ Projektio, eli suoralta $\Omega$ havaittu säteily voidaan esittää siten Radon
     g(s, \theta)=\int_{\Omega}f(x, y).
 \end{equation}
 
-Tietokoneella voidaan kuitenkin käsitellä ainoastaan äärellistä määrää mitattuja projektioita. Toisin sanoen muuttujat $s$ ja $\theta$ ovat diskreettejä, jonka vuoksi on luontevaa käsitellä myös muuttujia $x$ ja $y$ diskreetteinä. Muuttujien $x$ ja $y$ arvot jaetaan käytännössä aina tasaisille väleille, jolloin muodostuu pikseleistä koostuva kuva-alue. Kuva-alueen aktiivisuusjakauma oletetaan paloittain vakioksi pikselikohtaisesti. Tällöin yhtälön (\ref{eqn:radon-muunnos}) integraali palautuu suoran $\Omega$ läpäisemien pikselien painotetuksi summaksi, jossa painokertoimet ovat suoran kulkemat matkat kussakin pikselissä.
-\textcolor{red}{Projektion diskreetti muoto}\\
-\textcolor{red}{Havaintomatriisi liian suuri muistiin tallentamiseen}
+Tietokoneella voidaan kuitenkin käsitellä ainoastaan äärellistä määrää mitattuja projektioita. Toisin sanoen muuttujat $s$ ja $\theta$ ovat diskreettejä, jonka vuoksi on luontevaa käsitellä myös muuttujia $x$ ja $y$ diskreetteinä. Yleensä muuttujien $x$ ja $y$ arvot jaetaan tasaisille väleille muodostaen pikseleistä koostuvan kuva-alueen.
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\textwidth}
+    \input{kuvat/diskreetti-projektio.tex}
+    \caption{Kuva-alue (ruudukko), kuva-alueen pikselit $f_i$, $i=1,\ldots,64$ ja projektion suora piirrettynä punaisella katkoviivalla.}
+    \label{fig:diskreetti-projektio}
+\end{figure}
+
+Kun kuva-alue jaetaan pikseleihin, joihin viitataan indekseillä $i=1,\ldots, n$, yhtälön (\ref{eqn:radon-muunnos}) integraali voidaan jakaa pikselikohtaisesti osiin
+\begin{alignat*}{2}
+    g(s, \theta)
+    &=\sum_{i=1}^{n}\int_{\Omega}f(x, y)\chi_{i}.
+\end{alignat*}
+Funktio $\chi_i$ on indikaattorifunktio, joka saa arvon 1 pikselin $i$ sisällä ja arvon 0 kaikkialla muualla.
+
+Oletetaan kuva-alueen aktiivisuusjakauma paloittain vakioksi pikselikohtaisesti. Tällöin voidaan merkitä
+\begin{equation*}
+    f(x, y)\chi_{i}=f_i.
+\end{equation*}
+Yhtälön (\ref{eqn:radon-muunnos}) integraali palautuu summaksi
+\begin{equation}\label{eqn:diskreetti-radon-muunnos}
+    g(s, \theta)=\sum_{j=1}^{n}a_{j}f_{j},
+\end{equation}
+jossa $a_i$ on suoran $\Omega$ kulkema matka pikselissä $i$. 
+
+\hyperref[fig:diskreetti-projektio]{Kuvassa \ref*{fig:diskreetti-projektio}} projektion suora kulkee kuva-alueen pikseleiden 33, 42, 43, 52, 53, 62 ja 63 lävitse. Suoran kulkema matka on jokaisessa edellä mainitusta pikselissä $\frac{\sqrt{5}}{2}$.
+
+Toisaalta kertoimet $a_i$ määräävät parametrit $s$ ja $\theta$ täysin. Merkitään tästä johtuen yhtä projektiota, eli havaintoa, $g_i$ ja vastaavia kertoimia $a_{ij}$. Havainnot
+\begin{equation*}
+    \begin{cases}
+        g_1&=\sum_{j=1}^{n}a_{1j}f_{j}\\
+        &\vdots\\
+        g_m&=\sum_{j=1}^{n}a_{mj}f_{j}
+    \end{cases}
+\end{equation*}
+voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \right)^{T}$, $f=\left( f_1, \ldots, f_m \right)^{T}$ ja
+\begin{equation*}
+    A=
+    \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+    \end{pmatrix}
+\end{equation*}
+on havaintomatriisi eli tässä tapauksessa projektio-operaattori.
 
 \subsection{Analyyttiset menetelmät}
 \textcolor{red}{FBP}

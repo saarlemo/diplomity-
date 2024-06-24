@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+    % Vaakasuorat viivat
+    \foreach \i in {0,1,...,8} {
+        \draw (0, \i) -- (8, \i);
+    }   
+
+    % Pystysuorat viivat
+    \foreach \j in {0,1,...,8} {
+        \draw (\j, 0) -- (\j, 8);
+    }
+
+    % Pikselien indeksit
+    \foreach \i in {0,1,...,7} {
+        \foreach \j in {0,1,...,7} {
+            \node at (\j+0.5, \i+0.5) {$f_{\the\numexpr \j*8 + (8 - \i) \relax}$};
+        }
+    }
+
+    % Projektion suora
+    \draw[thick, dashed, red] (4.5, 8) -- (8, 1);
+\end{tikzpicture}
