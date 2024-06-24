@@ -22,7 +22,7 @@ Projektio, eli suoralta $\Omega$ havaittu säteily voidaan esittää siten Radon
     g(s, \theta)=\int_{\Omega}f(x, y).
 \end{equation}
 
-Tietokoneella voidaan kuitenkin käsitellä ainoastaan äärellistä määrää mitattuja projektioita. Toisin sanoen muuttujat $s$ ja $\theta$ ovat diskreettejä, jonka vuoksi on luontevaa käsitellä myös muuttujia $x$ ja $y$ diskreetteinä. Yleensä muuttujien $x$ ja $y$ arvot jaetaan tasaisille väleille muodostaen pikseleistä koostuvan kuva-alueen.
+Tietokoneella voidaan kuitenkin käsitellä ainoastaan äärellistä määrää mitattuja projektioita. Toisin sanoen muuttujat $s$ ja $\theta$ ovat diskreettejä, jonka vuoksi on luontevaa käsitellä myös muuttujia $x$ ja $y$ diskreetteinä jakamalla kuva-alue pikseleihin, joissa aktiivisuusjakaumat ovat vakioita.
 
 \begin{figure}[H]
     \centering
@@ -59,7 +59,7 @@ Toisaalta kertoimet $a_i$ määräävät parametrit $s$ ja $\theta$ täysin. Mer
         g_m&=\sum_{j=1}^{n}a_{mj}f_{j}
     \end{cases}
 \end{equation*}
-voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \right)^{T}$, $f=\left( f_1, \ldots, f_m \right)^{T}$ ja
+voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \right)^{T}$, $f=\left( f_1, \ldots, f_m \right)^{T}$ ja matriisi $A$,
 \begin{equation*}
     A=
     \begin{pmatrix}
@@ -67,9 +67,9 @@ voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \r
         a_{21} & a_{22} & \cdots & a_{2n} \\
         \vdots & \vdots & \ddots & \vdots \\
         a_{m1} & a_{m2} & \cdots & a_{mn}
-    \end{pmatrix}
+    \end{pmatrix},
 \end{equation*}
-on havaintomatriisi eli tässä tapauksessa projektio-operaattori.
+on projektio-operaattori.
 
 \subsection{Analyyttiset menetelmät}
 \textcolor{red}{FBP}
