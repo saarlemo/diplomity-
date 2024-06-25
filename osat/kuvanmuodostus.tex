@@ -1,5 +1,5 @@
 \section{Tomografiakuvan muodostus}
-Gammakameran kollimaattorin voidaan olettaa havaitsevan ainoastaan yhdestä suunnasta saapuvaa säteilyä. Tällöin gammakameran perspektiivistä havaitaan ikään kuin kaksiulotteinen varjo radioaktiivisen merkkiaineen kolmiulotteisesta jakaumasta. Keräämällä näitä projektioiksi kutsuttuja varjoja useasta suunnasta, voidaan matemaattisin menetelmin määrittää radioaktiivisen merkkiaineen jakauma.
+Oletetaan toistaiseksi gammakameran kollimaattorin havaitsevan ainoastaan yhdestä suunnasta saapuvaa säteilyä. Tällöin gammakameran perspektiivistä havaitaan ikään kuin kaksiulotteinen varjo radioaktiivisen merkkiaineen kolmiulotteisesta jakaumasta. Keräämällä näitä projektioiksi kutsuttuja varjoja useasta suunnasta, voidaan matemaattisin menetelmin määrittää radioaktiivisen merkkiaineen jakauma\cite{cherry_single_2012, bruyant_analytic_2002, beister_iterative_2012, willemink_evolution_2019, van_audenhaege_review_2015, bercovich_medical_2018}.
 
 Projektioiden matematiikka esitetään kahdessa ulottuvuudessa (jolloin projektiot ovat yksiulotteisia) ymmärrettävyyden vuoksi. Yleistys kolmeen ulottuvuuteen ja kaksiulotteiseen projektioon on suhteellisen suoraviivainen.
 
@@ -71,10 +71,10 @@ voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \r
 \end{equation*}
 on projektiomatriisi.
 
-Projektion lisäksi toinen tärkeä kuvan muodostuksessa tarvittava operaatio on takaisinprojektio, joka ikään kuin levittää projektiot $g$ takaisin kuva-alueelle Aiemmin esitetyillä merkinnöillä ja oletuksilla takaisinprojektio on projektiomatriisin $A$ transpoosi.
+Projektion lisäksi toinen tärkeä kuvan muodostuksessa tarvittava operaatio on takaisinprojektio, joka ikään kuin levittää projektiot $g$ takaisin kuva-alueelle. Aiemmin esitetyillä merkinnöillä ja oletuksilla takaisinprojektio on projektiomatriisin $A$ transpoosi.
 
 \subsection{Analyyttiset menetelmät}
-Takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio, koska jokaiseen projektioon vaikuttaa useamman pikselin alueelta havaittu aktiivisuus\cite{bruyant_analytic_2002}. Samasta syystä takaisinprojektiolla muodostettu kuva on sumea. Lisäksi jos projektioita on liian vähän, kuvaan jää artefaktoina projektioiden suuntaisia viivoja.
+Takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio, koska jokaiseen projektioon vaikuttaa useamman pikselin alueelta havaittu aktiivisuus\cite{bruyant_analytic_2002}. Samasta syystä takaisinprojektiolla muodostettu kuva on sumea. Lisäksi jos projektioita on liian vähän, kuvaan jää artefaktoina projektioiden suuntaisia viivoja.\cite{bruyant_analytic_2002, stiller_basics_2018} \hyperref[fig:takaisinprojektio]{Kuvasta \ref*{fig:takaisinprojektio}} nähdään, kuinka takaisinprojisoinnissa todellisen aktiivisuusjakauman sijainti erottuu muista alueista selvästi tummempana.
 
 \begin{figure}[H]
     \centering
@@ -91,12 +91,35 @@ Takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio, koska jokais
     \label{fig:takaisinprojektio}
 \end{figure}
 
-Ratkaisuna tähän on kuvan taajuussisällön suodattaminen. Tämä on mahdollista tehdä joko ennen (\textit{filtered backprojection, FBP}) tai jälkeen (\textit{backprojection filtering, BPF}) takaisinprojisoinnin, mutta yleensä suodatus tapahtuu ennen takaisinprojisointia.\cite{bruyant_analytic_2002} FBP-algoritmissa jokaisesta eri kulmasta kerätyistä havainnoista suodatetaan pois matalat taajuudet, jolloin jäljelle jää korkeataajuuksiset yksityiskohdat. 
+Ratkaisuna tähän on kuvan taajuussisällön suodattaminen\cite{stiller_basics_2018, bruyant_analytic_2002}. Suodattaminen on mahdollista tehdä joko ennen (\textit{filtered backprojection, FBP}) tai jälkeen (\textit{backprojection filtering, BPF}) takaisinprojisoinnin, mutta yleensä suodatus tapahtuu ennen takaisinprojisointia.\cite{bruyant_analytic_2002}
 
-Analyyttisten menetelmien suurin etu on niiden nopeus, mutta niihin kuitenkin hankala sisällyttää esitietoa kuvattavasta kohteesta, esimerkiksi säteilyn sironnasta. Menetelmä on myös altis kohinalle, koska kohina ilmenee pääosin jäljelle jäävissä korkeissa taajuuksissa.
+Yleinen muoto projektioiden esittämiseen on sinogrammiksi kutsuttu matriisi. Sinogrammin sarakkeet vastaavat gammakameran detektorin pikseleitä ja rivit projektioita eri suunnista\cite{stiller_basics_2018}. Nimitys on peräisin siitä, kuinka yksittäinen pistemäinen säteilylähde näkyy sinogrammissa siniaaltona. FBP-algoritmissa sinogrammista suodatetaan pois matalat taajuudet, jolloin jäljelle jää korkeataajuuksiset yksityiskohdat. Tämä suodatettu sinogrammi takaisinprojisoidaan kuvaksi\cite{bruyant_analytic_2002, willemink_evolution_2019}.
+
+Analyyttisten menetelmien suurin etu on niiden nopeus, mutta niihin on kuitenkin hankalaa sisällyttää esitietoa kuvattavasta kohteesta, esimerkiksi säteilyn sironnasta. Menetelmä on myös altis kohinalle, koska kohina ilmenee pääosin jäljelle jäävissä korkeissa taajuuksissa.\cite{bruyant_analytic_2002, willemink_evolution_2019, stiller_basics_2018}
 
 \subsection{Iteratiiviset menetelmät}
+Iteratiiviisissa menetelmissä muodostettua kuvaa parannetaan toistuvasti vertaamalla mitattua projektiodataa jo muodostetun kuvan avulla simuloituihin projektioihin. Jokainen iteratiivinen menetelmä lähtee liikkeelle arvauksesta, mitä aktiivisuusjakauma voisi olla. Arvaus on yleensä joko vakio tai esimerkiksi FBP:llä muodostettu kuva. Tämän jälkeen kaikissa iteratiivisissa menetelmissä on tietyt vaiheet, jotka ovat pääpiirteittäin\cite{bruyant_analytic_2002, beister_iterative_2012, stiller_basics_2018}:
+\begin{enumerate}[1.]
+    \item Vaiheen 4 kuvasta (ensimmäisellä iteraatiolla alkuarvauksesta) lasketaan projektio. 
+    \item Vaiheen 1 projektioita verrataan todellisiin, mitattuihin projektioihin. Näiden välisen eron, eli virheen, voidaan tulkita mittaavan kuinka paljon muodostettu kuva ja todellinen kuva eroavat toisistaan.
+    \item Virhe projisoidaan takaisin kuvaksi. 
+    \item Arviota kuvasta päivitetään takaisinprojisoidun virheen perusteella.
+    \item Tarkistetaan, kuinka paljon kuvan rekonstruktio on muuttunut edellisestä iteraatiosta. Jos ero ei ole riittävän pieni, siirrytään takaisin kohtaan 1. Vaihtoehtoisesti iteraatio voidaan pysäyttää tietyn enimmäismäärän jälkeen.
+\end{enumerate}
+Iteratiiviset algoritmit eroavat toisistaan lähinnä virheen muodostuksessa (vaihe 2) ja kuvan päivittämisessä (vaihe 4)\cite{bruyant_analytic_2002}.
+
 \textcolor{red}{MLEM, OSEM}
 
 \subsection{Virhelähteet kuvanmuodostuksessa}
+\textcolor{red}{
+    \begin{itemize}
+        \item Vaimeneminen, CT-kuvan käyttö korjaukseen
+        \item Satunnainen kohina säteilyn havaitsemisessa ja signaalinkäsittelyssä kokonaisuudessaan
+        \item Sironta, korjaukseen esim. "energy window", CT-kuva tai Monte Carlo -simulaatiot
+        \item CDR (collimator-detector response): kollimaattorin vaikutus säteilyn havaitsemiseen
+\end{itemize}
+}
+\textcolor{red}{Korjausten ja virhelähteiden huomioiminen havaintomatriisiissa (\cite{wettenhovi_omegaopen-source_2021} 2.4)}
+
 \subsection{OMEGA}
+\textcolor{red}{Havaintomatriisin suuruus, algoritmien kannalta riittää laskea operaatiot $Ax$ ja $A^{T}x$}
