@@ -59,7 +59,7 @@ Toisaalta kertoimet $a_i$ määräävät parametrit $s$ ja $\theta$ täysin. Mer
         g_m&=\sum_{j=1}^{n}a_{mj}f_{j}
     \end{cases}
 \end{equation*}
-voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \right)^{T}$, $f=\left( f_1, \ldots, f_m \right)^{T}$ ja matriisi $A$,
+voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \right)^{T}$, $f=\left( f_1, \ldots, f_m \right)^{T}$ ja
 \begin{equation*}
     A=
     \begin{pmatrix}
@@ -67,12 +67,33 @@ voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \r
         a_{21} & a_{22} & \cdots & a_{2n} \\
         \vdots & \vdots & \ddots & \vdots \\
         a_{m1} & a_{m2} & \cdots & a_{mn}
-    \end{pmatrix},
+    \end{pmatrix}
 \end{equation*}
-on projektio-operaattori.
+on projektiomatriisi.
+
+Projektion lisäksi toinen tärkeä kuvan muodostuksessa tarvittava operaatio on takaisinprojektio, joka ikään kuin levittää projektiot $g$ takaisin kuva-alueelle Aiemmin esitetyillä merkinnöillä ja oletuksilla takaisinprojektio on projektiomatriisin $A$ transpoosi.
 
 \subsection{Analyyttiset menetelmät}
-\textcolor{red}{FBP}
+Takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio, koska jokaiseen projektioon vaikuttaa useamman pikselin alueelta havaittu aktiivisuus\cite{bruyant_analytic_2002}. Samasta syystä takaisinprojektiolla muodostettu kuva on sumea. Lisäksi jos projektioita on liian vähän, kuvaan jää artefaktoina projektioiden suuntaisia viivoja.
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\textwidth}
+    \begin{subfigure}[t]{.4\textwidth}
+        \resizebox{\linewidth}{!}{\input{kuvat/takaisinprojektio1.tex}}
+        \caption{Aktiivisuusjakauma}
+    \end{subfigure}%
+    \begin{subfigure}[t]{.4\textwidth}
+        \resizebox{\linewidth}{!}{\input{kuvat/takaisinprojektio2.tex}}
+        \caption{Takaisinprojektio}
+    \end{subfigure}%
+    \caption{Takaisinprojektion idea. Vasemmalla puolella on sinisillä pisteillä piirretty aktiivisuusjakauma, josta on kerätty projektioita 4 eri suunnasta. Muodostaessa näistä takaisinprojektio, nähdään kuinka alkuperäisen aktiivisuusjakauman sijainti erottuu selvästi tummempana oikeanpuoleisessa kuvassa.}
+    \label{fig:takaisinprojektio}
+\end{figure}
+
+Ratkaisuna tähän on kuvan taajuussisällön suodattaminen. Tämä on mahdollista tehdä joko ennen (\textit{filtered backprojection, FBP}) tai jälkeen (\textit{backprojection filtering, BPF}) takaisinprojisoinnin, mutta yleensä suodatus tapahtuu ennen takaisinprojisointia.\cite{bruyant_analytic_2002} FBP-algoritmissa jokaisesta eri kulmasta kerätyistä havainnoista suodatetaan pois matalat taajuudet, jolloin jäljelle jää korkeataajuuksiset yksityiskohdat. 
+
+Analyyttisten menetelmien suurin etu on niiden nopeus, mutta niihin kuitenkin hankala sisällyttää esitietoa kuvattavasta kohteesta, esimerkiksi säteilyn sironnasta. Menetelmä on myös altis kohinalle, koska kohina ilmenee pääosin jäljelle jäävissä korkeissa taajuuksissa.
 
 \subsection{Iteratiiviset menetelmät}
 \textcolor{red}{MLEM, OSEM}
