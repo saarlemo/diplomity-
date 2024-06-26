@@ -83,6 +83,7 @@ Takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio, koska jokais
         \resizebox{\linewidth}{!}{\input{kuvat/takaisinprojektio1.tex}}
         \caption{Aktiivisuusjakauma}
     \end{subfigure}%
+    \hspace*{.1\textwidth}
     \begin{subfigure}[t]{.4\textwidth}
         \resizebox{\linewidth}{!}{\input{kuvat/takaisinprojektio2.tex}}
         \caption{Takaisinprojektio}
@@ -91,7 +92,7 @@ Takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio, koska jokais
     \label{fig:takaisinprojektio}
 \end{figure}
 
-Ratkaisuna tähän on kuvan taajuussisällön suodattaminen\cite{stiller_basics_2018, bruyant_analytic_2002}. Suodattaminen on mahdollista tehdä joko ennen (\textit{filtered backprojection, FBP}) tai jälkeen (\textit{backprojection filtering, BPF}) takaisinprojisoinnin, mutta yleensä suodatus tapahtuu ennen takaisinprojisointia.\cite{bruyant_analytic_2002}
+Ratkaisuna tähän on kuvan taajuussisällön suodattaminen\cite{stiller_basics_2018, bruyant_analytic_2002}. Suodattaminen on mahdollista tehdä joko ennen (\textit{filtered backprojection, FBP}) tai jälkeen (\textit{backprojection filtering, BPF}) takaisinprojisoinnin, mutta yleensä suodatus tehdään ennen takaisinprojisointia.\cite{bruyant_analytic_2002}
 
 Yleinen muoto projektioiden esittämiseen on sinogrammiksi kutsuttu matriisi. Sinogrammin sarakkeet vastaavat gammakameran detektorin pikseleitä ja rivit projektioita eri suunnista\cite{stiller_basics_2018}. Nimitys on peräisin siitä, kuinka yksittäinen pistemäinen säteilylähde näkyy sinogrammissa siniaaltona. FBP-algoritmissa sinogrammista suodatetaan pois matalat taajuudet, jolloin jäljelle jää korkeataajuuksiset yksityiskohdat. Tämä suodatettu sinogrammi takaisinprojisoidaan kuvaksi\cite{bruyant_analytic_2002, willemink_evolution_2019}.
 
@@ -108,6 +109,7 @@ Iteratiiviisissa menetelmissä muodostettua kuvaa parannetaan toistuvasti vertaa
 \end{enumerate}
 Iteratiiviset algoritmit eroavat toisistaan lähinnä virheen muodostuksessa (vaihe 2) ja kuvan päivittämisessä (vaihe 4)\cite{bruyant_analytic_2002}.
 
+Yleisimmin käytössä olevat iteratiiviset algoritmit ovat niin kutsuttuja tilastollisia algoritmeja, joissa projektiomatriisi tulkitaan projektiodatan todennäköisyysjakaumana. Edelleen, jokainen sarake vastaa yhtä kuva-alueen vokselia, mutta alkio $A_{ij}$ tulkitaan todennäköisyytenä, että hajoamistapahtuma vokselissa $i$ havaitaan indeksiä $j$ vastaavassa detektorissa\cite{boudjelal_novel_2021}.
 \textcolor{red}{MLEM, OSEM}
 
 \subsection{Virhelähteet kuvanmuodostuksessa}

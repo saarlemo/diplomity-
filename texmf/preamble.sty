@@ -135,10 +135,7 @@ format=plain]{caption}
 }
 
 \renewcommand\multicitedelim{\addcomma\space}%\addsemicolon\space}
-\DeclareFieldFormat[unpublished]{title}{\textit{#1}}
-%\DeclareFieldFormat[unpublished]{url}{\url{#1}}
-%\DeclareFieldFormat*{url}{}
-%\DeclareFieldFormat[unpublished]{url}{\mkbibacro{URL}\addcolon\space\url{#1}}
+
 \DeclareFieldFormat*{urldate}{}
 \DeclareFieldFormat[unpublished, online]{urldate}{\mkbibparens{\bibstring{urlseen}\space#1}}
 
@@ -154,16 +151,56 @@ format=plain]{caption}
 \AtEveryBibitem{\clearfield{month}}
 \AtEveryCitekey{\clearfield{month}}
 
-\renewbibmacro*{publisher+location+date}{%
+\DeclareFieldFormat[incollection]{pages}{s.~#1}
+\DeclareFieldFormat[incollection]{title}{\textit{#1}.}
+\DeclareFieldFormat[incollection]{booktitle}{Teoksessa:~\textit{#1}.}
+\DeclareFieldFormat[incollection]{location}{#1}
+\DeclareFieldFormat[incollection]{publisher}{#1}
+\DeclareBibliographyDriver{incollection}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author/translator+others}%
+    \setunit{\labelnamepunct}\newblock
+    \usebibmacro{title}%
+    \newunit\newblock
+    \printfield{booktitle}%
+    \setunit{\space}
     \printlist{publisher}%
-    \iflistundef{location}
-        {\setunit*{\addcomma\space}}
-        {\setunit*{\addcomma\space}}%
+    \setunit{\addcomma\space}
     \printlist{location}%
-    \setunit*{\addcomma\space}%
+    \setunit{\addperiod\space}
+    \printfield{pages}%
+    \setunit{\addcomma\space}
     \usebibmacro{date}%
-    \newunit
+    \newunit\newblock
+    \usebibmacro{finentry}
 }
+
+\DeclareFieldFormat[article]{pages}{s.~#1}
+\DeclareFieldFormat[article]{title}{\textit{#1}}
+\DeclareFieldFormat[article]{volume}{Vol.~#1}
+\DeclareFieldFormat[article]{number}{No.~#1}
+\DeclareFieldFormat[article]{journaltitle}{#1}
+\DeclareBibliographyDriver{article}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author/translator+others}%
+    \setunit{\labelnamepunct}\newblock
+    \usebibmacro{title}%
+    \newunit\newblock
+    \printfield{journaltitle}%
+    \setunit{\space}
+    \printfield{volume}%
+    \setunit{\addcomma\space}
+    \printfield{number}%
+    \setunit{\addcomma\space}
+    \printfield{pages}%
+    \setunit{\addcomma\space}
+    \usebibmacro{date}%
+    \newunit\newblock
+    \usebibmacro{finentry}
+}
+
 \addbibresource{viitteet.bib}
 
 %\usepackage[intoc]{nomencl} % Merkinnät
