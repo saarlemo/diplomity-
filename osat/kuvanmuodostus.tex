@@ -109,19 +109,53 @@ Iteratiiviisissa menetelmissä muodostettua kuvaa parannetaan toistuvasti vertaa
 \end{enumerate}
 Iteratiiviset algoritmit eroavat toisistaan lähinnä virheen muodostuksessa (vaihe 2) ja kuvan päivittämisessä (vaihe 4)\cite{bruyant_analytic_2002}.
 
-Yleisimmin käytössä olevat iteratiiviset algoritmit ovat niin kutsuttuja tilastollisia algoritmeja, joissa projektiomatriisi tulkitaan projektiodatan todennäköisyysjakaumana. Edelleen, jokainen sarake vastaa yhtä kuva-alueen vokselia, mutta alkio $A_{ij}$ tulkitaan todennäköisyytenä, että hajoamistapahtuma vokselissa $i$ havaitaan indeksiä $j$ vastaavassa detektorissa\cite{boudjelal_novel_2021}.
-\textcolor{red}{MLEM, OSEM}
+Yleisimmin käytössä olevat iteratiiviset algoritmit ovat niin kutsuttuja tilastollisia algoritmeja, joissa havainnot $g_i$ tulkitaan satunnaismuuttujina $G_i\colon\mathbb{N}\to\mathbb{N}$\cite{wettenhovi_omegaopen-source_2021, kaipio_statistical_2005} ja projektiomatriisi tulkitaan projektiodatan todennäköisyysjakaumana\cite{boudjelal_novel_2021}. Edelleen, jokainen projektiomatriisin sarake vastaa yhtä kuva-alueen vokselia, mutta alkio $A_{ij}$ tulkitaan todennäköisyytenä, että hajoamistapahtuma vokselissa $i$ havaitaan indeksiä $j$ vastaavassa detektorissa\cite{boudjelal_novel_2021}.
+
+Koska havaittujen hajoamistapahtumien määrä saa diskreettejä, pieniä arvoja, aktiivisuusjakaumaa voidaan mallintaa Poisson-prosessilla\cite{kaipio_statistical_2005}. Projektiomatriisin avulla saadaan malli keskimääräiselle havainnolle $\overline{g}_i$, joka on muotoa\cite{boudjelal_novel_2021, shepp_maximum_1982}
+\begin{equation*}
+    \overline{g}_i=\sum_{j=1}^{n}a_{ij}f_j.
+\end{equation*}
+Siis
+\begin{equation*}
+    G_i\sim\text{Pois}(\overline{g}_i),
+\end{equation*}
+eli havainnot ovat Poisson-jakautuneita keskiarvolla $\overline{g}_i$\cite{kaipio_statistical_2005, bruyant_analytic_2002}.
+
+Oletuksista seuraa, että todennäköisyys havaita $g_i$, kun tiedetään $f$, on
+\begin{equation*}
+    \pi(g_i \mid f)=e^{-\sum_{j=1}^{n}a_{ij}f_j}\frac{\left( \sum_{j=1}^{n}a_{ij}f_j \right)^{g_i}}{g_i!}.
+\end{equation*}
+Oletetaan satunnaismuuttujat $G_i$, $i=1,\ldots, n$ riippumattomiksi ja identtisesti jakautuneiksi. Tällöin todennäköisyys sille, että havaitaan $g$ kun tiedetään $f$, on
+\begin{equation*}
+    \pi(g\mid f)=\prod_{i=1}^{m}e^{-\sum_{j=1}^{n}a_{ij}f_j}\frac{\left( \sum_{j=1}^{n}a_{ij}f_j \right)^{g_i}}{g_i!}.
+\end{equation*}
+
+Iteratiivisilla menetelmillä pyritään maksimoimaan todennäköisyys $\pi(g\mid f)$ kuvan $f$ suhteen. Yleensä kuitenkin etsitään maksimia funktiolle $\ln(\pi(g\mid f))$, koska molemmat edellä mainitut funktiot saavuttavat maksiminsa samassa pisteessä. Shepp ja Vardi ovat artikkelissaan\cite{shepp_maximum_1982} osoittaneet maksimikohdan olemassaolon.
+
+Emissiotomografiassa edellä mainitun kaltaisiin \textit{maximum likelihood} -tyyppisiin estimaattoreihin pohjautuvista algoritmeista ensimmäinen lienee MLEM (\textit{maximum likelihood expectation maximization}), jossa arviota kuvasta päivitetään yhtälöllä\cite{boudjelal_novel_2021, shepp_maximum_1982, wettenhovi_omegaopen-source_2021, bruyant_analytic_2002}
+\begin{equation*}
+    f_j^{k+1}=\frac{f_j^{k}}{\sum_{i=1}^{m}a_{ij}}\sum_{i=1}^{m}\frac{a_{ij}g_i}{\sum_{j=1}^{n}a_{ij}f_j^{k}}.
+\end{equation*}
+MLEM-algoritmi kuitenkin suppenee verrattain hitaasti kohti maksimia ja on altis kohinalle\cite{wettenhovi_omegaopen-source_2021, bruyant_analytic_2002}. Jakamalla havainnot ja projektiomatriisi osajoukkoihin sekä käyttämällä MLEM-algoritmia jokaiseen osajoukkoon erikseen, saadaan algoritmi yleensä suppenemaan nopeammin. Eräs esimerkki tämän kaltaisesta menetelmästä on OSEM (\textit{ordered subsets expectation maximization}) ja sen muunnelmat.\cite{bruyant_analytic_2002, wettenhovi_omegaopen-source_2021, beister_iterative_2012}
+
+Toinen yleinen estimaattori on MAP (\textit{maximum a posteriori}), joka edeltävin oletuksin palautuu lausekkeen
+\begin{equation}\label{eqn:map}
+    \pi(g\mid f)-R(f)
+\end{equation}
+maksimin etsimiseksi kuvan $f$ suhteen. Lausekkeessa (\ref{eqn:map}) funktioon $R\colon\NN^{n}\to\RR$ on sisällytetty matemaattisesti muotoiltu esitieto kuvasta.\cite{wettenhovi_omegaopen-source_2021, bruyant_analytic_2002}
 
 \subsection{Virhelähteet kuvanmuodostuksessa}
-\textcolor{red}{
-    \begin{itemize}
-        \item Vaimeneminen, CT-kuvan käyttö korjaukseen
-        \item Satunnainen kohina säteilyn havaitsemisessa ja signaalinkäsittelyssä kokonaisuudessaan
-        \item Sironta, korjaukseen esim. "energy window", CT-kuva tai Monte Carlo -simulaatiot
-        \item CDR (collimator-detector response): kollimaattorin vaikutus säteilyn havaitsemiseen
-\end{itemize}
-}
-\textcolor{red}{Korjausten ja virhelähteiden huomioiminen havaintomatriisiissa (\cite{wettenhovi_omegaopen-source_2021} 2.4)}
+Havaitut projektiot eivät tosiasiassa muodostu ainoastaan suoraan radionuklidilta detektorille kulkeneista gammakvanteista. Havaittuihin projektioihin sisältyy sekä nämä kvantit, että myös väliaineesta sironneet kvantit ja laitteistosta aiheutuva kohina\cite{king_attenuation_2004}.
+
+Comptonin sironnasta ja valosähköisestä ilmiöstä johtuen gammasäteily vaimenee kulkiessaan aineen läpi. Vaimenemista kuvaa vaimenemiskerroin, joka riippuu säteilyn energiasta ja aineen tiheydestä. Emissiotomografiassa säteilyn energia on vakio, mutta aineen tiheys ja siten vaimenemiskerroin vaihtelee kudostyypin mukaan\cite{king_attenuation_2004, cherry_single_2012}. Tästä johtuen emissiotomografiaan yhdistetään yleensä transmissiotomografiakuvaus, jolla määritetään säteilyn vaimeneminen kuva-alueen vokseleissa\cite{king_attenuation_2004, cherry_single_2012, wettenhovi_omegaopen-source_2021}. Uusimmat laitteet yhdistävät emissiotomografian magneettikuvaukseen, jonka kontrasti pehmytkudoksissa on merkittävästi TT-kuvaa parempi\cite{wettenhovi_omegaopen-source_2021}. Transmissiotomografiassa voidaan käyttää samaa detektoria kuin emissiotomografiassa, mutta säteilyn energia kuitenkin poikkeaa emissiotomografiassa käytetyn säteilyn energiasta, jotta havaitun säteilyn lähde voidaan selvittää. Transmissiotomografiakuvaa ei siksi voida käyttää vaimenemisen korjaukseen sellaisenaan, joten vaimenemiskertoimet skaalataan ennen vaimenemiskorjausta\cite{cherry_single_2012, king_attenuation_2004, wettenhovi_omegaopen-source_2021}.
+
+Vaikka gammakvantti lähestyisi detektoria kollimaattorin reiän suuntaisesti, sen alkuperäisen etenemissuunnan on mahdollista olla jokin muu sironnan vuoksi. Tällä tavoin väärin havaittuja hajoamistapahtumia voi korjata useammalla tavalla. Yleisin tapa huomioida sironta on niin sanotun energiaikkunan käyttäminen. Energiaikkunalla viitataan siihen energiaväliin, jolta detektorille saapuvat gammakvantit rekisteröidään. Sironneilla gammakvanteilla tämä energia on matalampi, joka tarkoittaa, että sironneista gammakvanteista voidaan mitata erilliset projektiot. Nämä projektiot skaalataan ja vähennetään kyseessä olevan isotoopin lähettämien gammakvanttien energian ympärillä olevasta energiaikkunasta. Energiaikkunoita sironneille gammakvanteille voi olla myös useampia, mutta tällöin kussakin ikkunassa havaitaan vähemmän hajoamistapahtumia, lisäten kohinaa.\cite{cherry_single_2012, king_attenuation_2004} Sironnan tarkempi mallintaminen usealla energiaikkunalla vaatii myös enemmän laskentatehoa tai -aikaa\cite{king_attenuation_2004}. Kliinisiin sovelluksiin sopivaan tasapainoon laskenta-ajan ja kuvan laadun välillä riittää kaksi tai kolme energiaikkunaa\cite{king_attenuation_2004, cherry_single_2012}. 
+
+Kohinalla viitataan siihen vaihteluun havainnoissa, joka ei anna hyödyllistä informaatiota kuvan rekonstruktiossa. Kohina voi olla joko satunnaista tai systemaattista, joista jälkimmäistä kutsutaan artifaktoiksi. Radioaktiivisen hajoamisen satunnaisuuden lisäksi satunnaista kohinaa syntyy ei-ideaalista laitteistosta, esimerkiksi detektorin havaitsemiskyvyn lämpötilariippuvuudesta. Myös taustasäteily vaikuttaa kuvan kontrastiin etenkin ajallisesti lyhyissä mittauksissa.\cite{cherry_single_2012, king_attenuation_2004} Artifaktat voivat olla peräisin esimerkiksi kuvan rekonstruktioalgoritmista tai ylimääräisestä säteilylähteestä SPECT-laitteen läheisyydessä.
+
+Muita erittelemisen arvoisia tekijöitä ovat säteilyn vaimeneminen ja sironta kollimaattorin reikien välisessä aineessa, ei-kohtisuorasti saapuvien gammakvanttien havaitsemisesta johtuva epätarkkuus aktiivisuusjakauman määrityksessä sekä epätarkkuudet tuikeaineessa syntyvän valon sijainnin paikantamisessa\cite{king_attenuation_2004, frey_collimator-detector_2006}. Edellä mainitut tekijät kootaan usein yhteen termin CDR (\textit{collimator-detector response}) alle. Kuvan rekonstruktiossa CDR:n voi huomioida joko mallintamalla sen analyyttisesti kollimaattorin ja detektorin geometrian avulla tai Monte Carlo -simulaatioilla, jotka ovat tarkempia mutta hitaampia.\cite{frey_collimator-detector_2006}
+
+Korjaus jokaiselle virheen lähteelle voidaan toteuttaa matriisimuodossa. Käytännössä projektiomatriisia kerrotaan kutakin virhettä vastaavalla matriisilla erikseen ja matriisituloa käytetään kuvan rekonstruktiossa\cite{wettenhovi_omegaopen-source_2021}.
 
 \subsection{OMEGA}
 \textcolor{red}{Havaintomatriisin suuruus, algoritmien kannalta riittää laskea operaatiot $Ax$ ja $A^{T}x$}

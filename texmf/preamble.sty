@@ -146,10 +146,29 @@ format=plain]{caption}
 %\AtEveryCitekey{\clearlist{location}}
 %\AtEveryBibitem{\clearlist{location}}
 \AtEveryBibitem{\clearfield{series}}
-\AtEveryBibitem{\clearfield{edition}}
+%\AtEveryBibitem{\clearfield{edition}}
 \AtEveryBibitem{\clearfield{pagetotal}}
 \AtEveryBibitem{\clearfield{month}}
 \AtEveryCitekey{\clearfield{month}}
+
+\DeclareFieldFormat[book]{edition}{{#1}. painos}
+\DeclareBibliographyDriver{book}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author/translator+others}%
+    \setunit{\labelnamepunct}\newblock
+    \usebibmacro{title}%
+    \newunit\newblock
+    \printlist{publisher}%
+    \setunit{\addcomma\space}
+    \printlist{location}%
+    \setunit{\addperiod\space}
+    \printfield{edition}
+    \setunit{\addcomma\space}
+    \usebibmacro{date}%
+    \newunit\newblock
+    \usebibmacro{finentry}
+}
 
 \DeclareFieldFormat[incollection]{pages}{s.~#1}
 \DeclareFieldFormat[incollection]{title}{\textit{#1}.}
@@ -170,7 +189,11 @@ format=plain]{caption}
     \printlist{location}%
     \setunit{\addperiod\space}
     \printfield{pages}%
-    \setunit{\addcomma\space}
+    \setunit{\addperiod\space}
+    \iffieldundef{edition}{}{%
+        \printfield{edition}%
+        \setunit{\addcomma\space}%
+    }%
     \usebibmacro{date}%
     \newunit\newblock
     \usebibmacro{finentry}
