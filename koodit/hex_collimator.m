@@ -3,7 +3,7 @@ clear
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Modeling parameters
 param.nRaySPECT = 1+6+12+18+24; % Number of rays: for example 7 for centre and all hexagon corners
-param.coneMethod = 1;
+param.coneMethod = 3;
 ix = 0; % Pixel index
 iy = 0; % Pixel index
 
@@ -36,19 +36,23 @@ detectors.xd = x(4); % Detector center x in global coordinates
 detectors.yd = x(5); % Detector center y in global coordinates
 detectors.zd = x(6); % Detector center z in global coordinates
 
-%% 2D one detector pixel plot
-param.coneMethod = 1;
-hexShifts1 = computeSpectHexShifts(param, detectors, 63, 63, 1);
-param.coneMethod = 2;
-hexShifts2 = computeSpectHexShifts(param, detectors, 63, 63, 1);
+%% Plot
+if param.coneMethod == 3
+    shifts2D = computeSpectSquareShifts(param, detectors, 63, 63, 1);
+    shifts3D = x + computeSpectSquareShifts(param, detectors, 63, 63, 0);
+else
+    shifts2D = computeSpectHexShifts(param, detectors, 63, 63, 1);
+    shifts3D = x + computeSpectHexShifts(param, detectors, 63, 63, 0);
+end
 
-f2 = figure(2);
-set(f2, "defaulttextinterpreter", "latex")
-tiledlayout(1, 2)
+f5 = figure(5);
+set(f5, "defaulttextinterpreter", "latex")
+t = tiledlayout(1, 2);
+sgtitle(strcat("Kollimaattorin malli ", num2str(param.coneMethod)), "interpreter", "latex")
 
-nexttile
+nexttile % 2D plot
 hold on
-scatter(hexShifts1(4, :), hexShifts1(5, :), 0.1, '.') % Plot points
+scatter(shifts2D(4, :), shifts2D(5, :), 0.1, '.') % Plot points
 hold off
 ticks = param.dPitchXY * (-10:10);
 set(gca,'XTick',ticks,'YTick',ticks)
@@ -60,45 +64,19 @@ xlabel("x (mm)")
 ylabel("y (mm)")
 axis square
 grid on
-title('Kollimaattorin malli 1')
+title("Detektoripaneeli")
 
-nexttile
-hold on
-scatter(hexShifts2(4, :), hexShifts2(5, :), 0.1, '.') % Plot points
-hold off
-ticks = param.dPitchXY * (-10:10);
-set(gca,'XTick',ticks,'YTick',ticks)
-set(gca,'Layer','top','GridColor','r','GridAlpha',1,...
-    'MinorGridLineStyle','-','MinorGridColor',[.92 .51 .93],'MinorGridAlpha',1)
-xlim([-2 * param.dPitchXY, 2 * param.dPitchXY])
-ylim([-2 * param.dPitchXY, 2 * param.dPitchXY])
-xlabel("x (mm)")
-ylabel("y (mm)")
-axis square
-grid on
-title('Kollimaattorin malli 2')
-
-f2.Position = [100 100 640 480];
-% exportgraphics(f2, "../kuvat/2d-kollimaattori.pdf", 'resolution', 1500, 'contenttype', 'vector')
-
-%% 3D Plot
-param.coneMethod = 1;
-hexShifts2 = x + computeSpectHexShifts(param, detectors, ix, iy, 0);
-nHex = size(hexShifts2, 2);
-
-f3 = figure(3);
-clf
-view(3)
-
+nexttile % 3D plot
 % Extend rays to be plotted
-hexShifts2(1:3, :) = hexShifts2(1:3, :) + 1e3 * normc(hexShifts2(1:3, :) - hexShifts2(4:6, :));
+shifts3D(1:3, :) = shifts3D(1:3, :) + 1e3 * normc(shifts3D(1:3, :) - shifts3D(4:6, :));
+nShifts = size(shifts3D, 2);
 
 hold on
-for ii = 1:nHex
+for ii = 1:nShifts
     plot3( ...
-        hexShifts2([1 4], ii)', ...
-        hexShifts2([2 5], ii)', ...
-        hexShifts2([3 6], ii)', ...
+        shifts3D([1 4], ii)', ...
+        shifts3D([2 5], ii)', ...
+        shifts3D([3 6], ii)', ...
         color=[0 0.4470 0.7410], ...
         LineWidth=0.01)
 end
@@ -125,13 +103,7 @@ h = line([X1(:);X2(:);X3(:)], [Y1(:);Y2(:);Y3(:)], [Z1(:);Z2(:);Z3(:)]);
 set(h, 'Color',[0 0 0 1], 'LineWidth',0.1, 'LineStyle','-')
 
 % Axis properties
-axis vis3d
-camproj perspective, rotate3d on
 axis equal
-% xlabel('x')
-% ylabel('y')
-% zlabel('z')
-
 ax = gca;
 ax.Color = 'none';
 ax.XColor = 'none'; % Hide the axis lines and ticks by setting their color to 'none'
@@ -148,5 +120,5 @@ ax.ZLabel.Visible='on';
 ax.ZLabel.Position = 1.1 * [-xlimits, -ylimits, 0];
 ax.ZLabel.Rotation = 0;
 
-f3.Position = [100 100 640 480];
-% exportgraphics(f3, "../kuvat/3d-kollimaattori2.pdf", 'resolution', 1500, 'contenttype', 'vector')
+f5.Position = [100 100 640 480];
+exportgraphics(f5, strcat("../kuvat/malli", num2str(param.coneMethod), ".pdf"), 'resolution', 1500, 'contenttype', 'vector')

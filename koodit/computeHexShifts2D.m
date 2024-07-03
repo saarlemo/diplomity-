@@ -14,7 +14,7 @@ function hexShifts = computeHexShifts2D(nPoints, startAngle, diameter)
     if nPoints == 1 % Trivial case
         return
     end
-
+    
     currentPoint = 1; % Variable to keep count of current point
     nLayer = ceil(0.5 * sqrt(4. * (nPoints - 1.) / 3. + 1.) - 1.); % Number of hexagon point layers
     radius = diameter / 2.; % Hexagon radius
@@ -38,7 +38,6 @@ function hexShifts = computeHexShifts2D(nPoints, startAngle, diameter)
 
                 hexShifts(currentPoint, 1) = xx_s;
                 hexShifts(currentPoint, 2) = yy_s;
-
             end
         end
     end
