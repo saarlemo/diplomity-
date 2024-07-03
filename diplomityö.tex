@@ -11,18 +11,19 @@
 \usepackage{texmf/envdef}
 
 \begin{document}  
-    \include{osat/kansilehti.tex}
-    \include{osat/tiivistelma.tex}
-    \include{osat/abstract.tex}
-    \clearpage\setcounter{page}{1}
-    \include{osat/sisällys.tex}
-    \include{osat/johdanto.tex}
-    \include{osat/spect.tex}
-    \include{osat/kuvanmuodostus.tex}
-    \include{osat/omega.tex}
-    \include{osat/toteutus.tex}
-    \include{osat/vertailu.tex}
-    \include{osat/pohdinta.tex}
-    \include{osat/viitteet.tex}
-    \include{osat/liitteet.tex}
+    \pagenumbering{roman}%
+    \include{osat/kansilehti.tex}%
+    \include{osat/tiivistelma.tex}%
+    \include{osat/abstract.tex}%
+    \include{osat/sisällys.tex}%
+    \pagenumbering{arabic}%
+    \include{osat/johdanto.tex}%
+    \include{osat/spect.tex}%
+    \include{osat/kuvanmuodostus.tex}%
+    \include{osat/omega.tex}%
+    \include{osat/toteutus.tex}%
+    \include{osat/vertailu.tex}%
+    \include{osat/pohdinta.tex}%
+    \include{osat/viitteet.tex}%
+    \include{osat/liitteet.tex}%
 \end{document}

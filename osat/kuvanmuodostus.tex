@@ -71,9 +71,11 @@ voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \r
 \end{equation*}
 on projektiomatriisi.
 
-Projektion lisäksi toinen tärkeä kuvan muodostuksessa tarvittava operaatio on takaisinprojektio, joka ikään kuin levittää projektiot $g$ takaisin kuva-alueelle. Aiemmin esitetyillä merkinnöillä ja oletuksilla takaisinprojektio on projektiomatriisin $A$ transpoosi.
+Edellä kuvattu menetelmä on niin sanottu sädepohjainen projektio (\textit{ray-based projection}). Projektio voidaan laskea myös käyttämällä säteen sijasta sylinteriä ja laskemalla sylinterin ja vokseleiden leikkausten tilavuudet. Tässä tapauksessa vokselit oletetaan yleensä pallomaisiksi, jotta leikkauste tilavuudet olisivat nopeita laskea analyyttisesti.\cite{lougovski_volume_2014} Muissa projektion laskentaan käytetyissä menetelmissä hyödynnetään esimerkiksi kohtisuoraa etäisyyttä projektion säteen ja vokselin keskipisteen välillä\cite{aguiar_geometrical_2010} tai kuva-alueen taajuussisältöä\cite{zeng_frequency_1992, zeng_rotating_1994}. Taajuussisältöön perustuva menetelmä on laskennallisesti nopea ja eroaa muista myös siinä, että menetelmässä ajatellaan detektorin pysyvän paikoillaan kuva-alueen pyöriessä\cite{zeng_frequency_1992, zeng_rotating_1994}.
 
 \subsection{Analyyttiset menetelmät}
+Projektion lisäksi toinen tärkeä kuvan muodostuksessa tarvittava operaatio on takaisinprojektio, joka ikään kuin levittää projektiot $g$ takaisin kuva-alueelle. Aiemmin esitetyillä merkinnöillä ja oletuksilla takaisinprojektio on projektiomatriisin $A$ transpoosi.
+
 Takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio, koska jokaiseen projektioon vaikuttaa useamman pikselin alueelta havaittu aktiivisuus\cite{bruyant_analytic_2002}. Samasta syystä takaisinprojektiolla muodostettu kuva on sumea. Lisäksi jos projektioita on liian vähän, kuvaan jää artefaktoina projektioiden suuntaisia viivoja.\cite{bruyant_analytic_2002, stiller_basics_2018} \hyperref[fig:takaisinprojektio]{Kuvasta \ref*{fig:takaisinprojektio}} nähdään, kuinka takaisinprojisoinnissa todellisen aktiivisuusjakauman sijainti erottuu muista alueista selvästi tummempana.
 
 \begin{figure}[H]
@@ -119,7 +121,7 @@ Siis
 \begin{equation*}
     G_i\sim\text{Pois}(\overline{g}_i),
 \end{equation*}
-eli havainnot ovat Poisson-jakautuneita keskiarvolla $\overline{g}_i$\cite{kaipio_statistical_2005, bruyant_analytic_2002}.
+eli havainnot ovat Poisson-jakautuneita keskiarvolla $\overline{g}_i$\cite{kaipio_statistical_2005, bruyant_analytic_2002, wettenhovi_transmission_2021}.
 
 Oletuksista seuraa, että todennäköisyys havaita $g_i$, kun tiedetään $f$, on
 \begin{equation*}
@@ -132,7 +134,7 @@ Oletetaan satunnaismuuttujat $G_i$, $i=1,\ldots, n$ riippumattomiksi ja identtis
 
 Iteratiivisilla menetelmillä pyritään maksimoimaan todennäköisyys $\pi(g\mid f)$ kuvan $f$ suhteen. Yleensä kuitenkin etsitään maksimia funktiolle $\ln(\pi(g\mid f))$, koska molemmat edellä mainitut funktiot saavuttavat maksiminsa samassa pisteessä. Shepp ja Vardi ovat artikkelissaan\cite{shepp_maximum_1982} osoittaneet maksimikohdan olemassaolon.
 
-Emissiotomografiassa edellä mainitun kaltaisiin \textit{maximum likelihood} -tyyppisiin estimaattoreihin pohjautuvista algoritmeista ensimmäinen lienee MLEM (\textit{maximum likelihood expectation maximization}), jossa arviota kuvasta päivitetään yhtälöllä\cite{boudjelal_novel_2021, shepp_maximum_1982, wettenhovi_omegaopen-source_2021, bruyant_analytic_2002}
+Emissiotomografiassa edellä mainitun kaltaisiin \textit{maximum likelihood} -tyyppisiin estimaattoreihin pohjautuvista algoritmeista ensimmäinen lienee MLEM (\textit{maximum likelihood expectation maximization}), jossa arviota kuvasta päivitetään yhtälöllä\cite{boudjelal_novel_2021, shepp_maximum_1982, wettenhovi_omegaopen-source_2021, bruyant_analytic_2002, wettenhovi_transmission_2021}
 \begin{equation*}
     f_j^{k+1}=\frac{f_j^{k}}{\sum_{i=1}^{m}a_{ij}}\sum_{i=1}^{m}\frac{a_{ij}g_i}{\sum_{j=1}^{n}a_{ij}f_j^{k}}.
 \end{equation*}
@@ -142,7 +144,7 @@ Toinen yleinen estimaattori on MAP (\textit{maximum a posteriori}), joka edeltä
 \begin{equation}\label{eqn:map}
     \pi(g\mid f)-R(f)
 \end{equation}
-maksimin etsimiseksi kuvan $f$ suhteen. Lausekkeessa (\ref{eqn:map}) funktioon $R\colon\NN^{n}\to\RR$ on sisällytetty matemaattisesti muotoiltu esitieto kuvasta.\cite{wettenhovi_omegaopen-source_2021, bruyant_analytic_2002}
+maksimin etsimiseksi aktiivisuusjakauman $f$ suhteen. Lausekkeessa (\ref{eqn:map}) funktioon $R\colon\NN^{n}\to\RR$ on sisällytetty matemaattisesti muotoiltu esitieto kuvasta.\cite{wettenhovi_omegaopen-source_2021, bruyant_analytic_2002}
 
 \subsection{Virhelähteet kuvanmuodostuksessa}
 Havaitut projektiot eivät tosiasiassa muodostu ainoastaan suoraan radionuklidilta detektorille kulkeneista gammakvanteista. Havaittuihin projektioihin sisältyy sekä nämä kvantit, että myös väliaineesta sironneet kvantit ja laitteistosta aiheutuva kohina\cite{king_attenuation_2004}.
@@ -155,7 +157,27 @@ Kohinalla viitataan siihen vaihteluun havainnoissa, joka ei anna hyödyllistä i
 
 Muita erittelemisen arvoisia tekijöitä ovat säteilyn vaimeneminen ja sironta kollimaattorin reikien välisessä aineessa, ei-kohtisuorasti saapuvien gammakvanttien havaitsemisesta johtuva epätarkkuus aktiivisuusjakauman määrityksessä sekä epätarkkuudet tuikeaineessa syntyvän valon sijainnin paikantamisessa\cite{king_attenuation_2004, frey_collimator-detector_2006}. Edellä mainitut tekijät kootaan usein yhteen termin CDR (\textit{collimator-detector response}) alle. Kuvan rekonstruktiossa CDR:n voi huomioida joko mallintamalla sen analyyttisesti kollimaattorin ja detektorin geometrian avulla tai Monte Carlo -simulaatioilla, jotka ovat tarkempia mutta hitaampia.\cite{frey_collimator-detector_2006}
 
-Korjaus jokaiselle virheen lähteelle voidaan toteuttaa matriisimuodossa. Käytännössä projektiomatriisia kerrotaan kutakin virhettä vastaavalla matriisilla erikseen ja matriisituloa käytetään kuvan rekonstruktiossa\cite{wettenhovi_omegaopen-source_2021}.
+Jokainen virheen lähde voidaan esittää matriisimuodossa. Projektiomatriisia kerrotaan kutakin virhettä vastaavalla matriisilla erikseen ja matriisituloa käytetään kuvan rekonstruktiossa\cite{wettenhovi_omegaopen-source_2021}.
 
 \subsection{OMEGA}
-\textcolor{red}{Havaintomatriisin suuruus, algoritmien kannalta riittää laskea operaatiot $Ax$ ja $A^{T}x$}
+Tomografiakuvan rekonstruktioalgoritmien kehityksen ja kliinisen käyttöönoton hidasteeksi on tunnistettu helppokäyttöisten ja monipuolisten, mieluiten avoimen lähdekoodin, kehitysalustojen heikko saatavuus ja tehokkuus\cite{hutton_origins_2014}. Vaikka alustoja on kuitenkin olemassa useita, vuoteen 2021 asti ongelmana oli alustojen yhteentoimivuus eri laitteiston kanssa. Laitteistolla viitataan tässä yhteydessä tietokoneen keskusyksikköön (CPU) ja etenkin näytönohjaimeen (GPU), joilla kuvan rekonstruktio yleisimmin lasketaan. Ohjelmistot tukivat esimerkiksi näytönohjaimella laskettaessa ainoastaan CUDA-rajapintaa ja siten ainoastaan Nvidian näytönohjaimia.\cite{wettenhovi_omegaopen-source_2021}
+
+OMEGA on avoimen lähdekoodin ohjelmisto tomografiakuvan rekonstruktioon, joka on kehitetty alkujaan PET-kuvan rekonstruktiota varten\cite{wettenhovi_omegaopen-source_2021, wettenhovi_transmission_2021}. Sittemmin ohjelmistoa on kehitetty tukemaan TT-kuvan rekonstruktiota\cite{wettenhovi_transmission_2021} ja tässä työssä toteuttava kollimaattorin mallinnus on tarkoitus sisällyttää tulevien versioiden SPECT-rekonstruktioon. OMEGA sisältää toteutukset yleisimmille estimaattoreille ja algoritmeille. Projektiot voidaan laskea joko sädepohjaisesti\cite{siddon_fast_1985, sundermann_fast_1998}, vokselin ja säteen kohtisuoralla etäisyydellä\cite{aguiar_geometrical_2010} tai kuva-alueen rotaatioon ja taajuussisältöön perustuvalla menetelmällä\cite{zeng_frequency_1992, zeng_rotating_1994}.\cite{wettenhovi_omegaopen-source_2021}
+
+Ohjelmiston voidaan ajatella koostuvan kolmesta päällekkäisestä abstraktiokerroksesta, joissa ylhäältä alaspäin laskentateho kasvaa koodin luettavuuden kustannuksella. Kerroksia ja niiden toiminnallisuuksia on visualisoitu \hyperref[fig:omega-kerrokset]{kuvassa \ref*{fig:omega-kerrokset}}.
+
+Ensimmäinen, ylin kerros koostuu MATLAB-koodista, joka on ajettavissa ilman kääntämistä sekä MATLAB-ohjelmistolla että avoimen lähdekoodin Octave-ohjelmistolla. Tällä kerroksella voidaan esimerkiksi suorittaa joitakin rekonstruktioalgoritmeista keskusyksiköllä ja käsitellä projektiodataa. Kerros on ainut käyttäjän eksplisiittisesti tarvitseva ja kerroksen toiminnallisuutta on myös verrattain helppo muokata sovelluskohteen mukaan.\cite{wettenhovi_transmission_2021, wettenhovi_omegaopen-source_2021}
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\textwidth}
+    \resizebox{.9\linewidth}{!}{
+        \input{kuvat/omega-kerrokset.tex}
+    }
+    \caption{OMEGA-ohjelmiston kerrokset (pyöreäkulmaiset laatikot) ja niiden toiminnallisuudet (teräväkulmaiset laatikot). Kuva on muokattu lähteestä \cite{wettenhovi_omegaopen-source_2021}.}
+    \label{fig:omega-kerrokset}
+\end{figure}
+
+MATLAB-ohjelmiston MEX (MATLAB Executable) -tiedostot sisältävät koodia, joka on kirjoitettu ja käännetty C-, C++-, tai Fortran-kielillä ja jotka voidaan suorittaa suoraan MATLAB-ympäristössä. MEX-tiedostojen etuja ovat muun muassa parempi suorituskyky verrattuna perinteisiin MATLAB-tiedostoihin ja olemassa olevan C-, C++ tai Fortran-koodin hyödyntäminen. Kuvan rekonstruktion vaatiessa runsaasti laskentatehoa on luontevaa käyttää toiminnallisuutta hyödyksi. OMEGAn toinen kerros sisältää C++-koodia, joka on käännetty MEX-tiedostoksi. Kerros sisältää esimerkiksi menetelmiä kuvan rekonstruktioon, datan käsittelyyn sekä projektiomatriisin laskemiseen.\cite{wettenhovi_transmission_2021, wettenhovi_omegaopen-source_2021}
+
+Alin ja kaikista tehokkain kerros keskittyy kuvan rekonstruktioon OpenCL- ja CUDA-rajapinnoilla\cite{wettenhovi_transmission_2021, wettenhovi_omegaopen-source_2021}. Kuten aiemmin esitettiin, CUDA tukee ainoastaan Nvidian näytönohjaimia, mutta OpenCL:n etuna on tuki käytännössä kaikille moderneille moniydinsuorittimille ja näytönohjaimille valmistajasta riippumatta\cite{stone_opencl_2010}.

@@ -1,5 +1,36 @@
 \begin{appendices}
     \begin{landscape}
+        \section{Taulukko pääfunktioiden parametreistä}\label{appendix:parametrit}
+        \begin{table}[H]
+            \centering
+            \captionsetup{width=.9\linewidth}
+            \caption{Funktioiden \texttt{computeSpectHexShifts} ja \texttt{computeSpectSquareShifts} parametrit}
+            \resizebox{.9\linewidth}{!}{%
+                \begin{tabular}{lcc}
+                    \toprule
+                    Parametrin nimi & Arvo & Kuvaus \\
+                    \midrule
+                    \texttt{param.coneMethod} & $\left\{ 1, 2 \right\}$ & Mallin valinta \\
+                    \texttt{param.hexOrientation} & $\left\{ 1, 2 \right\}$ & Kuusikulmion pohjan suuntaus \\
+                    \texttt{param.nRaySPECT} & $\mathbb{N}$ & Säteiden lukumäärä yhdessä kollimaattorin reiässä \\
+                    \texttt{param.dPitchXY} & $>0$ & Detektorin pikselin reunan pituus \\
+                    \texttt{param.colL} & $>0$ & Kollimaattorin reiän pituus \\
+                    \texttt{param.colD} & $>0$ & Kollimaattorin reiän halkaisija \\
+                    \texttt{param.dSeptal} & $>0$ & Kollimaattorin reikien välinen etäisyys \\
+                    \texttt{detectors.xd} & $\mathbb{R}$ & Detektorin pikselin keskipisteen $x$-koordinaatti \\
+                    \texttt{detectors.yd} & $\mathbb{R}$ & Detektorin pikselin keskipisteen $y$-koordinaatti \\
+                    \texttt{detectors.zd} & $\mathbb{R}$ & Detektorin pikselin keskipisteen $z$-koordinaatti \\
+                    \texttt{detectors.xs} & $\mathbb{R}$ & \texttt{detectors.xd} + detektoripaneelin ulkonormaalivektorin $x$-komponentti \\
+                    \texttt{detectors.ys} & $\mathbb{R}$ & \texttt{detectors.yd} + detektoripaneelin ulkonormaalivektorin $y$-komponentti \\
+                    \texttt{detectors.zs} & $\mathbb{R}$ & \texttt{detectors.zd} + detektoripaneelin ulkonormaalivektorin $z$-komponentti \\
+                    \texttt{ix} & $\mathbb{N}$ & Detektorin pikselin indeksi paneelin $x$-suunnassa \\
+                    \texttt{iy} & $\mathbb{N}$ & Detektorin pikselin indeksi paneelin $y$-suunnassa \\
+                    \bottomrule
+                \end{tabular}
+            }
+            \label{tbl:parametrit}
+        \end{table}
+
         \section{C++-koodit}\label{appendix:code}
         \fvset{fontsize=\footnotesize}
         \subsection{Apufunktiot}\label{appendix:apufunktiot}
@@ -8,5 +39,7 @@
         \VerbatimInput[numbers=left]{koodit/computeHexShifts2D.cpp}
         \subsection{\texttt{computeSpectHexShifts}}\label{appendix:3Dsiirto}
         \VerbatimInput[numbers=left]{koodit/computeSpectHexShifts.cpp}
+        \subsection{\texttt{computeSpectSquareShifts}}\label{appendix:malli3}
+        \VerbatimInput[numbers=left]{koodit/computeSpectSquareShifts.cpp}
     \end{landscape}
 \end{appendices}
