@@ -1,5 +1,7 @@
 \section{Tomografiakuvan muodostus}
-Oletetaan toistaiseksi gammakameran kollimaattorin havaitsevan ainoastaan yhdestä suunnasta saapuvaa säteilyä. Tällöin gammakameran perspektiivistä havaitaan ikään kuin kaksiulotteinen varjo radioaktiivisen merkkiaineen kolmiulotteisesta jakaumasta. Keräämällä näitä projektioiksi kutsuttuja varjoja useasta suunnasta, voidaan matemaattisin menetelmin määrittää radioaktiivisen merkkiaineen jakauma\cite{cherry_single_2012, bruyant_analytic_2002, beister_iterative_2012, willemink_evolution_2019, van_audenhaege_review_2015, bercovich_medical_2018}.
+\textcolor{red}{Tähän johdanto}
+
+Oletetaan toistaiseksi gammakameran kollimaattorin havaitsevan ainoastaan yhdestä suunnasta saapuvaa säteilyä. Tällöin gammakameran perspektiivistä havaitaan ikään kuin kaksiulotteinen varjo radioaktiivisen merkkiaineen kolmiulotteisesta jakaumasta. Keräämällä näitä projektioiksi kutsuttuja varjoja useasta suunnasta voidaan matemaattisin menetelmin määrittää radioaktiivisen merkkiaineen jakauma\cite{cherry_single_2012, bruyant_analytic_2002, beister_iterative_2012, willemink_evolution_2019, van_audenhaege_review_2015, bercovich_medical_2018}. Samat matemaattiset menetelmät soveltuvat myös tietokonetomografiaan, jossa jokainen projektio vastaa tietystä suunnasta otettua tavallista röntgenkuvaa.
 
 Projektioiden matematiikka esitetään kahdessa ulottuvuudessa (jolloin projektiot ovat yksiulotteisia) ymmärrettävyyden vuoksi. Yleistys kolmeen ulottuvuuteen ja kaksiulotteiseen projektioon on suhteellisen suoraviivainen.
 
@@ -7,7 +9,7 @@ Projektioiden matematiikka esitetään kahdessa ulottuvuudessa (jolloin projekti
     \centering
     \captionsetup{width=.9\textwidth}
     \input{kuvat/projektio.tex}
-    \caption{Aktiivisuusjakauma $f$ $xy$-tasossa (siniset pisteet), gammakamera (mustat palkit ja väritetty alue) ja projektio $g(s, \theta)$, jossa $\theta$ on $s$- ja $x$-akseleiden välinen kulma. Yhteen projektion pisteeseen vaikuttava aktiivisuusjakauman osa on piirretty punaisella katkoviivalla. Kuva on muokattu lähteestä \cite{bruyant_analytic_2002}.}
+    \caption{Aktiivisuusjakauma $f$ $xy$-tasossa (siniset pisteet), gammakameran kollimaattori (mustat palkit), detektorin tuikeaine (väritetty alue) ja projektio $g(s, \theta)$, jossa $\theta$ on $s$- ja $x$-akseleiden välinen kulma. Yhteen projektion pisteeseen vaikuttava aktiivisuusjakauman osa on piirretty punaisella katkoviivalla. Kuva on muokattu lähteestä \cite{bruyant_analytic_2002}.}
     \label{fig:projektio}
 \end{figure}
 
@@ -22,7 +24,7 @@ Projektio, eli suoralta $\Omega$ havaittu säteily voidaan esittää siten Radon
     g(s, \theta)=\int_{\Omega}f(x, y).
 \end{equation}
 
-Tietokoneella voidaan kuitenkin käsitellä ainoastaan äärellistä määrää mitattuja projektioita. Toisin sanoen muuttujat $s$ ja $\theta$ ovat diskreettejä, jonka vuoksi on luontevaa käsitellä myös muuttujia $x$ ja $y$ diskreetteinä jakamalla kuva-alue pikseleihin, joissa aktiivisuusjakaumat ovat vakioita.
+Tietokoneella voidaan kuitenkin käsitellä ainoastaan äärellistä määrää mitattuja projektioita. Toisin sanoen muuttujat $s$ ja $\theta$ ovat diskreettejä, jonka vuoksi on luontevaa diskretoida muuttujat $x$ ja $y$ jakamalla kuva-alue pikseleihin (tai kolmiulotteisessa tapauksessa vokseleihin), joissa aktiivisuusjakaumat ovat vakioita.
 
 \begin{figure}[H]
     \centering
@@ -32,26 +34,26 @@ Tietokoneella voidaan kuitenkin käsitellä ainoastaan äärellistä määrää 
     \label{fig:diskreetti-projektio}
 \end{figure}
 
-Kun kuva-alue jaetaan pikseleihin, joihin viitataan indekseillä $i=1,\ldots, n$, yhtälön (\ref{eqn:radon-muunnos}) integraali voidaan jakaa pikselikohtaisesti osiin
-\begin{alignat*}{2}
-    g(s, \theta)
-    &=\sum_{i=1}^{n}\int_{\Omega}f(x, y)\chi_{i}.
-\end{alignat*}
-Funktio $\chi_i$ on indikaattorifunktio, joka saa arvon 1 pikselin $i$ sisällä ja arvon 0 kaikkialla muualla.
+%Kun kuva-alue jaetaan pikseleihin, joihin viitataan indekseillä $i=1,\ldots, n$, yhtälön (\ref{eqn:radon-muunnos}) integraali voidaan jakaa pikselikohtaisesti osiin
+%\begin{alignat*}{2}
+%    g(s, \theta)
+%    &=\sum_{i=1}^{n}\int_{\Omega}f(x, y)\chi_{i}.
+%\end{alignat*}
+%
 
 Oletetaan kuva-alueen aktiivisuusjakauma paloittain vakioksi pikselikohtaisesti. Tällöin voidaan merkitä
 \begin{equation*}
     f(x, y)\chi_{i}=f_i.
 \end{equation*}
-Yhtälön (\ref{eqn:radon-muunnos}) integraali palautuu summaksi
+Funktio $\chi_i$ on indikaattorifunktio, joka saa arvon 1 pikselin $i$ sisällä ja arvon 0 kaikkialla muualla. Yhtälön (\ref{eqn:radon-muunnos}) integraali palautuu summaksi
 \begin{equation}\label{eqn:diskreetti-radon-muunnos}
-    g(s, \theta)=\sum_{j=1}^{n}a_{j}f_{j},
+    g(s, \theta)=\sum_{i=1}^{n}a_{i}f_{i},
 \end{equation}
 jossa $a_i$ on suoran $\Omega$ kulkema matka pikselissä $i$. 
 
 \hyperref[fig:diskreetti-projektio]{Kuvassa \ref*{fig:diskreetti-projektio}} projektion suora kulkee kuva-alueen pikseleiden 33, 42, 43, 52, 53, 62 ja 63 lävitse. Suoran kulkema matka on jokaisessa edellä mainitusta pikselissä $\frac{\sqrt{5}}{2}$.
 
-Toisaalta kertoimet $a_i$ määräävät parametrit $s$ ja $\theta$ täysin. Merkitään tästä johtuen yhtä projektiota, eli havaintoa, $g_i$ ja vastaavia kertoimia $a_{ij}$. Havainnot
+Koska kuva-alueen pikselien muodostama ruudukko on muodoltaan säännöllinen ja $\Omega$ on suora, niin kertoimet $a_i$ määräävät parametrit $s$ ja $\theta$ täysin. Merkitään tästä johtuen havaintojen lukumäärää vakiolla $m$, yhtä havaintoa vakiolla $g_i$, $0<i\leq m$ ja vastaavia kertoimia $a_{ij}$. Havainnot
 \begin{equation*}
     \begin{cases}
         g_1&=\sum_{j=1}^{n}a_{1j}f_{j}\\
@@ -69,14 +71,16 @@ voidaan kerätä matriisiyhtälöön $g=Af$, jossa $g=\left( g_1, \ldots, g_m \r
         a_{m1} & a_{m2} & \cdots & a_{mn}
     \end{pmatrix}
 \end{equation*}
-on projektiomatriisi.
+on projektiomatriisi. Täsmällisempi nimitys matriisin $A$ operaatiolle on eteenpäinprojisointi, jonka lisäksi voidaan määritellä takaisinpäin projisointi. Tämä takaisinprojektio ikään kuin levittää projektiot $g$ takaisin kuva-alueelle. Aiemmin esitetyillä merkinnöillä ja oletuksilla takaisinprojektio on projektiomatriisin $A$ transpoosi.
 
-Edellä kuvattu menetelmä on niin sanottu sädepohjainen projektio (\textit{ray-based projection}). Projektio voidaan laskea myös käyttämällä säteen sijasta sylinteriä ja laskemalla sylinterin ja vokseleiden leikkausten tilavuudet. Tässä tapauksessa vokselit oletetaan yleensä pallomaisiksi, jotta leikkauste tilavuudet olisivat nopeita laskea analyyttisesti.\cite{lougovski_volume_2014} Muissa projektion laskentaan käytetyissä menetelmissä hyödynnetään esimerkiksi kohtisuoraa etäisyyttä projektion säteen ja vokselin keskipisteen välillä\cite{aguiar_geometrical_2010} tai kuva-alueen taajuussisältöä\cite{zeng_frequency_1992, zeng_rotating_1994}. Taajuussisältöön perustuva menetelmä on laskennallisesti nopea ja eroaa muista myös siinä, että menetelmässä ajatellaan detektorin pysyvän paikoillaan kuva-alueen pyöriessä\cite{zeng_frequency_1992, zeng_rotating_1994}.
+Edellä kuvattu menetelmä on niin sanottu sädepohjainen projektio (\textit{ray-based projection}). OMEGAn toteutus sädepohjaisesta projektiosta perustuu Siddonin kehittämään algoritmiin\cite{wettenhovi_omegaopen-source_2021}. Algoritmissa määritetään aluksi säteen etenemissuunta ja leikkauspiste kuva-alueen reunan kanssa. Tästä eteenpäin hyödynnetään kuva-alueen säännöllisyyttä määrittämään yksi kerrallaan ne pikselit, joiden kautta säde kulkee. Samalla tallennetaan vastaavat säteen kuva-alueen pikseleissä kulkemat etäisyydet.\cite{siddon_fast_1985, sundermann_fast_1998}
+
+Projektio voidaan laskea myös käyttämällä säteen sijasta sylinteriä ja laskemalla sylinterin ja vokseleiden leikkausten tilavuudet. Tässä tapauksessa vokselit oletetaan yleensä pallomaisiksi, jotta leikkauste tilavuudet olisivat nopeita laskea analyyttisesti.\cite{lougovski_volume_2014} Muissa projektion laskentaan käytetyissä menetelmissä hyödynnetään esimerkiksi kohtisuoraa etäisyyttä projektion säteen ja vokselin keskipisteen välillä\cite{aguiar_geometrical_2010} tai kuva-alueen taajuussisältöä\cite{zeng_frequency_1992, zeng_rotating_1994}. Taajuussisältöön perustuva menetelmä on laskennallisesti nopea ja eroaa muista myös siinä, että menetelmässä ajatellaan detektorin pysyvän paikoillaan kuva-alueen pyöriessä\cite{zeng_frequency_1992, zeng_rotating_1994}.
 
 \subsection{Analyyttiset menetelmät}
-Projektion lisäksi toinen tärkeä kuvan muodostuksessa tarvittava operaatio on takaisinprojektio, joka ikään kuin levittää projektiot $g$ takaisin kuva-alueelle. Aiemmin esitetyillä merkinnöillä ja oletuksilla takaisinprojektio on projektiomatriisin $A$ transpoosi.
+Kuva-alueen aktiivisuusjakauma saadaan projektiosta yksinkertaisimmin takaisinprojektiolla, kuten \hyperref[fig:takaisinprojektio]{kuvassa \ref*{fig:takaisinprojektio}} on esitetty. Kuvassa projektioita on kerätty neljästä eri suunnasta ja projektiot ovat levitetty takaisin kuva-alueelle. Kuvan (a) aktiivisuusjakauman pisteet erottuvat kuvassa (b) selvästi tummempana.
 
-Takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio, koska jokaiseen projektioon vaikuttaa useamman pikselin alueelta havaittu aktiivisuus\cite{bruyant_analytic_2002}. Samasta syystä takaisinprojektiolla muodostettu kuva on sumea. Lisäksi jos projektioita on liian vähän, kuvaan jää artefaktoina projektioiden suuntaisia viivoja.\cite{bruyant_analytic_2002, stiller_basics_2018} \hyperref[fig:takaisinprojektio]{Kuvasta \ref*{fig:takaisinprojektio}} nähdään, kuinka takaisinprojisoinnissa todellisen aktiivisuusjakauman sijainti erottuu muista alueista selvästi tummempana.
+\hyperref[fig:takaisinprojektio]{Kuvan \ref*{fig:takaisinprojektio}} alkuperäisen aktiivisuusjakauman ulkopuolella oleva punainen väritys havainnollistaa myös, kuinka takaisinprojektio ei kuitenkaan ole projektion käänteisoperaatio. Tästä syystä takaisinprojektiolla muodostettu kuva on sumea. Lisäksi jos projektioita on liian vähän, kuvaan voi esimerkiksi jäädä artefaktoina projektioiden suuntaisia viivoja.\cite{bruyant_analytic_2002, stiller_basics_2018}
 
 \begin{figure}[H]
     \centering
@@ -101,63 +105,62 @@ Yleinen muoto projektioiden esittämiseen on sinogrammiksi kutsuttu matriisi. Si
 Analyyttisten menetelmien suurin etu on niiden nopeus, mutta niihin on kuitenkin hankalaa sisällyttää esitietoa kuvattavasta kohteesta, esimerkiksi säteilyn sironnasta. Menetelmä on myös altis kohinalle, koska kohina ilmenee pääosin jäljelle jäävissä korkeissa taajuuksissa.\cite{bruyant_analytic_2002, willemink_evolution_2019, stiller_basics_2018}
 
 \subsection{Iteratiiviset menetelmät}
-Iteratiiviisissa menetelmissä muodostettua kuvaa parannetaan toistuvasti vertaamalla mitattua projektiodataa jo muodostetun kuvan avulla simuloituihin projektioihin. Jokainen iteratiivinen menetelmä lähtee liikkeelle arvauksesta, mitä aktiivisuusjakauma voisi olla. Arvaus on yleensä joko vakio tai esimerkiksi FBP:llä muodostettu kuva. Tämän jälkeen kaikissa iteratiivisissa menetelmissä on tietyt vaiheet, jotka ovat pääpiirteittäin\cite{bruyant_analytic_2002, beister_iterative_2012, stiller_basics_2018, ljungberg_spectct_2018}:
+Analyyttisissa menetelmissä kuva muodostetaan yleensä yhdellä takaisinprojisoinnilla, mutta iteratiiviisissa menetelmissä muodostettua kuvaa parannetaan toistuvasti vertaamalla mitattua projektiodataa jo muodostetun kuvan avulla simuloituihin eteenpäinprojektioihin. Jokainen iteratiivinen menetelmä lähtee liikkeelle arvauksesta, mitä aktiivisuusjakauma voisi olla. Arvaus on yleensä joko vakio tai esimerkiksi FBP:llä muodostettu kuva. Tämän jälkeen kaikissa iteratiivisissa menetelmissä on tietyt vaiheet, jotka ovat pääpiirteittäin\cite{bruyant_analytic_2002, beister_iterative_2012, stiller_basics_2018, ljungberg_spectct_2018}:
 \begin{enumerate}[1.]
     \item Vaiheen 4 kuvasta (ensimmäisellä iteraatiolla alkuarvauksesta) lasketaan projektio. 
     \item Vaiheen 1 projektioita verrataan todellisiin, mitattuihin projektioihin. Näiden välisen eron, eli virheen, voidaan tulkita mittaavan kuinka paljon muodostettu kuva ja todellinen kuva eroavat toisistaan.
-    \item Virhe projisoidaan takaisin kuvaksi. 
+    \item Virhe takaisinprojisoidaan takaisin kuvaksi. 
     \item Arviota kuvasta päivitetään takaisinprojisoidun virheen perusteella.
     \item Tarkistetaan, kuinka paljon kuvan rekonstruktio on muuttunut edellisestä iteraatiosta. Jos ero ei ole riittävän pieni, siirrytään takaisin kohtaan 1. Vaihtoehtoisesti iteraatio voidaan pysäyttää tietyn enimmäismäärän jälkeen.
 \end{enumerate}
 Iteratiiviset algoritmit eroavat toisistaan lähinnä virheen muodostuksessa (vaihe 2) ja kuvan päivittämisessä (vaihe 4)\cite{bruyant_analytic_2002}.
 
-Yleisimmin käytössä olevat iteratiiviset algoritmit ovat niin kutsuttuja tilastollisia algoritmeja, joissa havainnot $g_i$ tulkitaan satunnaismuuttujina $G_i\colon\mathbb{N}\to\mathbb{N}$\cite{wettenhovi_omegaopen-source_2021, kaipio_statistical_2005} ja projektiomatriisi tulkitaan projektiodatan todennäköisyysjakaumana\cite{boudjelal_novel_2021}. Edelleen, jokainen projektiomatriisin sarake vastaa yhtä kuva-alueen vokselia, mutta alkio $A_{ij}$ tulkitaan todennäköisyytenä, että hajoamistapahtuma vokselissa $i$ havaitaan indeksiä $j$ vastaavassa detektorissa\cite{boudjelal_novel_2021}.
+Yleisimmin käytössä olevat iteratiiviset algoritmit ovat niin kutsuttuja tilastollisia algoritmeja, joissa havainnot $g_i$ tulkitaan satunnaismuuttujina $G_i\colon\mathbb{N}\to\mathbb{N}$\cite{wettenhovi_omegaopen-source_2021, kaipio_statistical_2005} ja projektiomatriisi tulkitaan projektiodatan todennäköisyysjakaumana\cite{boudjelal_novel_2021}. Edelleen, jokainen projektiomatriisin sarake vastaa yhtä kuva-alueen vokselia, mutta alkio $a_{ij}$ tulkitaan todennäköisyytenä, että hajoamistapahtuma vokselissa $i$ havaitaan indeksiä $j$ vastaavassa detektorissa\cite{boudjelal_novel_2021}.
 
-Koska havaittujen hajoamistapahtumien määrä saa diskreettejä, pieniä arvoja, aktiivisuusjakaumaa voidaan mallintaa Poisson-prosessilla\cite{kaipio_statistical_2005}. Projektiomatriisin avulla saadaan malli keskimääräiselle havainnolle $\overline{g}_i$, joka on muotoa\cite{boudjelal_novel_2021, shepp_maximum_1982}
+Koska havaittujen hajoamistapahtumien määrä on pieni, positiivinen kokonaisluku, aktiivisuusjakaumaa voidaan mallintaa Poisson-jakaumalla\cite{kaipio_statistical_2005}. Projektiomatriisin avulla saadaan malli keskimääräiselle havainnolle $\overline{g}_i$, joka on muotoa\cite{boudjelal_novel_2021, shepp_maximum_1982}
 \begin{equation*}
     \overline{g}_i=\sum_{j=1}^{n}a_{ij}f_j.
 \end{equation*}
 Siis
 \begin{equation*}
-    G_i\sim\text{Pois}(\overline{g}_i),
+    G_i\sim\text{Poisson}(\overline{g}_i),
 \end{equation*}
-eli havainnot ovat Poisson-jakautuneita keskiarvolla $\overline{g}_i$\cite{kaipio_statistical_2005, bruyant_analytic_2002, wettenhovi_transmission_2021}.
+eli havainnot ovat Poisson-jakautuneita keskiarvolla $\overline{g}_i$\cite{kaipio_statistical_2005, bruyant_analytic_2002, wettenhovi_transmission_2021}. Yleisesti Poisson-jakautuneen satunnaismuuttujan $X$ pistetodennäköisyysfunktio parametrilla $\lambda$ on
+\begin{equation*}
+    \pi(X=k)=e^{-\lambda}\frac{\lambda^{k}}{k!}.
+\end{equation*}
 
 Oletuksista seuraa, että todennäköisyys havaita $g_i$, kun tiedetään $f$, on
 \begin{equation*}
     \pi(g_i \mid f)=e^{-\sum_{j=1}^{n}a_{ij}f_j}\frac{\left( \sum_{j=1}^{n}a_{ij}f_j \right)^{g_i}}{g_i!}.
 \end{equation*}
-Oletetaan satunnaismuuttujat $G_i$, $i=1,\ldots, n$ riippumattomiksi ja identtisesti jakautuneiksi. Tällöin todennäköisyys sille, että havaitaan $g$ kun tiedetään $f$, on
+Oletetaan satunnaismuuttujat $G_i$, $i=1,\ldots, m$ riippumattomiksi ja identtisesti jakautuneiksi. Tällöin todennäköisyys sille, että havaitaan $g$ kun tiedetään $f$, on
 \begin{equation*}
     \pi(g\mid f)=\prod_{i=1}^{m}e^{-\sum_{j=1}^{n}a_{ij}f_j}\frac{\left( \sum_{j=1}^{n}a_{ij}f_j \right)^{g_i}}{g_i!}.
 \end{equation*}
 
-Iteratiivisilla menetelmillä pyritään maksimoimaan todennäköisyys $\pi(g\mid f)$ kuvan $f$ suhteen. Yleensä kuitenkin etsitään maksimia funktiolle $\ln(\pi(g\mid f))$, koska molemmat edellä mainitut funktiot saavuttavat maksiminsa samassa pisteessä. Shepp ja Vardi ovat artikkelissaan\cite{shepp_maximum_1982} osoittaneet maksimikohdan olemassaolon.
+Iteratiivisilla menetelmillä pyritään maksimoimaan todennäköisyys $\pi(g\mid f)$ kuvan $f$ suhteen. Yleensä kuitenkin etsitään maksimia funktiolle $\ln(\pi(g\mid f))$, koska maksimointimenetelmien johtaminen on tällöin helpompaa, eikä logaritmi vaikuta maksimikohdan sijaintiin. Shepp ja Vardi ovat artikkelissaan\cite{shepp_maximum_1982} osoittaneet maksimikohdan olemassaolon.
 
-Emissiotomografiassa edellä mainitun kaltaisiin \textit{maximum likelihood} -tyyppisiin estimaattoreihin pohjautuvista algoritmeista ensimmäinen lienee MLEM (\textit{maximum likelihood expectation maximization}), jossa arviota kuvasta päivitetään yhtälöllä\cite{boudjelal_novel_2021, shepp_maximum_1982, wettenhovi_omegaopen-source_2021, bruyant_analytic_2002, wettenhovi_transmission_2021}
+Emissiotomografiassa edellä mainitun kaltaisiin suurimman uskottavuuden (\textit{maximum likelihood}) estimaattoreihin pohjautuvista algoritmeista ensimmäinen on MLEM (\textit{maximum likelihood expectation maximization}), jossa arviota kuvasta päivitetään yhtälöllä\cite{boudjelal_novel_2021, shepp_maximum_1982, wettenhovi_omegaopen-source_2021, bruyant_analytic_2002, wettenhovi_transmission_2021}
 \begin{equation*}
     f_j^{k+1}=\frac{f_j^{k}}{\sum_{i=1}^{m}a_{ij}}\sum_{i=1}^{m}\frac{a_{ij}g_i}{\sum_{j=1}^{n}a_{ij}f_j^{k}}.
 \end{equation*}
 MLEM-algoritmi kuitenkin suppenee verrattain hitaasti kohti maksimia ja on altis kohinalle\cite{wettenhovi_omegaopen-source_2021, bruyant_analytic_2002}. Jakamalla havainnot ja projektiomatriisi osajoukkoihin sekä käyttämällä MLEM-algoritmia jokaiseen osajoukkoon erikseen, saadaan algoritmi yleensä suppenemaan nopeammin. Eräs esimerkki tämän kaltaisesta menetelmästä on OSEM (\textit{ordered subsets expectation maximization}) ja sen muunnelmat.\cite{bruyant_analytic_2002, wettenhovi_omegaopen-source_2021, beister_iterative_2012}
 
-Toinen yleinen estimaattori on MAP (\textit{maximum a posteriori}), joka edeltävin oletuksin palautuu lausekkeen
-\begin{equation}\label{eqn:map}
-    \pi(g\mid f)-R(f)
-\end{equation}
-maksimin etsimiseksi aktiivisuusjakauman $f$ suhteen. Lausekkeessa (\ref{eqn:map}) funktioon $R\colon\NN^{n}\to\RR$ on sisällytetty matemaattisesti muotoiltu esitieto kuvasta.\cite{wettenhovi_omegaopen-source_2021, bruyant_analytic_2002}
-
 \subsection{Virhelähteet kuvanmuodostuksessa}
-Havaitut projektiot eivät tosiasiassa muodostu ainoastaan suoraan radionuklidilta detektorille kulkeneista gammakvanteista. Havaittuihin projektioihin sisältyy sekä nämä kvantit, että myös väliaineesta sironneet kvantit ja laitteistosta aiheutuva kohina\cite{king_attenuation_2004}.
+Jokainen virhelähde voidaan mallintaa matriisimuodossa ja huomioida siten kuvan rekonstruktiossa. Käytännössä projektiomatriisia kerrotaan virhettä vastaavalla matriisilla. Puoli, jolta projektiomatriisia kerrotaan, riippuu siitä, kohdistuuko virheen korjaus projektiodataan vai kuvaan. Merkitään aiempien kappaleiden projektiomatriisia, jossa on huomioitu ainoastaan kuvantamisen geometria, matriisilla $G$. Merkitään esimerkiksi projektion mittaamisen epätarkkuutta matriisilla $H$ ja säteilyn vaimenemista matriisilla $B$. Nyt voidaan laskea projektiomatriisi
+\begin{equation*}
+    A=BGH,
+\end{equation*}
+jota käytettäessä kuvan rekonstruktiossa on huomioitu sekä epätarkkuus projektioiden havaitsemissa sekä säteilyn vaimeneminen\cite{wettenhovi_omegaopen-source_2021}.
 
-Comptonin sironnasta ja valosähköisestä ilmiöstä johtuen gammasäteily vaimenee kulkiessaan aineen läpi. Vaimenemista kuvaa vaimenemiskerroin, joka riippuu säteilyn energiasta ja aineen tiheydestä. Emissiotomografiassa säteilyn energia on vakio, mutta aineen tiheys ja siten vaimenemiskerroin vaihtelee kudostyypin mukaan\cite{king_attenuation_2004, cherry_single_2012}. Tästä johtuen emissiotomografiaan yhdistetään yleensä transmissiotomografiakuvaus, jolla määritetään säteilyn vaimeneminen kuva-alueen vokseleissa\cite{king_attenuation_2004, cherry_single_2012, wettenhovi_omegaopen-source_2021}. Uusimmat laitteet yhdistävät emissiotomografian magneettikuvaukseen, jonka kontrasti pehmytkudoksissa on merkittävästi TT-kuvaa parempi\cite{wettenhovi_omegaopen-source_2021}. Transmissiotomografiassa voidaan käyttää samaa detektoria kuin emissiotomografiassa, mutta säteilyn energia kuitenkin poikkeaa emissiotomografiassa käytetyn säteilyn energiasta, jotta havaitun säteilyn lähde voidaan selvittää. Transmissiotomografiakuvaa ei siksi voida käyttää vaimenemisen korjaukseen sellaisenaan, joten vaimenemiskertoimet skaalataan ennen vaimenemiskorjausta\cite{cherry_single_2012, king_attenuation_2004, wettenhovi_omegaopen-source_2021}.
+Comptonin sironnasta ja valosähköisestä ilmiöstä johtuen gammasäteily vaimenee kulkiessaan aineen läpi. Vaimenemista kuvaa vaimenemiskerroin, joka riippuu gammafotonin energiasta ja aineen tiheydestä. Emissiotomografiassa fotonin energia on vakio, mutta aineen tiheys ja siten vaimenemiskerroin vaihtelee kudostyypin mukaan\cite{king_attenuation_2004, cherry_single_2012}. Tästä johtuen emissiotomografiaan yhdistetään yleensä transmissiotomografiakuvaus, jolla määritetään säteilyn vaimeneminen kuva-alueen vokseleissa\cite{king_attenuation_2004, cherry_single_2012, wettenhovi_omegaopen-source_2021}. Transmissiotomografiassa voidaan käyttää samaa detektoria kuin emissiotomografiassa. Tällöin transmissiotomografian gammafotonin energian täytyy kuitenkin poiketa emissiotomografiassa käytetyn fotonin energiasta, jotta havaittu fotoni voidaan tunnistaa transmissiotomografian fotoniksi. Transmissiotomografiakuvaa ei vaimenemiskertoimen energiariippuvuuden vuoksi voida käyttää vaimenemisen korjaukseen sellaisenaan, joten vaimenemiskertoimet skaalataan ennen vaimenemiskorjausta vastaamaan emissiotomografiassa käytetyn fotonin energiaa\cite{cherry_single_2012, king_attenuation_2004, wettenhovi_omegaopen-source_2021}.
 
-Vaikka gammakvantti lähestyisi detektoria kollimaattorin reiän suuntaisesti, sen alkuperäisen etenemissuunnan on mahdollista olla jokin muu sironnan vuoksi. Tällä tavoin väärin havaittuja hajoamistapahtumia voi korjata useammalla tavalla. Yleisin tapa huomioida sironta on niin sanotun energiaikkunan käyttäminen. Energiaikkunalla viitataan siihen energiaväliin, jolta detektorille saapuvat gammakvantit rekisteröidään. Sironneilla gammakvanteilla tämä energia on matalampi, joka tarkoittaa, että sironneista gammakvanteista voidaan mitata erilliset projektiot. Nämä projektiot skaalataan ja vähennetään kyseessä olevan isotoopin lähettämien gammakvanttien energian ympärillä olevasta energiaikkunasta. Energiaikkunoita sironneille gammakvanteille voi olla myös useampia, mutta tällöin kussakin ikkunassa havaitaan vähemmän hajoamistapahtumia, lisäten kohinaa.\cite{cherry_single_2012, king_attenuation_2004} Sironnan tarkempi mallintaminen usealla energiaikkunalla vaatii myös enemmän laskentatehoa tai -aikaa\cite{king_attenuation_2004}. Kliinisiin sovelluksiin sopivaan tasapainoon laskenta-ajan ja kuvan laadun välillä riittää kaksi tai kolme energiaikkunaa\cite{king_attenuation_2004, cherry_single_2012}. 
+Vaikka gammafotoni lähestyisi detektoria kollimaattorin reiän suuntaisesti, sen alkuperäisen etenemissuunnan on mahdollista olla jokin muu sironnan vuoksi. Tällä tavoin väärin havaittuja hajoamistapahtumia voi korjata useammalla tavalla. Yleisin tapa huomioida sironta on niin sanottujen energiaikkunoiden käyttäminen. Energiaikkunalla viitataan siihen energiaväliin, jolta detektorille saapuvat gammafotonit rekisteröidään. Sironneilla gammafotoneilla tämä energia on matalampi, joka tarkoittaa, että sironneista gammafotoneista voidaan mitata erilliset projektiot. Nämä projektiot skaalataan ja vähennetään kyseessä olevan isotoopin lähettämien gammafotonien energian ympärillä olevasta energiaikkunasta. Sironneille gammakvanteille voidaan käyttää myös useampia energiaikkunoita, mutta tällöin kussakin ikkunassa havaitaan vähemmän hajoamistapahtumia, lisäten kohinaa.\cite{cherry_single_2012, king_attenuation_2004} Kliinisiin sovelluksiin sopivaan tasapainoon laskenta-ajan ja kuvan laadun välillä riittää kaksi tai kolme energiaikkunaa\cite{king_attenuation_2004, cherry_single_2012}. 
 
-Kohinalla viitataan siihen vaihteluun havainnoissa, joka ei anna hyödyllistä informaatiota kuvan rekonstruktiossa. Kohina voi olla joko satunnaista tai systemaattista, joista jälkimmäistä kutsutaan artifaktoiksi. Radioaktiivisen hajoamisen satunnaisuuden lisäksi satunnaista kohinaa syntyy ei-ideaalista laitteistosta, esimerkiksi detektorin havaitsemiskyvyn lämpötilariippuvuudesta. Myös taustasäteily vaikuttaa kuvan kontrastiin etenkin ajallisesti lyhyissä mittauksissa.\cite{cherry_single_2012, king_attenuation_2004} Artifaktat voivat olla peräisin esimerkiksi kuvan rekonstruktioalgoritmista tai ylimääräisestä säteilylähteestä SPECT-laitteen läheisyydessä.
+Kohinalla viitataan siihen vaihteluun havainnoissa, joka ei anna hyödyllistä informaatiota kuvan rekonstruktiossa tai vaikeuttaa kuvan tulkintaa. Kohina voi olla joko satunnaista tai systemaattista, joista jälkimmäistä kutsutaan artifaktoiksi. Radioaktiivisen hajoamisen satunnaisuuden lisäksi satunnaista kohinaa syntyy ei-ideaalista laitteistosta, esimerkiksi detektorin havaitsemiskyvyn lämpötilariippuvuudesta ja gammafotonien sironnasta. Myös taustasäteily vaikuttaa kuvan kontrastiin etenkin ajallisesti lyhyissä mittauksissa.\cite{cherry_single_2012, king_attenuation_2004} Artifaktat voivat olla peräisin esimerkiksi kuvan rekonstruktioalgoritmista tai ylimääräisestä säteilylähteestä SPECT-laitteen läheisyydessä.
 
 Muita erittelemisen arvoisia tekijöitä ovat säteilyn vaimeneminen ja sironta kollimaattorin reikien välisessä aineessa, ei-kohtisuorasti saapuvien gammakvanttien havaitsemisesta johtuva epätarkkuus aktiivisuusjakauman määrityksessä sekä epätarkkuudet tuikeaineessa syntyvän valon sijainnin paikantamisessa\cite{king_attenuation_2004, frey_collimator-detector_2006}. Edellä mainitut tekijät kootaan usein yhteen termin CDR (\textit{collimator-detector response}) alle. Kuvan rekonstruktiossa CDR:n voi huomioida joko mallintamalla sen analyyttisesti kollimaattorin ja detektorin geometrian avulla tai Monte Carlo -simulaatioilla, jotka ovat tarkempia mutta hitaampia.\cite{frey_collimator-detector_2006}
-
-Jokainen virheen lähde voidaan esittää matriisimuodossa. Projektiomatriisia kerrotaan kutakin virhettä vastaavalla matriisilla erikseen ja matriisituloa käytetään kuvan rekonstruktiossa\cite{wettenhovi_omegaopen-source_2021}.
 
 \subsection{OMEGA}
 Tomografiakuvan rekonstruktioalgoritmien kehityksen ja kliinisen käyttöönoton hidasteeksi on tunnistettu helppokäyttöisten ja monipuolisten, mieluiten avoimen lähdekoodin, kehitysalustojen heikko saatavuus ja tehokkuus\cite{hutton_origins_2014}. Vaikka alustoja on kuitenkin olemassa useita, vuoteen 2021 asti ongelmana oli alustojen yhteentoimivuus eri laitteiston kanssa. Laitteistolla viitataan tässä yhteydessä tietokoneen keskusyksikköön (CPU) ja etenkin näytönohjaimeen (GPU), joilla kuvan rekonstruktio yleisimmin lasketaan. Ohjelmistot tukivat esimerkiksi näytönohjaimella laskettaessa ainoastaan CUDA-rajapintaa ja siten ainoastaan Nvidian näytönohjaimia.\cite{wettenhovi_omegaopen-source_2021}

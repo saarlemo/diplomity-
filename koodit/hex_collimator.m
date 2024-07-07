@@ -3,7 +3,7 @@ clear
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Modeling parameters
 param.nRaySPECT = 1+6+12+18+24; % Number of rays: for example 7 for centre and all hexagon corners
-param.coneMethod = 3;
+param.coneMethod = 2;
 ix = 0; % Pixel index
 iy = 0; % Pixel index
 
@@ -23,7 +23,7 @@ voxelSize = 4.664;
 voxelNx = 128;
 voxelNy = 128;
 voxelNz = 128;
-show_grid_lines = 9; % Amount of image area grid lines
+show_grid_lines = 65; % Amount of image area grid lines
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Calculate detector pixel center in global coordinates (xd, yd, zd)
@@ -36,7 +36,6 @@ detectors.xd = x(4); % Detector center x in global coordinates
 detectors.yd = x(5); % Detector center y in global coordinates
 detectors.zd = x(6); % Detector center z in global coordinates
 
-%% Plot
 if param.coneMethod == 3
     shifts2D = computeSpectSquareShifts(param, detectors, 63, 63, 1);
     shifts3D = x + computeSpectSquareShifts(param, detectors, 63, 63, 0);
@@ -45,12 +44,15 @@ else
     shifts3D = x + computeSpectHexShifts(param, detectors, 63, 63, 0);
 end
 
+% Extend rays to be plotted
+shifts3D(1:3, :) = shifts3D(1:3, :) + 2e2 * normc(shifts3D(1:3, :) - shifts3D(4:6, :));
+nShifts = size(shifts3D, 2);
+
+%% 2D Plot
 f5 = figure(5);
 set(f5, "defaulttextinterpreter", "latex")
-t = tiledlayout(1, 2);
-sgtitle(strcat("Kollimaattorin malli ", num2str(param.coneMethod)), "interpreter", "latex")
+%title(strcat("Kollimaattorin malli ", num2str(param.coneMethod)), "interpreter", "latex")
 
-nexttile % 2D plot
 hold on
 scatter(shifts2D(4, :), shifts2D(5, :), 0.1, '.') % Plot points
 hold off
@@ -64,12 +66,14 @@ xlabel("x (mm)")
 ylabel("y (mm)")
 axis square
 grid on
-title("Detektoripaneeli")
 
-nexttile % 3D plot
-% Extend rays to be plotted
-shifts3D(1:3, :) = shifts3D(1:3, :) + 1e3 * normc(shifts3D(1:3, :) - shifts3D(4:6, :));
-nShifts = size(shifts3D, 2);
+f5.Position = [100 100 640 480];
+exportgraphics(f5, strcat("./kuvat/malli", num2str(param.coneMethod), "_2D.pdf"), 'resolution', 1500, 'contenttype', 'vector')
+
+%%
+f5 = figure(5);
+set(f5, "defaulttextinterpreter", "latex")
+%title(strcat("Kollimaattorin malli ", num2str(param.coneMethod)), "interpreter", "latex")
 
 hold on
 for ii = 1:nShifts
@@ -78,7 +82,7 @@ for ii = 1:nShifts
         shifts3D([2 5], ii)', ...
         shifts3D([3 6], ii)', ...
         color=[0 0.4470 0.7410], ...
-        LineWidth=0.01)
+        LineWidth=0.001)
 end
 hold off
 
@@ -86,39 +90,48 @@ hold off
 xlimits = voxelSize*(voxelNx+1) / 2;
 ylimits = voxelSize*(voxelNy+1) / 2;
 zlimits = voxelSize*(voxelNz+1) / 2;
-xx = linspace(-xlimits, xlimits, show_grid_lines);
-yy = linspace(-zlimits, ylimits, show_grid_lines);
-zz = linspace(-xlimits, zlimits, show_grid_lines);
+%xx = linspace(-xlimits, xlimits, show_grid_lines);
+%yy = linspace(-zlimits, ylimits, show_grid_lines);
+%zz = linspace(-xlimits, zlimits, show_grid_lines);
+%
+%[X1, Y1, Z1] = meshgrid(xx([1 end]),yy,zz);
+%X1 = permute(X1,[2 1 3]); Y1 = permute(Y1,[2 1 3]); Z1 = permute(Z1,[2 1 3]);
+%X1(end+1,:,:) = NaN; Y1(end+1,:,:) = NaN; Z1(end+1,:,:) = NaN;
+%[X2, Y2, Z2] = meshgrid(xx,yy([1 end]),zz);
+%X2(end+1,:,:) = NaN; Y2(end+1,:,:) = NaN; Z2(end+1,:,:) = NaN;
+%[X3, Y3, Z3] = meshgrid(xx,yy,zz([1 end]));
+%X3 = permute(X3,[3 1 2]); Y3 = permute(Y3,[3 1 2]); Z3 = permute(Z3,[3 1 2]);
+%X3(end+1,:,:) = NaN; Y3(end+1,:,:) = NaN; Z3(end+1,:,:) = NaN;
+%
+%h = line([X1(:);X2(:);X3(:)], [Y1(:);Y2(:);Y3(:)], [Z1(:);Z2(:);Z3(:)]);
+%set(h, 'Color',[0 0 0 1], 'LineWidth',0.1, 'LineStyle','-')
 
-[X1, Y1, Z1] = meshgrid(xx([1 end]),yy,zz);
-X1 = permute(X1,[2 1 3]); Y1 = permute(Y1,[2 1 3]); Z1 = permute(Z1,[2 1 3]);
-X1(end+1,:,:) = NaN; Y1(end+1,:,:) = NaN; Z1(end+1,:,:) = NaN;
-[X2, Y2, Z2] = meshgrid(xx,yy([1 end]),zz);
-X2(end+1,:,:) = NaN; Y2(end+1,:,:) = NaN; Z2(end+1,:,:) = NaN;
-[X3, Y3, Z3] = meshgrid(xx,yy,zz([1 end]));
-X3 = permute(X3,[3 1 2]); Y3 = permute(Y3,[3 1 2]); Z3 = permute(Z3,[3 1 2]);
-X3(end+1,:,:) = NaN; Y3(end+1,:,:) = NaN; Z3(end+1,:,:) = NaN;
+grid on
+set(gca, 'Xtick', voxelSize * voxelNx / 2 * linspace(-1, 1, voxelNx))
+set(gca, 'Ytick', voxelSize * voxelNx / 2 * linspace(-1, 1, voxelNx))
+set(gca, 'Ztick', voxelSize * voxelNx / 2 * linspace(-1, 1, voxelNx))
 
-h = line([X1(:);X2(:);X3(:)], [Y1(:);Y2(:);Y3(:)], [Z1(:);Z2(:);Z3(:)]);
-set(h, 'Color',[0 0 0 1], 'LineWidth',0.1, 'LineStyle','-')
+set(gca,'XTickLabel',[]);
+set(gca,'YTickLabel',[]);
+set(gca,'ZTickLabel',[]);
 
 % Axis properties
 axis equal
-ax = gca;
-ax.Color = 'none';
-ax.XColor = 'none'; % Hide the axis lines and ticks by setting their color to 'none'
-ax.XLabel.Color=[0 0 0];
-ax.XLabel.Visible='on';
-ax.XLabel.Position = 1.1 * [0, -ylimits, zlimits];
-ax.YColor = 'none';
-ax.YLabel.Color=[0 0 0];
-ax.YLabel.Visible='on';
-ax.YLabel.Position = 1.1 * [-xlimits, 0, zlimits];
-ax.ZColor = 'none';
-ax.ZLabel.Color=[0 0 0];
-ax.ZLabel.Visible='on';
-ax.ZLabel.Position = 1.1 * [-xlimits, -ylimits, 0];
-ax.ZLabel.Rotation = 0;
+%ax = gca;
+%ax.Color = 'none';
+%ax.XColor = 'none'; % Hide the axis lines and ticks by setting their color to 'none'
+%ax.XLabel.Color=[0 0 0];
+%ax.XLabel.Visible='off';
+%ax.XLabel.Position = 1.1 * [0, -ylimits, zlimits];
+%ax.YColor = 'none';
+%ax.YLabel.Color=[0 0 0];
+%ax.YLabel.Visible='off';
+%ax.YLabel.Position = 1.1 * [-xlimits, 0, zlimits];
+%ax.ZColor = 'none';
+%ax.ZLabel.Color=[0 0 0];
+%ax.ZLabel.Visible='on';
+%ax.ZLabel.Position = 1.1 * [-xlimits, -ylimits, 0];
+%ax.ZLabel.Rotation = 0;
 
-f5.Position = [100 100 640 480];
-exportgraphics(f5, strcat("../kuvat/malli", num2str(param.coneMethod), ".pdf"), 'resolution', 1500, 'contenttype', 'vector')
+f5.Position = [100 100 2.5*640 2.5*480];
+exportgraphics(f5, strcat("./kuvat/malli", num2str(param.coneMethod), "_3D.pdf"), 'resolution', 1500, 'contenttype', 'vector')
