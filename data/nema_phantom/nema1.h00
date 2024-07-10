@@ -13,21 +13,19 @@ contact person := M Ljungberg
 !name of data file := nema1.a00
 patient name := SMC_nema1.a00
 !study ID := nema
-data description := NEMA phantom
+data description := EMISSION
 ;# Radionuclide :=
 exam type := EMISSION
 !patient ID := SIMIND
   
 !GENERAL IMAGE DATA :=
+patient position := HFS
 patient orientation := head_in
-patient position := supine
 ;decay corrected := Y
 !type of data := tomographic
-study date := 2024:07:05
-study time := 13:15:00
+study date := 2024:07:10
+study time := 15:49:06
 imagedata byte order := LITTLEENDIAN
-patient position := supine
-patient orientation := head_in
 ;energy window lower level := 129.50
 ;energy window upper level := 150.50
 !total number of images := 64
@@ -37,9 +35,9 @@ patient orientation := head_in
 !number format := short float
 !number of bytes per pixel := 4
 imagedata byte order := LITTLEENDIAN
-scaling factor (mm/pixel) [1] := 4.480000
-scaling factor (mm/pixel) [2] := 4.480000
-;# Image Position First image := -286.7200 -286.7200 286.720000
+scaling factor (mm/pixel) [1] := 4.664000
+scaling factor (mm/pixel) [2] := 4.664000
+;# Image Position First image := -298.4960 -298.4960 298.496000
 ;# Image Orientation := 1.0 0.0 0.0 0.0 0.0 -1.0
 ;# Units of data (ECT) := counts
   
@@ -51,8 +49,8 @@ number of detector heads := 1
 !number of images/energy window := 64
 !time per projection (sec) := 1.000000
 image duration (sec) := 64.000000
-maximum pixel count := 0.033829
-;# total counts := 1207.558482
+maximum pixel count := 0.035896
+;# total counts := 1207.482609
 ;# Center of Rotation := 65.000000
   
 !SPECT STUDY (acquired data) :=
@@ -62,7 +60,6 @@ acquisition mode := stepped
 !direction of rotation := CCW
 start angle := 0.000000
 ;# X_offset := 0.000000
-  
 ;# Name of Aligned Density Map := nema1.hct
 ;# Name of Aligned transmission study := nema1.hct
   

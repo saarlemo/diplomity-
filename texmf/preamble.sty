@@ -172,6 +172,8 @@ format=plain]{caption}
     \usebibmacro{finentry}
 }
 
+\DeclareFieldFormat[misc]{author}{{#1}}
+
 \DeclareFieldFormat[incollection]{pages}{s.~#1}
 \DeclareFieldFormat[incollection]{title}{\textit{#1}.}
 \DeclareFieldFormat[incollection]{booktitle}{Teoksessa:~\textit{#1}.}
@@ -227,6 +229,7 @@ format=plain]{caption}
 }
 
 \addbibresource{diplomityö.bib}
+\addbibresource{nema.bib}
 
 %\usepackage[intoc]{nomencl} % Merkinnät
 %\makenomenclature

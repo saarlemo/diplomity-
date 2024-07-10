@@ -14,8 +14,8 @@
  DetectorWidth......: 0            SPECT     DetectorHeight....: 0.9525         
  UpperEneWindowTresh: 150.5        Random    Distance to det...: 19.478         
  LowerEneWindowTresh: 129.5        Phantom   ShiftSource X.....: 0              
- PixelSize  I.......: 0.448        Resolut   ShiftSource Y.....: 0              
- PixelSize  J.......: 0.448        Forced    ShiftSource Z.....: 0              
+ PixelSize  I.......: 0.4664       Resolut   ShiftSource Y.....: 0              
+ PixelSize  J.......: 0.4664       Forced    ShiftSource Z.....: 0              
  HalfLength S.......: 11           Header    HalfLength P......: 11             
  HalfWidth  S.......: 0            SaveMap   HalfWidth  P......: 0              
  HalfHeight S.......: 0                      HalfHeight P......: 0              
@@ -59,7 +59,7 @@
                                                                               
  INFO FOR TCT file
  MatrixSize I.......: 128                    MatrixSize J......: 128            
- MatrixSize K.......: 0                      Units.............: g/cm3*1000                              
+ MatrixSize K.......: 128                    Units.............: g/cm3*1000          
  Scout File.........: F
                                                                               
  PHANTOM DATA FROM FILE: phantom.zub section: 3
@@ -74,34 +74,37 @@
    7: background        1.000  4545244  0.909E+04  0.723E+00  0.795E-01   2.000
    8: spine/lung        0.300   169224  0.338E+03  0.673E-01  0.199E+00   5.000
                                                                               
+ Phantom volume....L: 9.59    
+ Phantom mass.....Kg: 9.35    
+                                                                              
  INTERACTIONS IN THE CRYSTAL
- MaxValue spectrum..: 40.14          
- MaxValue projection: 0.3383E-01     
+ MaxValue spectrum..: 40.15          
+ MaxValue projection: 0.3590E-01     
  CountRate spectrum.: 41.77          
  CountRate E-Window.: 18.87          
                                                                               
  SCATTER IN ENERGY WINDOW
- Scatter/Primary....: 0.32082        
+ Scatter/Primary....: 0.32081        
  Scatter/Total......: 0.24289        
  Scatter order 1....: 87.22 %        
- Scatter order 2....: 11.65 %        
- Scatter order 3....: 1.14 %         
+ Scatter order 2....: 11.64 %        
+ Scatter order 3....: 1.13 %         
                                                                               
  CALCULATED DETECTOR PARAMETERS
- Efficiency E-window: 0.4159         
+ Efficiency E-window: 0.4158         
  Efficiency spectrum: 0.9207         
- Sensitivity Cps/MBq: 18.8681        
- Sensitivity Cpm/uCi: 41.8872        
+ Sensitivity Cps/MBq: 18.8669        
+ Sensitivity Cpm/uCi: 41.8846        
                                                                               
- Simulation started.: 2024:07:05 11:50:43
- Simulation stopped.: 2024:07:05 13:15:00
- Elapsed time.......: 1 h, 24 m and 17 s
- DetectorHits.......: 31540373       
- DetectorHits/CPUsec: 6509           
+ Simulation started.: 2024:07:10 14:29:59
+ Simulation stopped.: 2024:07:10 15:49:06
+ Elapsed time.......: 1 h, 19 m and 7 s
+ DetectorHits.......: 31521520       
+ DetectorHits/CPUsec: 6647           
                                                                               
  OTHER INFORMATION
- Compiled 2024:05:03 with INTEL Win   
- Random number generator: ranmar
+ Compiled 2024:05:03 with INTEL Mac   
+ Random number generator: Intel RAN
  Comment:EMISSION
  Energy resolution as function of 1/sqrt(E)
  Header file: nema1.h00
