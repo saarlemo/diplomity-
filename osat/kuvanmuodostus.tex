@@ -1,10 +1,11 @@
 \section{Tomografiakuvan muodostus}
+Kuvan rekonstruktiossa pyritään muodostamaan kuva radioaktiivisen merkkiaineen jakaumasta gammakameran havaitsemien fotonien perusteella\cite{cherry_single_2012, bruyant_analytic_2002, beister_iterative_2012, willemink_evolution_2019, van_audenhaege_review_2015, bercovich_medical_2018}. Prosessissa voidaan kompensoida myös kuvaan vaikuttavia virhelähteitä, joista esimerkkeinä toimivat taustasäteily, laitteiston kalibrointivirheet, fotonien sironta ja potilaan liikkeet kuvantamisen aikana\cite{beister_iterative_2012, bruyant_analytic_2002}. Lopullisille tomografiakuville, joiden perusteella esimerkiksi diagnoosi tehdään, voidaan myös suorittaa jälkikäsittely suodattamalla tai muuttamalla kontrastia. Yleisesti jälkikäsittelyä ei kuitenkaan luokitella rekonstruktioksi, koska rekonstruktion keskiössä on kolmiulotteisen aktiivisuusjakauman määrittäminen.\cite{bruyant_analytic_2002}
 
-\textcolor{red}{Tähän johdanto}
-
-Oletetaan toistaiseksi gammakameran kollimaattorin havaitsevan ainoastaan yhdestä suunnasta saapuvaa säteilyä. Tällöin gammakameran perspektiivistä havaitaan ikään kuin kaksiulotteinen varjo radioaktiivisen merkkiaineen kolmiulotteisesta jakaumasta. Keräämällä näitä projektioiksi kutsuttuja varjoja useasta suunnasta voidaan matemaattisin menetelmin määrittää radioaktiivisen merkkiaineen jakauma\cite{cherry_single_2012, bruyant_analytic_2002, beister_iterative_2012, willemink_evolution_2019, van_audenhaege_review_2015, bercovich_medical_2018}. Samat matemaattiset menetelmät soveltuvat myös tietokonetomografiaan, jossa jokainen projektio vastaa tietystä suunnasta otettua tavallista röntgenkuvaa.
+Gammakameran perspektiivistä havaitaan ikään kuin kaksiulotteinen varjo radioaktiivisen merkkiaineen kolmiulotteisesta jakaumasta. Varjoista ei suoraan nähdä kuvattavan kohteen aktiivisuusjakaumaa, mutta keräämällä näitä projektioiksi kutsuttuja varjoja useasta suunnasta jakauma voidaan määrittää matemaattisin menetelmin.\cite{cherry_single_2012, bruyant_analytic_2002, beister_iterative_2012, willemink_evolution_2019, van_audenhaege_review_2015, bercovich_medical_2018}. Samat matemaattiset menetelmät soveltuvat myös tietokonetomografiaan, jossa jokainen projektio vastaa tietystä suunnasta otettua tavallista röntgenkuvaa.
 
 Projektioiden matematiikka esitetään kahdessa ulottuvuudessa (jolloin projektiot ovat yksiulotteisia) ymmärrettävyyden vuoksi. Yleistys kolmeen ulottuvuuteen ja kaksiulotteiseen projektioon on suhteellisen suoraviivainen.
+
+Oletetaan toistaiseksi gammakameran kollimaattorin havaitsevan ainoastaan yhdestä suunnasta saapuvaa säteilyä ja tarkastellaan $xy$-tason jatkuvaa aktiivisuusjakaumaa $f\colon\RR^{2}\to\RR$. Olkoon $\theta$ gammakameran tangentin ja positiivisen $x$-akselin välinen kulma kuten \hyperref[fig:projektio]{kuvassa \ref*{fig:projektio}}. Merkitään projektiota $g(s, \theta)$, jossa $s$ on gammakameran tangentin suuntainen koordinaattiakseli.
 
 \begin{figure}[H]
     \centering
@@ -13,8 +14,6 @@ Projektioiden matematiikka esitetään kahdessa ulottuvuudessa (jolloin projekti
     \caption{Aktiivisuusjakauma $f$ $xy$-tasossa (siniset pisteet), gammakameran kollimaattori (mustat palkit), detektorin tuikeaine (väritetty alue) ja projektio $g(s, \theta)$, jossa $\theta$ on $s$- ja $x$-akseleiden välinen kulma. Yhteen projektion pisteeseen vaikuttava aktiivisuusjakauman osa on piirretty punaisella katkoviivalla. Kuva on muokattu lähteestä \cite{bruyant_analytic_2002}.}
     \label{fig:projektio}
 \end{figure}
-
-Tarkastellaan $xy$-tason jatkuvaa aktiivisuusjakaumaa $f\colon\RR^{2}\to\RR$. Olkoon $\theta$ gammakameran tangentin ja positiivisen $x$-akselin välinen kulma kuten \hyperref[fig:projektio]{kuvassa \ref*{fig:projektio}}. Merkitään projektiota $g(s, \theta)$, jossa $s$ on gammakameran tangentin suuntainen koordinaattiakseli.
 
 Kulmalla $\theta$ ja pisteessä $s$ gammakamera havaitsee säteilyä $xy$-tason suoralta $\Omega$, jonka määrittää
 \begin{equation*}
