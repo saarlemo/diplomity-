@@ -124,8 +124,41 @@ Varsinaiset C++:lla toteutetut kollimaattorin mallit olivat suoraviivaisia lisä
 OMEGA avoimen lähdekoodin ohjelmistona on saatavissa GitHubista\footnote{\url{https://github.com/villekf/OMEGA}}. SPECT-rekonstruktio on tarkoitus sisällyttää versioon 2.0, jonka julkaisu ajoittuu heinäkuulle 2024.
 
 \subsection{Projektiodatan simulointi}
-\textcolor{red}{
-    SIMIND v8.0\cite{ljungberg_monte_1989}\\
-    NEMA-phantom\cite{nema2018} \\
-    Precedence 6 kollimaattorin parametrit\cite{peters_towards_2019}
-}
+Suomessa kliinisen datan tutkimuskäyttöä sääntelee niin kutsuttu toisiolaki, joka edellyttää joko luvan hakemista sosiaali- ja terveysalan tietolupaviranomaiselta Findatalta tai luvan keräämistä kuvantamisen yhteydessä potilaalta. Mallin kehitystä tämä ei kuitenkaan estänyt, koska mallin toimintaa voidaan testata myös simuloidulla datalla.
+
+Ohjelmistoja emissiotomografiadatan simulointiin on kehitetty jo 1980-luvulta alkaen\cite{ljungberg_monte_1989}. Kirjallisuudessa esiintyviä, julkisesti saatavissa olevia, ohjelmistoja ovat muun muassa SIMIND\cite{ljungberg_monte_1989, taheri_monte_2017, giannone_monte_1999}, GATE (\textit{Geant4 Application for Tomographic Emission})\cite{taheri_monte_2017}, MCNPX (\textit{Monte Carlo N-Particle Transport})\cite{taheri_monte_2017}, SIMSET\cite{giannone_monte_1999}, MCMATV3D\cite{giannone_monte_1999} ja SIMSPECT\cite{giannone_monte_1999}.
+
+Simuloinnissa käytetyt Monte Carlo -menetelmät perustuvat satunnaisuuteen. Käytännössä tunnettuna ovat kuvattavan kohteen rakenne, materiaalit ja aktiivisuusjakauma sekä gammakameran ominaisuudet. Aktiivisuusjakauman perusteella luodaan satunnaisesti gammafotoneja sekä niille sijainti, etenemissuunta ja energia kyseessä olevan radionuklidin ominaisuuksien kaltaisesti. Jokaista fotonia seurataan sen edetessä aineessa, samalla mallintaen vuorovaikutusta satunnaisena. Vuorovaikutus mallinnetaan myös detektorissa, jolloin fotonin mahdollinen havaitseminen tallennetaan. Prosessi toistetaan miljoonia kertoja, jolloin saadaan ohjelmistolle syötettyjä parametrejä vastaavaa projektiodataa.\cite{ljungberg_monte_1989}
+
+Tässä työssä projektiodatan simulointiin käytettiin SIMIND-ohjelmistoa (v8.0, Lundin yliopisto)\cite{ljungberg_monte_1989}, johon on sisäänrakennettuna mallinnettuja useita fantomeja (\textit{phantom}) ja radionuklideja. Kuvantamisen fantomi on fyysinen esine, jonka tarkoituksena on esimerkiksi sisältää samankaltaisia vaihteluita radioaktiivisuuden jakaumassa kuin ihmiskehossa. Jäljempänä esitetty simuloitu data ja rekonstruktiot ovat IQ NEMA -fantomista.
+
+Kyseinen fantomi koostuu vesisäiliöstä, jossa on kuusi radioaktiivisella nesteellä täytettyä palloa ja säiliön keskellä olevasta kiinteästä sylinteristä\cite{nema2018, mancosu_4d-pet_2009}. Pallojen halkaisijat ovat \qtylist{10;13;17;22;28;37}{\milli\meter} ja sylinterin halkaisija on \qty{51}{\milli\meter}\cite{nema2018, mancosu_4d-pet_2009}. Pallojen aktiivisuus simulaatioissa oli välillä \qtyrange{1.19}{2.38}{\mega\becquerel\per\milli\liter} ja taustan aktiivisuus oli \qty{0.0795}{\mega\becquerel\per\milli\liter}. Radioaktiivinen aine oli metastabiilia teknetiumia ja gammakvanttien energia oli \qty{140}{\kilo\electronvolt}.
+
+Detektorin tuikeaineen ja kollimaattorin parametrit asetettiin vastaamaan Precedence 6 -laitteen parametreja\cite{peters_towards_2019}. Nämä ja muut kuvantamisen parametrit ovat esitetty \hyperref[tbl:simulaation_parametrit]{taulukossa \ref*{tbl:simulaation_parametrit}}. Yhteen projektioon simuloitiin 12579273 fotonia ja havaittuja fotoneja oli yhteensä 31521520, joka vastaa noin \qty{3.9}{\percent} kokonaismäärästä.
+\begin{table}[H]
+    \centering
+    \captionsetup{width=.9\linewidth}
+    \caption{Projektiodatan simulaation parametrit}
+    %\resizebox{.9\linewidth}{!}{%
+        \begin{tabular}{lcc}
+            \toprule
+            Parametri & Arvo & \\
+            \midrule
+            Tuikeaineen materiaali & \ce{NaI}\\
+            Tuikeaineen paksuus & \qty{9.525}{\milli\meter}\\
+            Tuikeaineen pikselin koko & \qty{4.664}{\milli\meter}\\
+            Kollimaattorin reiän muoto & kuusikulmainen\\
+            Kollimaattorin reiän halkaisija & \qty{1.40}{\milli\meter}\\
+            Kollimaattorin reiän pituus & \qty{32.8}{\milli\meter}\\
+            Kollimaattorin reikien väli & \qty{0.152}{\milli\meter}\\
+            Energiaikkuna & \qtyrange{129.5}{150.5}{\kilo\electronvolt}\\
+            Projektioiden lukumäärä & 64\\
+            Projektioita vastaavat kulmat & \qtyrange{0}{360}{\degree}\\
+            Simuloitujen fotonien lukumäärä & 805073472\\
+            Havaittujen fotonien lukumäärä & 31521520\\
+            Kuvantamisaika per projektio & \qty{1}{\second}\\
+            \bottomrule
+        \end{tabular}
+    %}
+    \label{tbl:simulaation_parametrit}
+\end{table}

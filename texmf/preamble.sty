@@ -85,9 +85,12 @@ format=plain]{caption}
 \DeclareSIUnit\year{y}
 \DeclareSIUnit\atomicmassunit{u}
 \sisetup{
-    range-phrase    =   \text{--},
-    range-units     =   single,
-    per-mode        =   fraction,
+    range-phrase            =   \text{--},
+    range-units             =   single,
+    per-mode                =   fraction,
+    list-separator          =   {, },
+    list-final-separator    =   { ja },
+    list-units              =    single,
 %   exponent-mode   =   scientific,
 }
 
@@ -224,6 +227,24 @@ format=plain]{caption}
     \printfield{pages}%
     \setunit{\addcomma\space}
     \usebibmacro{date}%
+    \newunit\newblock
+    \usebibmacro{finentry}
+}
+
+\DeclareFieldFormat[standard]{pages}{#1~s.}
+\DeclareBibliographyDriver{standard}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \setunit{\labelnamepunct}\newblock
+    \usebibmacro{title}%
+    \newunit\newblock
+    \printlist{institution}%
+    \setunit{\addcomma\space}
+    \printlist{location}%
+    \setunit{\addperiod\space}
+    \usebibmacro{date}%
+    \setunit{\addperiod\space}
+    \printfield{pages}%
     \newunit\newblock
     \usebibmacro{finentry}
 }
