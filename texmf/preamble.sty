@@ -103,7 +103,11 @@ format=plain]{caption}
 \counterwithin{equation}{section}
 %\counterwithin{equation}{subsection}
 
-\usepackage[automark]{scrlayer-scrpage} % Header and footer
+\usepackage[
+    automark,
+    markcase=used,
+    draft=false,
+]{scrlayer-scrpage} % Header and footer
 \pagestyle{scrheadings} 
 \clearpairofpagestyles % Clear the default settings
 \cfoot{\normalfont\thepage} % Set the center footer to display the page number
