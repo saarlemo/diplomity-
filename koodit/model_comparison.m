@@ -7,13 +7,13 @@ options = {};
 pz = {};
 
 for ii = rays
-    fname = strcat('nema_phantom_proj1_model3_nRay', num2str(ii^2), '.mat');
+    fname = strcat('brain_phantom_proj1_model3_nRay', num2str(ii^2), '.mat');
     tmp_struct = load(fname);
     options{ii} = tmp_struct.options;
     pz{ii} = tmp_struct.pz ./ max(tmp_struct.pz, [], 'all');
 end
 
-load("data/nema_phantom/results/nema_ground_truth.mat");
+load("data/brain_phantom/results/cbf1_ground_truth.mat");
 phantom = single(phantom);
 phantom = phantom ./ max(phantom, [], 'all');
 
@@ -40,7 +40,7 @@ xlabel('$N$')
 grid on
 
 f1.Position = [100 100 640 480];
-exportgraphics(f1, strcat("../kuvat/vertailu_SSIM.pdf"), 'resolution', 1500, 'contenttype', 'vector')
+exportgraphics(f1, strcat("kuvat/cbf_vertailu_SSIM.pdf"), 'resolution', 1500, 'contenttype', 'vector')
 
 f2 = figure(2);
 set(f2, 'defaulttextinterpreter', 'latex')
@@ -48,7 +48,7 @@ semilogx(rays.^2, mse_arr)
 ylabel('MSE')
 xlabel('$N$')
 grid on
-ylim([0 0.0005])
+ylim([0 0.001])
 
 f2.Position = [100 100 640 480];
-exportgraphics(f2, strcat("../kuvat/vertailu_MSE.pdf"), 'resolution', 1500, 'contenttype', 'vector')
+exportgraphics(f2, strcat("kuvat/cbf_vertailu_MSE.pdf"), 'resolution', 1500, 'contenttype', 'vector')

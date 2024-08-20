@@ -1,0 +1,63 @@
+outside phantom            0  0000   0
+skin                       1  1040   2
+brain                      2  1040   1
+spinal cord                3  1040   2
+skull                      4  1300   1
+spine                      5  1300   1
+dens of axis              70  1300   1
+jaw bone                  71  1300   1
+parotid gland             72  1040   8
+skeletal muscle            9  1040   2
+lacrimal glands           74  1040   2
+spinal canal              75  1040   1
+hard palate               76  1300   1
+cerebellum                77  1040   12
+tongue                    78  1040   2
+pharynx                   15  1040   2
+esophagus                 16  1040   2
+horn of mandible          81  1300   1
+nasal septum              82   600   1
+white matter              83  1040   4
+superior sagital sinus    84  1040   1
+medulla oblongota         85  1040   4
+fat                       22  1040   1
+blood pool                23  1040   2
+artificial lesion         88  1040   12
+frontal lobes             89  1040   12
+bone marrow               26  1040   2
+pons                      91  1040   12
+third ventricle           92  1040   1
+trachea                   29  1040   1
+cartilage                 30  1040   1
+occipital lobes           95  1040   12
+hippocampus               96  1040   12
+pituitary gland           97  1040   12
+cerebral fluid            98  1040   1
+uncus(ear bones)          99  1300   1
+turbinates               100   600   1
+caudate nucleus          101  1040   12
+zygoma                   102  1040   2
+insula cortex            103  1040   12
+sinuses/mouth cavity     104   600   2
+putamen                  105  1040   12
+optic nerve              106  1040   4
+internal capsul          107  1040   4
+septum pellucidium       108  1040   4
+thalamus                 109  1040   12
+eyeball                  110  1040   1
+corpus collosum          111  1040   4
+special region frontlobe  112  1040   12
+cerebral falx            113  1040   4
+temporal lobes           114  1040   12
+fourth ventricle         115  1040   1
+frontal portion eyes     116  1040   2
+parietal lobes           117  1040   12
+amygdala                 118  1040   12
+eye                      119  1040   1
+globus pallidus          120  1040   12
+lens                     121  1040   1
+cerebral aquaduct        122  1040   1
+lateral ventricles       123  1040   1
+prefrontal lobes         124  1040   12
+teeth                    125  1300   1
+lesion                    63  1040   1

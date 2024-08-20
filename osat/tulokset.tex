@@ -7,26 +7,26 @@ Keskusyksiköllä laskenta on verrattain hidasta ja esimerkiksi 144 säteellä l
     \centering
     \captionsetup{width=.9\linewidth}
     \begin{subfigure}[t]{.25\textwidth}
-        \includegraphics[width=\linewidth]{kuvat/rekonstruktio_proj6.pdf}
+        \includegraphics[width=\linewidth]{kuvat/nema_rekonstruktio_proj6.pdf}
         \caption{Kuva-alueen rotaatioon perustuva projektio}
     \end{subfigure}%
     \hspace{.075\textwidth}%
     \begin{subfigure}[t]{.25\textwidth}
-        \includegraphics[width=\linewidth]{kuvat/ground_truth.pdf}
+        \includegraphics[width=\linewidth]{kuvat/nema_ground_truth.pdf}
         \caption{Todellinen aktiivisuusjakauma}
     \end{subfigure}%
     \hspace{.075\textwidth}%
     \begin{subfigure}[t]{.25\textwidth}
-        \includegraphics[width=\linewidth]{kuvat/rekonstruktio_proj1_malli1_nRay7.pdf}
+        \includegraphics[width=\linewidth]{kuvat/nema_rekonstruktio_proj1_malli1_nRay7.pdf}
         \caption{Sädepohjainen projektio, malli 1, 7 sädettä}
     \end{subfigure}
     \begin{subfigure}[b]{.25\textwidth}
-        \includegraphics[width=\linewidth]{kuvat/rekonstruktio_proj1_malli2_nRay7.pdf}
+        \includegraphics[width=\linewidth]{kuvat/nema_rekonstruktio_proj1_malli2_nRay7.pdf}
         \caption{Sädepohjainen projektio, malli 2, 7 sädettä}
     \end{subfigure}%
     \hspace{.075\textwidth}%
     \begin{subfigure}[b]{.25\textwidth}
-        \includegraphics[width=\linewidth]{kuvat/rekonstruktio_proj1_malli3_nRay7.pdf}
+        \includegraphics[width=\linewidth]{kuvat/nema_rekonstruktio_proj1_malli3_nRay9.pdf}
         \caption{Sädepohjainen projektio, malli 3, 9 sädettä}
     \end{subfigure}
     \caption{Simuloidun IQ NEMA -fantomin SPECT-projektiodatan rekonstruktio neljällä eri projektiomenetelmällä ja todellinen aktiivisuusjakauma. Kuvissa on esitetty poikkileikkaus kuva-alueen aktiivisuusjakaumasta. Rekonstruktiossa kuvan koko oli $128^3$ vokselia sekä algoritmi oli OSEM kahdella iteraatiolla ja 8 osajoukolla. Projektioiden lukumäärä oli 64 ja jokaisessa projektiokuvassa oli $128^2$ pikseliä. Kuvan \textbf{(c)} rekonstruktion projektiossa käytettiin 7 sädettä yhtä kollimaattorin reikää kohti. Kuvan \textbf{(e)} rekonstruktiossa säteiden määrä voi olla vain jonkin luonnollisen luvun neliö, josta johtuen rekonstruktioon valittiin 9 sädettä.}
@@ -48,14 +48,14 @@ Mallilla 3 toteutetun rekonstruktion yhtäläisyyttä fantomiin eri säteiden lu
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\linewidth}
-    \includegraphics[width=.9\linewidth]{kuvat/vertailu_SSIM.pdf}
+    \includegraphics[width=.9\linewidth]{kuvat/nema_vertailu_SSIM.pdf}
     \caption{Simuloidun IQ NEMA -fantomin SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan SSIM-mittarilla. Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä on esitetty vaaka-akselilla.}
     \label{fig:vertailu_SSIM}
 \end{figure}
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\linewidth}
-    \includegraphics[width=.9\linewidth]{kuvat/vertailu_MSE.pdf}
+    \includegraphics[width=.9\linewidth]{kuvat/nema_vertailu_MSE.pdf}
     \caption{Simuloidun IQ NEMA -fantomin SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan keskivirheellä (\textit{mean square error, MSE}). Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä on esitetty vaaka-akselilla.}
     \label{fig:vertailu_MSE}
 \end{figure}
