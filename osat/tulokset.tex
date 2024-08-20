@@ -78,6 +78,22 @@ Mallilla 3 toteutetun rekonstruktion yhtäläisyyttä fantomiin eri säteiden lu
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\linewidth}
+    \includegraphics[width=.9\linewidth]{kuvat/vertailu_SSIM.pdf}
+    \caption{Simuloidun IQ NEMA -fantomin (sinisellä) ja Zubal-fantomin (punaisella) SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan SSIM-mittarilla. Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä on esitetty vaaka-akselilla.}
+    \label{fig:vertailu_SSIM}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\linewidth}
+    \includegraphics[width=.9\linewidth]{kuvat/vertailu_MSE.pdf}
+    \caption{Simuloidun IQ NEMA -fantomin (sinisellä) ja Zubal-fantomin (punaisella) SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan keskivirheellä (\textit{mean square error, MSE}). Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä on esitetty vaaka-akselilla.}
+    \label{fig:vertailu_MSE}
+\end{figure}
+
+\iffalse
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\linewidth}
     \begin{subfigure}[t]{.4\textwidth}
         \includegraphics[width=\linewidth]{kuvat/nema_vertailu_SSIM.pdf}
         \caption{IQ NEMA -fantomi}
@@ -105,26 +121,29 @@ Mallilla 3 toteutetun rekonstruktion yhtäläisyyttä fantomiin eri säteiden lu
     \caption{Simuloidun IQ NEMA -fantomin ja Zubal-fantomin SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan keskivirheellä (\textit{mean square error, MSE}). Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä on esitetty vaaka-akselilla.}
     \label{fig:vertailu_MSE}
 \end{figure}
+\fi
 
-%Kuviin \ref{fig:rekonstruktio4}, \ref{fig:rekonstruktio64} ja \ref{fig:rekonstruktio144} on piirretty projektiodatan rekonstruktio 4, 64 ja 144 säteellä. Jokainen rekonstruktioista on selkeä, mutta yksityiskohdat ja muutokset aktiivisuusjakaumassa tarkentuvat säteiden määrän kasvaessa.
-%\begin{figure}[H]
-%    \centering
-%    \captionsetup{width=.9\linewidth}
-%    \includegraphics[width=.9\linewidth]{kuvat/rekonstruktio_nRay4.pdf}
-%    \caption{NEMA-fantomista simuloidun projektiodatan rekonstruktio. Projektioita on 64, tasaisesti joka puolelta kuva-aluetta. Mallissa jokainen detektorin pikseli havaitsee gammafotoneja 4 eri suunnasta.}
-%    \label{fig:rekonstruktio4}
-%\end{figure}
-%\begin{figure}[H]
-%    \centering
-%    \captionsetup{width=.9\linewidth}
-%    \includegraphics[width=.9\linewidth]{kuvat/rekonstruktio_nRay64.pdf}
-%    \caption{NEMA-fantomista simuloidun projektiodatan rekonstruktio. Projektioita on 64, tasaisesti joka puolelta kuva-aluetta. Mallissa jokainen detektorin pikseli havaitsee gammafotoneja 64 eri suunnasta.}
-%    \label{fig:rekonstruktio64}
-%\end{figure}
-%\begin{figure}[H]
-%    \centering
-%    \captionsetup{width=.9\linewidth}
-%    \includegraphics[width=.9\linewidth]{kuvat/rekonstruktio_nRay144.pdf}
-%    \caption{NEMA-fantomista simuloidun projektiodatan rekonstruktio. Projektioita on 64, tasaisesti joka puolelta kuva-aluetta. Mallissa jokainen detektorin pikseli havaitsee gammafotoneja 144 eri suunnasta.}
-%    \label{fig:rekonstruktio144}
-%\end{figure}
+\iffalse
+Kuviin \ref{fig:rekonstruktio4}, \ref{fig:rekonstruktio64} ja \ref{fig:rekonstruktio144} on piirretty projektiodatan rekonstruktio 4, 64 ja 144 säteellä. Jokainen rekonstruktioista on selkeä, mutta yksityiskohdat ja muutokset aktiivisuusjakaumassa tarkentuvat säteiden määrän kasvaessa.
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\linewidth}
+    \includegraphics[width=.9\linewidth]{kuvat/rekonstruktio_nRay4.pdf}
+    \caption{NEMA-fantomista simuloidun projektiodatan rekonstruktio. Projektioita on 64, tasaisesti joka puolelta kuva-aluetta. Mallissa jokainen detektorin pikseli havaitsee gammafotoneja 4 eri suunnasta.}
+    \label{fig:rekonstruktio4}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\linewidth}
+    \includegraphics[width=.9\linewidth]{kuvat/rekonstruktio_nRay64.pdf}
+    \caption{NEMA-fantomista simuloidun projektiodatan rekonstruktio. Projektioita on 64, tasaisesti joka puolelta kuva-aluetta. Mallissa jokainen detektorin pikseli havaitsee gammafotoneja 64 eri suunnasta.}
+    \label{fig:rekonstruktio64}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \captionsetup{width=.9\linewidth}
+    \includegraphics[width=.9\linewidth]{kuvat/rekonstruktio_nRay144.pdf}
+    \caption{NEMA-fantomista simuloidun projektiodatan rekonstruktio. Projektioita on 64, tasaisesti joka puolelta kuva-aluetta. Mallissa jokainen detektorin pikseli havaitsee gammafotoneja 144 eri suunnasta.}
+    \label{fig:rekonstruktio144}
+\end{figure}
+\fi
