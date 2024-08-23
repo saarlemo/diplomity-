@@ -62,11 +62,11 @@ brain_proj6 = [immse(pz, phantom), ssim(pz, phantom)];
 f1 = figure(1);
 set(f1, 'defaulttextinterpreter', 'latex')
 
-semilogx(rays.^2, nema_arr(:, 2))
+p1 = semilogx(rays.^2, nema_arr(:, 2));
 hold on
-semilogx(rays.^2, cbf_arr(:, 2))
-yline(nema_proj6(2), '--')
-yline(brain_proj6(2), '--')
+p2 = semilogx(rays.^2, cbf_arr(:, 2));
+yline(nema_proj6(2), '--', 'Color', p1.Color)
+yline(brain_proj6(2), '--', 'Color', p2.Color)
 hold off
 ylabel('SSIM')
 ylim([0.9 1])
@@ -80,11 +80,11 @@ exportgraphics(f1, strcat("kuvat/vertailu_SSIM.pdf"), 'resolution', 1500, 'conte
 f2 = figure(2);
 set(f2, 'defaulttextinterpreter', 'latex')
 
-semilogx(rays.^2, nema_arr(:, 1))
+p3 = semilogx(rays.^2, nema_arr(:, 1));
 hold on
-semilogx(rays.^2, cbf_arr(:, 1))
-yline(nema_proj6(1), '--')
-yline(brain_proj6(1), '--')
+p4 = semilogx(rays.^2, cbf_arr(:, 1));
+yline(nema_proj6(1), '--', 'Color', p3.Color)
+yline(brain_proj6(1), '--', 'Color', p4.Color)
 hold off
 ylabel('MSE')
 xlabel('$N$')
