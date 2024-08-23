@@ -1,5 +1,5 @@
 \section{Rekonstruktion toteutus}
-Työssä toteutettiin kolme eri mallia kollimaattorille. Kaksi mallia on suunniteltu kollimaattorille, jonka reiät ovat suoria särmiöitä kuusikulmaisella pohjalla. Ensimmäinen malli on kehitetty mahdollisimman todenmukaista rekonstruktiota varten ja toinen laskentatehokkuutta ajatellen. Kolmas malli on kaikista yleisin ja se soveltuu erityisesti kollimaattoreille, jossa jokaisen detektorin pikselin päällä on ainoastaan yksi neliön muotoinen kollimaattorin reikä. Kollimaattorin mallintava koodi kehitettiin MATLAB-ympäristössä (R2023b, Mathworks Inc.) testauksen nopeuden ja helppouden vuoksi, mutta laskennan nopeuden vuoksi lopullinen koodi toteutettiin C++-kielellä.
+Työssä toteutettiin kolme eri mallia kollimaattorille. Kaksi mallia on suunniteltu kollimaattorille, jonka reiät ovat suoria särmiöitä kuusikulmaisella pohjalla. Ensimmäinen malli on kehitetty mahdollisimman todenmukaista rekonstruktiota varten ja toinen laskentatehokkuutta ajatellen. Kolmas malli on kaikista yleisin ja se soveltuu erityisesti kollimaattoreille, jossa jokaisen detektorin pikselin päällä on ainoastaan yksi neliön muotoinen kollimaattorin reikä\cite{weng_energy-optimized_2016}. Kollimaattorin mallintava koodi kehitettiin MATLAB-ympäristössä (R2023b, Mathworks Inc.) testauksen nopeuden ja helppouden vuoksi, mutta laskennan nopeuden vuoksi lopullinen koodi toteutettiin C++-kielellä.
 
 Eräs keino säteen lävistämien kuva-alueen vokseleiden laskentaan on Siddonin kehittämä kuva-alueen vokseleiden säännöllisyyttä hyödyntävä algoritmi\cite{siddon_fast_1985, sundermann_fast_1998}. Siddonin algoritmiin tarvitaan kaksi pistettä säteen virittämältä suoralta avaruudessa kuva-alueen parametrien lisäksi\cite{sundermann_fast_1998}. Koska epäideaalin kollimaattorin reikä kerää säteilyä kartion muotoiselta alueelta avaruudessa\cite{cherry_single_2012}, jokaiselle detektorin pikselille asetetaan useampi säde kollimaattorin reikien sisälle. Kunkin säteen lävistämät vokselit ja pituudet niissä määritetään, jonka jälkeen pituudet keskiarvoistetaan vokselikohtaisesti. Projektion laskentaan käytetään näitä keskiarvoja.
 
@@ -35,28 +35,28 @@ Kahdessa ensimmäisessä mallissa kollimaattorin yksittäisen reiän ajatellaan 
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli1_2D.pdf}
-    \caption{Kollimaattorin mallin 1 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (890 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on \qty{4.664}{\milli\meter}.}
+    \caption{Kollimaattorin mallin 1 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (890 kappaletta) sinisellä värillä. Kollimaattorin reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
     \label{fig:ray1_2D}
 \end{figure}
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli1_3D.pdf}
-    \caption{Kollimaattorin mallin 1 havainnollistus kuva-alueen transversaalitasossa. Kuva-alue on piirretty harmaalla ruudukolla ja detektorin havaitsemat säteet (287 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on \qty{4.664}{\milli\meter} ja kuva-alueen yksittäisen vokselin koko on $(\qty{4.664}{\milli\meter})^{3}$.}
+    \caption{Kollimaattorin mallin 1 havainnollistus kuva-alueen transversaalitasossa. Kuva-alue on piirretty harmaalla ruudukolla ja detektorin havaitsemat säteet (287 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$ ja kuva-alueen yksittäisen vokselin koko on $(\qty{4.664}{\milli\meter})^{3}$.}
     \label{fig:ray1_3D}
 \end{figure}
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli2_2D.pdf}
-    \caption{Kollimaattorin mallin 2 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (61 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on \qty{4.664}{\milli\meter}.}
+    \caption{Kollimaattorin mallin 2 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (61 kappaletta) sinisellä värillä. Kollimaattorin reiän halkaisija on \qty{1.4}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
     \label{fig:ray2_2D}
 \end{figure}
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli2_3D.pdf}
-    \caption{Kollimaattorin mallin 2 havainnollistus kuva-alueen transversaalitasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla. Kuva-alue on piirretty harmaalla ruudukolla ja detektorin havaitsemat säteet (61 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on \qty{4.664}{\milli\meter} ja kuva-alueen yksittäisen vokselin koko on $(\qty{4.664}{\milli\meter})^{3}$.}
+    \caption{Kollimaattorin mallin 2 havainnollistus kuva-alueen transversaalitasossa. Kuva-alue on piirretty harmaalla ruudukolla ja detektorin havaitsemat säteet (61 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$ ja kuva-alueen yksittäisen vokselin koko on $(\qty{4.664}{\milli\meter})^{3}$.}
     \label{fig:ray2_3D}
 \end{figure}
 %Ensimmäisessä mallissa kollimaattorin reiät ovat todenmukaisissa paikoissaan. \hyperref[fig:ray1]{Kuvan \ref*{fig:ray1}} malli sisältää 108 sädettä, kun yhdessä kollimaattorin reiässä on 7 sädettä. \hyperref[fig:ray1]{Kuvan \ref*{fig:ray2}} malli muodostuu vain yhdestä kollimaattorin reiästä detektorin pikseliä kohti ja kuvaan on piirretty 61 sädettä. Kuvista nähdään, kuinka detektorin havaitsema alue avaruudesta täyttyy tasaisemmin yhden reiän mallilla, vaikka säteitä on yli kolmannes vähemmän.
@@ -122,14 +122,14 @@ Kuvissa \ref{fig:ray3_2D} ja \ref{fig:ray3_3D} on esitetty kolmas malli, jossa s
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli3_2D.pdf}
-    \caption{Kollimaattorin mallin 3 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (64 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on \qty{4.664}{\milli\meter}.}
+    \caption{Kollimaattorin mallin 3 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (64 kappaletta) sinisellä värillä. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
     \label{fig:ray3_2D}
 \end{figure}
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli3_3D.pdf}
-    \caption{Kollimaattorin mallin 3 havainnollistus kuva-alueen transversaalitasossa. Kuva-alue on piirretty harmaalla ruudukolla ja detektorin havaitsemat säteet (64 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on \qty{4.664}{\milli\meter} ja kuva-alueen yksittäisen vokselin koko on $(\qty{4.664}{\milli\meter})^{3}$.}
+    \caption{Kollimaattorin mallin 3 havainnollistus kuva-alueen transversaalitasossa. Kuva-alue on piirretty harmaalla ruudukolla ja detektorin havaitsemat säteet (64 kappaletta) sinisellä värillä. Kollimaattorin reiän pituus on \qty{32.4}{\milli\meter}, reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$ ja kuva-alueen yksittäisen vokselin koko on $(\qty{4.664}{\milli\meter})^{3}$.}
     \label{fig:ray3_3D}
 \end{figure}
 
@@ -142,7 +142,7 @@ Oleellisin muutos oli sinogrammin datapisteitä vastaavien säteiden määritys.
 
 Varsinaiset C++:lla toteutetut kollimaattorin mallit olivat suoraviivaisia lisätä ohjelmistoon. Ohjelmistossa oli valmiina loogiset muuttujat \texttt{CT} ja \texttt{PET}, joilla voidaan määrittää kullakin kuvantamismenetelmällä ajettavat koodin osiot. Vastaavasti ohjelmistoon lisättiin muuttuja \texttt{SPECT}. Liitteissä esitetyt funktiot lisättiin lähdekoodiin sellaisenaan ja niitä kutsuttiin \texttt{SPECT}-muuttujan ehtolauseessa ennen säteiden ja vokseleiden leikkausten laskemista. Koska tässä työssä toteutetut funktiot \texttt{computeSpectHexShifts} ja \texttt{computeSpectSquareShifts} palauttavat joukon pisteitä, säteiden ja vokseleiden leikkaukset lasketaan jokaiselle parille pisteitä erikseen ja tulokset keskiarvoistetaan.
 
-OMEGA avoimen lähdekoodin ohjelmistona on saatavissa GitHubista\footnote{\url{https://github.com/villekf/OMEGA}}. SPECT-rekonstruktio on tarkoitus sisällyttää versioon 2.0, jonka julkaisu ajoittuu heinäkuulle 2024.
+OMEGA avoimen lähdekoodin ohjelmistona on saatavissa GitHubista\footnote{\url{https://github.com/villekf/OMEGA}}. SPECT-rekonstruktio on tarkoitus sisällyttää versioon 2.0, jonka julkaisun on suunniteltu ajoittuvan vuoden 2024 lopulle.
 
 \subsection{Projektiodatan simulointi}
 Suomessa kliinisen datan tutkimuskäyttöä sääntelee niin kutsuttu toisiolaki, joka edellyttää joko luvan hakemista sosiaali- ja terveysalan tietolupaviranomaiselta Findatalta tai luvan keräämistä kuvantamisen yhteydessä potilaalta. Mallin kehitystä tämä ei kuitenkaan estänyt, koska mallin toimintaa voidaan testata myös simuloidulla datalla.

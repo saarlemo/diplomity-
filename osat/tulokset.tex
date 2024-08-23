@@ -29,7 +29,7 @@ Keskusyksiköllä laskenta on verrattain hidasta ja esimerkiksi 144 säteellä l
         \includegraphics[width=\linewidth]{kuvat/nema_rekonstruktio_proj1_malli3_nRay9.pdf}
         \caption{Sädepohjainen projektio, malli 3, 9 sädettä}
     \end{subfigure}
-    \caption{Simuloidun IQ NEMA -fantomin SPECT-projektiodatan rekonstruktio neljällä eri projektiomenetelmällä ja todellinen aktiivisuusjakauma. Kuvissa on esitetty poikkileikkaus kuva-alueen aktiivisuusjakaumasta. Rekonstruktiossa kuvan koko oli $128^3$ vokselia sekä algoritmi oli OSEM kahdella iteraatiolla ja 8 osajoukolla. Projektioiden lukumäärä oli 64 ja jokaisessa projektiokuvassa oli $128^2$ pikseliä. Kuvan \textbf{(c)} rekonstruktion projektiossa käytettiin 7 sädettä yhtä kollimaattorin reikää kohti. Kuvan \textbf{(e)} rekonstruktiossa säteiden määrä voi olla vain jonkin luonnollisen luvun neliö, josta johtuen rekonstruktioon valittiin 9 sädettä.}
+    \caption{Simuloidun IQ NEMA -fantomin SPECT-projektiodatan rekonstruktio neljällä eri projektiomenetelmällä ja todellinen aktiivisuusjakauma. Kuvissa on esitetty poikkileikkaus kuva-alueen aktiivisuusjakaumasta. Kuvien värikartat ovat skaalattu siten, että kuva-alueen suurin arvo vastaa valkoista väriä ja kuva-alueen pienin arvo mustaa väriä. Rekonstruktiossa kuvan koko oli $128^3$ vokselia sekä algoritmi oli OSEM kahdella iteraatiolla ja 8 osajoukolla. Projektioiden lukumäärä oli 64 ja jokaisessa projektiokuvassa oli $128^2$ pikseliä. Kuvan \textbf{(c)} rekonstruktion projektiossa käytettiin 7 sädettä yhtä kollimaattorin reikää kohti. Kuvan \textbf{(e)} rekonstruktiossa säteiden määrä voi olla vain jonkin luonnollisen luvun neliö, josta johtuen rekonstruktioon valittiin 9 sädettä.}
     \label{fig:nema-rekonstruktiot}
 \end{figure}
 
@@ -59,7 +59,7 @@ Keskusyksiköllä laskenta on verrattain hidasta ja esimerkiksi 144 säteellä l
         \includegraphics[width=\linewidth]{kuvat/cbf_rekonstruktio_proj1_malli3_nRay9.pdf}
         \caption{Sädepohjainen projektio, malli 3, 9 sädettä}
     \end{subfigure}
-    \caption{Simuloidun Zubal-fantomin SPECT-projektiodatan rekonstruktio neljällä eri projektiomenetelmällä ja todellinen aktiivisuusjakauma. Kuvissa on esitetty poikkileikkaus kuva-alueen aktiivisuusjakaumasta. Rekonstruktiossa kuvan koko oli $128^3$ vokselia sekä algoritmi oli OSEM kahdella iteraatiolla ja 8 osajoukolla. Projektioiden lukumäärä oli 64 ja jokaisessa projektiokuvassa oli $128^2$ pikseliä. Kuvan \textbf{(c)} rekonstruktion projektiossa käytettiin 7 sädettä yhtä kollimaattorin reikää kohti. Kuvan \textbf{(e)} rekonstruktiossa säteiden määrä voi olla vain jonkin luonnollisen luvun neliö, josta johtuen rekonstruktioon valittiin 9 sädettä.}
+    \caption{Simuloidun Zubal-fantomin SPECT-projektiodatan rekonstruktio neljällä eri projektiomenetelmällä ja todellinen aktiivisuusjakauma. Kuvissa on esitetty poikkileikkaus kuva-alueen aktiivisuusjakaumasta. Kuvien värikartat ovat skaalattu siten, että kuva-alueen suurin arvo vastaa valkoista väriä ja kuva-alueen pienin arvo mustaa väriä. Rekonstruktiossa kuvan koko oli $128^3$ vokselia sekä algoritmi oli OSEM kahdella iteraatiolla ja 8 osajoukolla. Projektioiden lukumäärä oli 64 ja jokaisessa projektiokuvassa oli $128^2$ pikseliä. Kuvan \textbf{(c)} rekonstruktion projektiossa käytettiin 7 sädettä yhtä kollimaattorin reikää kohti. Kuvan \textbf{(e)} rekonstruktiossa säteiden määrä voi olla vain jonkin luonnollisen luvun neliö, josta johtuen rekonstruktioon valittiin 9 sädettä.}
     \label{fig:cbf-rekonstruktiot}
 \end{figure}
 
@@ -79,14 +79,14 @@ Mallilla 3 toteutetun rekonstruktion yhtäläisyyttä fantomiin eri säteiden lu
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/vertailu_SSIM.pdf}
-    \caption{Simuloidun IQ NEMA -fantomin (sinisellä) ja Zubal-fantomin (punaisella) SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan SSIM-mittarilla. Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä on esitetty vaaka-akselilla.}
+    \caption{Simuloidun IQ NEMA -fantomin (sinisellä) ja Zubal-fantomin (punaisella) SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan SSIM-mittarilla. Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä $N$ on esitetty vaaka-akselilla. Harmaat katkoviivat kuvaavat rekonstruktioita kuva-alueen rotaatioon perustuvalla projektiolla, jonka lopputulos ei riipu säteiden lukumäärästä.}
     \label{fig:vertailu_SSIM}
 \end{figure}
 \begin{figure}[H]
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/vertailu_MSE.pdf}
-    \caption{Simuloidun IQ NEMA -fantomin (sinisellä) ja Zubal-fantomin (punaisella) SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan keskivirheellä (\textit{mean square error, MSE}). Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä on esitetty vaaka-akselilla.}
+    \caption{Simuloidun IQ NEMA -fantomin (sinisellä) ja Zubal-fantomin (punaisella) SPECT-projektiodatan rekonstruktion vertailu todelliseen aktiivisuusjakaumaan keskivirheellä (\textit{mean square error, MSE}). Rekonstruktio toteutettiin sädepohjaisella mallilla 3, jossa säteiden määrä $N$ on esitetty vaaka-akselilla. Harmaat katkoviivat kuvaavat rekonstruktioita kuva-alueen rotaatioon perustuvalla projektiolla, jonka lopputulos ei riipu säteiden lukumäärästä.}
     \label{fig:vertailu_MSE}
 \end{figure}
 

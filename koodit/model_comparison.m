@@ -38,6 +38,26 @@ function res_arr = calculate_metrics(fpath, gtpath, n_images, rays)
     res_arr(:, 2) = ssim_arr;
 end
 
+load("data/nema_phantom/results/nema_ground_truth.mat")
+phantom = single(phantom);
+phantom = phantom ./ max(phantom, [], 'all');
+
+load('nema_phantom_proj6.mat')
+pz = single(pz);
+pz = pz ./ max(pz, [], 'all');
+
+nema_proj6 = [immse(pz, phantom), ssim(pz, phantom)];
+
+load("data/brain_phantom/results/cbf1_ground_truth.mat")
+phantom = single(phantom);
+phantom = phantom ./ max(phantom, [], 'all');
+
+load('brain_phantom_proj6.mat')
+pz = single(pz);
+pz = pz ./ max(pz, [], 'all');
+
+brain_proj6 = [immse(pz, phantom), ssim(pz, phantom)];
+
 %% Plot
 f1 = figure(1);
 set(f1, 'defaulttextinterpreter', 'latex')
@@ -45,6 +65,8 @@ set(f1, 'defaulttextinterpreter', 'latex')
 semilogx(rays.^2, nema_arr(:, 2))
 hold on
 semilogx(rays.^2, cbf_arr(:, 2))
+yline(nema_proj6(2), '--')
+yline(brain_proj6(2), '--')
 hold off
 ylabel('SSIM')
 ylim([0.9 1])
@@ -61,6 +83,8 @@ set(f2, 'defaulttextinterpreter', 'latex')
 semilogx(rays.^2, nema_arr(:, 1))
 hold on
 semilogx(rays.^2, cbf_arr(:, 1))
+yline(nema_proj6(1), '--')
+yline(brain_proj6(1), '--')
 hold off
 ylabel('MSE')
 xlabel('$N$')
