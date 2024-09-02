@@ -115,7 +115,7 @@ Analyyttisissa menetelmissä kuva muodostetaan yleensä yhdellä takaisinprojiso
 \end{enumerate}
 Iteratiiviset algoritmit eroavat toisistaan lähinnä virheen muodostuksessa (vaihe 2) ja kuvan päivittämisessä (vaihe 4)\cite{bruyant_analytic_2002}.
 
-Yleisimmin käytössä olevat iteratiiviset algoritmit ovat niin kutsuttuja tilastollisia algoritmeja, joissa havainnot $g_i$ tulkitaan satunnaismuuttujina $G_i\colon\mathbb{N}\to\mathbb{N}$\cite{wettenhovi_omegaopen-source_2021, kaipio_statistical_2005} ja projektiomatriisi tulkitaan projektiodatan todennäköisyysjakaumana\cite{boudjelal_novel_2021}. Edelleen, jokainen projektiomatriisin sarake vastaa yhtä kuva-alueen vokselia, mutta alkio $a_{ij}$ tulkitaan todennäköisyytenä, että hajoamistapahtuma vokselissa $i$ havaitaan indeksiä $j$ vastaavassa detektorissa\cite{boudjelal_novel_2021}.
+Yleisimmin käytössä olevat iteratiiviset algoritmit ovat niin kutsuttuja tilastollisia algoritmeja, joissa havainnot $g_i$ tulkitaan satunnaismuuttujina $G_i\colon\mathbb{N}\to\mathbb{N}$\cite{wettenhovi_omegaopen-source_2021, kaipio_statistical_2005} ja projektiomatriisi tulkitaan projektiodatan todennäköisyysjakaumana\cite{boudjelal_novel_2021}. Edelleen, jokainen projektiomatriisin sarake vastaa yhtä kuva-alueen vokselia, mutta alkio $a_{ij}$ tulkitaan todennäköisyytenä, että hajoamistapahtuma vokselissa $j$ havaitaan indeksiä $i$ vastaavassa detektorissa\cite{boudjelal_novel_2021}.
 
 Koska havaittujen hajoamistapahtumien määrä on pieni, positiivinen kokonaisluku, aktiivisuusjakaumaa voidaan mallintaa Poisson-jakaumalla\cite{kaipio_statistical_2005}. Projektiomatriisin avulla saadaan malli keskimääräiselle havainnolle $\overline{g}_i$, joka on muotoa\cite{boudjelal_novel_2021, shepp_maximum_1982}
 \begin{equation*}
