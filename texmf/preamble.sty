@@ -12,8 +12,13 @@
     right=1.5in,
     includeheadfoot,
 ]{geometry}
-\usepackage[font=small,labelfont=bf,justification=justified,
-format=plain]{caption}
+\usepackage[
+    font=small,
+    labelfont=bf,
+    justification=justified,
+    format=plain,
+    labelsep=period,
+]{caption}
 \usepackage{amsmath}
 
 \usepackage{subcaption}
@@ -83,6 +88,7 @@ format=plain]{caption}
 \usepackage{siunitx}
 \DeclareSIUnit\curie{Ci}
 \DeclareSIUnit\year{y}
+\DeclareSIUnit\hour{t}
 \DeclareSIUnit\atomicmassunit{u}
 \sisetup{
     range-phrase            =   \text{--},
@@ -91,6 +97,7 @@ format=plain]{caption}
     list-separator          =   {, },
     list-final-separator    =   { ja },
     list-units              =    single,
+    output-decimal-marker = {,},
 %   exponent-mode   =   scientific,
 }
 

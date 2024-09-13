@@ -35,7 +35,7 @@ Kahdessa ensimmäisessä mallissa kollimaattorin yksittäisen reiän ajatellaan 
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli1_2D.pdf}
-    \caption{Kollimaattorin mallin 1 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (890 kappaletta) sinisellä värillä. Kollimaattorin reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
+    \caption{Kollimaattorin mallin 1 havainnollistus detektorin ($x$, $y$)-tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (890 kappaletta) sinisellä värillä. Kollimaattorin reiän halkaisija on \qty{1.4}{\milli\meter} ja reikien välinen etäisyys on \qty{0.12}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
     \label{fig:ray1_2D}
 \end{figure}
 \begin{figure}[H]
@@ -49,7 +49,7 @@ Kahdessa ensimmäisessä mallissa kollimaattorin yksittäisen reiän ajatellaan 
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli2_2D.pdf}
-    \caption{Kollimaattorin mallin 2 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (61 kappaletta) sinisellä värillä. Kollimaattorin reiän halkaisija on \qty{1.4}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
+    \caption{Kollimaattorin mallin 2 havainnollistus detektorin ($x$, $y$)-tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (61 kappaletta) sinisellä värillä. Kollimaattorin reiän halkaisija on \qty{1.4}{\milli\meter}. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
     \label{fig:ray2_2D}
 \end{figure}
 \begin{figure}[H]
@@ -61,7 +61,7 @@ Kahdessa ensimmäisessä mallissa kollimaattorin yksittäisen reiän ajatellaan 
 \end{figure}
 %Ensimmäisessä mallissa kollimaattorin reiät ovat todenmukaisissa paikoissaan. \hyperref[fig:ray1]{Kuvan \ref*{fig:ray1}} malli sisältää 108 sädettä, kun yhdessä kollimaattorin reiässä on 7 sädettä. \hyperref[fig:ray1]{Kuvan \ref*{fig:ray2}} malli muodostuu vain yhdestä kollimaattorin reiästä detektorin pikseliä kohti ja kuvaan on piirretty 61 sädettä. Kuvista nähdään, kuinka detektorin havaitsema alue avaruudesta täyttyy tasaisemmin yhden reiän mallilla, vaikka säteitä on yli kolmannes vähemmän.
 
-Koska malleille 1 ja 2 on yhteistä se, kuinka säteet asettuvat kollimaattorin yksittäiseen reikään, oli luontevaa eriyttää säteiden päätepisteiden asettava funktio omakseen. \hyperref[appendix:2Dsiirto]{Liitteen \ref*{appendix:2Dsiirto}} funktio \texttt{computeHexShifts2D} asettaa säännöllisen kuusikulmion sisälle $n\in\NN$ pistettä.
+Koska malleille 1 ja 2 on yhteistä se, kuinka säteet asettuvat kollimaattorin yksittäiseen reikään, oli luontevaa eriyttää säteiden päätepisteiden asettava funktio omakseen. \hyperref[appendix:2Dsiirto]{Liitteen \ref*{appendix:2Dsiirto}} funktio \texttt{computeHexShifts2D} asettaa säännöllisen kuusikulmion sisälle $n_p\in\NN$ pistettä.
 
 Funktiolle \texttt{computeHexShifts2D} annetaan parametreinä pisteiden lukumäärä \texttt{nPoints}, kuusikulmion kärjen ja $x$-akselin välinen kulma \texttt{startAngle} ja kuusikulmion halkaisija \texttt{diameter}. Funktio palauttaa listan pisteistä $(x, y)\in\RR^2$, jotka vastaavat kuusikulmioon sijoittuvien pisteiden koordinaatteja. Tämä lista, C++:n vakiokirjaston vektori \texttt{hexShifts}, alustetaan rivillä 3. Riveillä 4-6 tarkistetaan, onko kuusikulmioon asetettavien pisteiden lukumäärä 1. Jos näin on, niin ainut palautettava piste on kuusikulmion keskipiste $(0, 0)$. Rivillä 8 asetettu muuttuja \texttt{currentPoint} pitää kirjaa siitä, kuinka monta pistettä vektoriin \texttt{hexShifts} on jo lisätty. Seuraavalla rivillä asetetaan kuusikulmion säteelle apumuuttuja \texttt{radius}, jotta sädettä ei tarvitse laskea kuin kerran.
 
@@ -89,29 +89,29 @@ Kun kuusikulmio jaetaan tasasivuisiin kolmioihin, kolmioiden kärkipisteistä sa
     \label{fig:6kulmio}
 \end{figure}
 
-Havaitaan, että kerrosten lukumäärän $k$ lisääntyessä yhdellä, olettaen $k>0$, pisteiden lukumäärä lisääntyy $6k$:lla. Siis, jos kerroksia on $k$ kappaletta, niin pisteitä on
+Havaitaan, että kerrosten lukumäärän $n_k$ lisääntyessä yhdellä, olettaen $n_k>0$, pisteiden lukumäärä lisääntyy $6n_k$:lla. Siis, jos kerroksia on $n_k$ kappaletta, niin pisteitä on
 \begin{equation}\label{eqn:pisteidenlkm}
-    n=1+\sum\limits_{i=0}^{k}6i
+    n_p=1+\sum\limits_{l=0}^{n_k}6l
 \end{equation}
-kappaletta. Koska funktiolle \texttt{computeHexShifts2D} syötetään pisteiden lukumäärä, tasaista asettelua varten täytyy määrittää pienin kerrosten lukumäärä $k$, jolle kaikki pisteet mahtuvat. Käytännössä yhtälöstä (\ref{eqn:pisteidenlkm}) täytyy ratkaista muuttuja $k$, joka tapahtuu aritmeettisen summan osasumman\cite{harjulehto_analyysia_2022} avulla. Osasummasta saadaan
+kappaletta. Koska funktiolle \texttt{computeHexShifts2D} syötetään pisteiden lukumäärä, tasaista asettelua varten täytyy määrittää pienin kerrosten lukumäärä $n_k$, jolle kaikki pisteet mahtuvat. Käytännössä yhtälöstä (\ref{eqn:pisteidenlkm}) täytyy ratkaista muuttuja $n_k$, joka tapahtuu aritmeettisen summan osasumman\cite{harjulehto_analyysia_2022} avulla. Osasummasta saadaan
 \begin{equation*}
-    n-1=6\frac{k(k+1)}{2},
+    n_p-1=6\frac{n_k(n_k+1)}{2},
 \end{equation*}
-joka on muuttujan $k$ toisen asteen yhtälö. Yhtälön juuret ovat
+joka on muuttujan $n_k$ toisen asteen yhtälö. Yhtälön juuret ovat
 \begin{equation*}
-    k=\frac{1}{2}\left( \pm\sqrt{4\cdot\frac{n - 1}{3} + 1} - 1 \right)
+    n_k=\frac{1}{2}\left( \pm\sqrt{4\cdot\frac{n_p - 1}{3} + 1} - 1 \right)
 \end{equation*}
 ja koska kerrosten lukumäärän täytyy olla epänegatiivinen, saadaan
 \begin{equation*}
-    k=\frac{1}{2}\left( \sqrt{4\cdot\frac{n - 1}{3} + 1} - 1 \right).
+    n_k=\frac{1}{2}\left( \sqrt{4\cdot\frac{n_p - 1}{3} + 1} - 1 \right).
 \end{equation*}
-Kerrosten lukumäärän täytyy olla myös kokonaisluku, joten pyöristetään kerrosten lukumäärä ylöspäin lähimpään kokonaislukuun. Siten
+Kerrosten lukumäärän täytyy olla myös kokonaisluku, joten pyöristetään kerrosten lukumäärä kattofunktiolla ylöspäin lähimpään kokonaislukuun. Siten
 \begin{equation}\label{eqn:kerrostenlkm}
-    k=\left\lceil\frac{1}{2}\left( \sqrt{4\cdot\frac{n - 1}{3} + 1} - 1 \right)\right\rceil.
+    n_k=\left\lceil\frac{1}{2}\left( \sqrt{4\cdot\frac{n_p - 1}{3} + 1} - 1 \right)\right\rceil.
 \end{equation}
 Yhtälö (\ref{eqn:kerrostenlkm}) on toteutettu funktion \texttt{computeHexShifts2D} rivillä 10.
 
-Riveillä 12 ja 13 asetetaan tilapäiset muuttujat kuusikulmion pisteen sijainnille. Riviltä 15 eteenpäin käydään läpi jokainen kuusikulmion kerros, jokaisen kerroksen kärki ja asetetaan tilapäisten muuttujien arvoiksi kärjen sijainti. Kerroksella $k$, $k>0$, tilapäistä muuttujaa siirretään $6k$ kertaa tasaisin välein ja pisteet tallennetaan vektoriin \texttt{hexShifts}. Joka lisäyksellä tarkistetaan, onko vektori \texttt{hexShifts} täynnä. Jos on, niin vektori palautetaan.
+Riveillä 12 ja 13 asetetaan tilapäiset muuttujat kuusikulmion pisteen sijainnille. Riviltä 15 eteenpäin käydään läpi jokainen kuusikulmion kerros, jokaisen kerroksen kärki ja asetetaan tilapäisten muuttujien arvoiksi kärjen sijainti. Kerroksella $n_k$, $n_k>0$, tilapäistä muuttujaa siirretään $6n_k$ kertaa tasaisin välein ja pisteet tallennetaan vektoriin \texttt{hexShifts}. Joka lisäyksellä tarkistetaan, onko vektori \texttt{hexShifts} täynnä. Jos on, niin vektori palautetaan.
 
 Funktion \texttt{computeSpectHexShifts} riveillä 3--9 parametrit asetetaan muuttujiin, joita käytettiin funktion kehitysvaiheessa MATLABissa. Riveillä 12--15 määritetään detektoripaneelin ulkonormaalivektori. Paneelin kulma positiiviseen $x$-akseliin nähden on laskettu rivillä 18. Riveillä 21--28 lasketaan detektorin pikselin keskipiste ja reunat detektoripaneelin $xy$-tasossa. Näitä tietoja tarvitaan siirtäessä lasketut säteet detektoripaneelin tasosta kolmiulotteiseen avaruuteen. Rivit 31--56 määrittävät kuusikulmioiden väliset etäisyydet $x$- ja $y$-suunnissa sekä säteiden päätepisteiden siirrot yhdessä kollimaattorin reiässä. Kollimaattorin reikien keskipisteet ovat laskettu riveillä 59--91 tarkalle mallille 1 ja riveillä 92--96 tehokkaalle mallille 2. Viimeinen vaihe on säteen päätepisteiden siirtojen lisääminen jokaisen kollimaattorin reiän keskipisteeseen ja koordinaatistomuunnos paneelin tasosta kolmiulotteiseen avaruuteen. Siirtojen lisääminen tapahtuu riveillä 104--107 ja koordinaatistomuunnos riveillä 114--119. Pisteet tallennetaan palautettavaan vektoriin \texttt{hexShifts}, jonka lopusta poistetaan ylimääräiset alkiot rivillä 130.
 
@@ -122,7 +122,7 @@ Kuvissa \ref{fig:ray3_2D} ja \ref{fig:ray3_3D} on esitetty kolmas malli, jossa s
     \centering
     \captionsetup{width=.9\linewidth}
     \includegraphics[width=.9\linewidth]{kuvat/malli3_2D.pdf}
-    \caption{Kollimaattorin mallin 3 havainnollistus detektorin tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (64 kappaletta) sinisellä värillä. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
+    \caption{Kollimaattorin mallin 3 havainnollistus detektorin ($x$, $y$)-tasossa. Detektoripaneelin pikselit ovat rajattu punaisilla viivoilla ja detektorin havaitsemat säteet (64 kappaletta) sinisellä värillä. Detektorin pikselin koko on $(\qty{4.664}{\milli\meter})^2$.}
     \label{fig:ray3_2D}
 \end{figure}
 \begin{figure}[H]
@@ -138,14 +138,14 @@ Malli on toteutettu yhdellä funktiolla \texttt{computeSpectSquareShifts}, joka 
 \subsection{OMEGA-integraatio}
 Koska käyttäjän on suunniteltu muokkaavan ainoastaan MATLAB-tiedostoja ja erityisesti pääohjelmaa, C++-funktioiden lisääminen valmiiseen ohjelmistoon vaati dataa käsittelevien funktioiden muokkaamista.
 
-Oleellisin muutos oli sinogrammin datapisteitä vastaavien säteiden määritys. Siddonin algoritmin toteutus tarvitsee kaksi pistettä säteen virittämältä suoralta kolmiulotteisessa avaruudessa, mutta sinogrammin projektiodatasta nähdään suoraan ainoastaan havaittujen säteilytapahtumien määrä pikselikohtaisesti. Edellä esitettyjen kollimaattorin mallien mukaisten suorien määritys kuva-alueessa tarvitseekin laitteen ja erityisesti kollimaattorin dimensioita. Tarvittavat dimensiot lisättiin ohjelmiston pääohjelmaan (josta edelleen C++-koodille), jotta muillakin SPECT-laitteilla kerätystä datasta voisi rekonstruoida kuvan vain pienin muutoksin. Huomioimisen arvoista on, etteivät suoran kaksi pistettä voi olla missä tahansa ohjelmiston muun toiminnan vuoksi. Tästä johtuen toinen piste on detektoripaneelin tasossa ja toinen kuva-alueen toisella puolella usean metrin päässä. Ratkaisuun päädyttiin sen helppouden vuoksi, koska SPECT-laitteiden kuva-alueen enimmäishalkaisija on tyypillisesti \qty{60}{\centi\meter}\cite{cherry_single_2012}.
+Oleellisin muutos oli sinogrammin datapisteitä vastaavien säteiden määritys. Siddonin algoritmin toteutus tarvitsee kaksi pistettä säteen virittämältä suoralta kolmiulotteisessa avaruudessa, mutta sinogrammin projektiodatasta nähdään suoraan ainoastaan havaittujen säteilytapahtumien määrä pikselikohtaisesti. Edellä esitettyjen kollimaattorin mallien mukaisten suorien määritys kuva-alueessa tarvitseekin laitteen ja erityisesti kollimaattorin dimensioita. Tarvittavat dimensiot lisättiin ohjelmiston pääohjelmaan (josta edelleen C++-koodille), jotta muillakin SPECT-laitteilla kerätystä datasta voisi rekonstruoida kuvan vain pienin muutoksin. Huomioimisen arvoista on, ettei suoran virittävää kahta pistettä voi valita mistä tahansa. Siddonin algoritmin toteutuksessa huomioidaan ainoastaan pisteiden väliin jäävän janan lävistävät kuva-alueen vokselit. Tästä johtuen toinen piste on detektoripaneelin tasossa ja toinen kuva-alueen toisella puolella usean metrin päässä. Ratkaisuun päädyttiin sen yksinkertaisuuden vuoksi, koska SPECT-laitteiden kuva-alueen enimmäishalkaisija on tyypillisesti \qty{60}{\centi\meter}\cite{cherry_single_2012}.
 
 Varsinaiset C++:lla toteutetut kollimaattorin mallit olivat suoraviivaisia lisätä ohjelmistoon. Ohjelmistossa oli valmiina loogiset muuttujat \texttt{CT} ja \texttt{PET}, joilla voidaan määrittää kullakin kuvantamismenetelmällä ajettavat koodin osiot. Vastaavasti ohjelmistoon lisättiin muuttuja \texttt{SPECT}. Liitteissä esitetyt funktiot lisättiin lähdekoodiin sellaisenaan ja niitä kutsuttiin \texttt{SPECT}-muuttujan ehtolauseessa ennen säteiden ja vokseleiden leikkausten laskemista. Koska tässä työssä toteutetut funktiot \texttt{computeSpectHexShifts} ja \texttt{computeSpectSquareShifts} palauttavat joukon pisteitä, säteiden ja vokseleiden leikkaukset lasketaan jokaiselle parille pisteitä erikseen ja tulokset keskiarvoistetaan.
 
 OMEGA avoimen lähdekoodin ohjelmistona on saatavissa GitHubista\footnote{\url{https://github.com/villekf/OMEGA}}. SPECT-rekonstruktio on tarkoitus sisällyttää versioon 2.0, jonka julkaisun on suunniteltu ajoittuvan vuoden 2024 lopulle.
 
 \subsection{Projektiodatan simulointi}
-Suomessa kliinisen datan tutkimuskäyttöä sääntelee niin kutsuttu toisiolaki, joka edellyttää joko luvan hakemista sosiaali- ja terveysalan tietolupaviranomaiselta Findatalta tai luvan keräämistä kuvantamisen yhteydessä potilaalta. Mallin kehitystä tämä ei kuitenkaan estänyt, koska mallin toimintaa voidaan testata myös simuloidulla datalla.
+Suomessa kliinisen datan tutkimuskäyttöä sääntelee niin kutsuttu toisiolaki, joka edellyttää joko luvan hakemista sosiaali- ja terveysalan tietolupaviranomaiselta Findatalta tai luvan keräämistä kuvantamisen yhteydessä potilaalta. Lupaprosessin vaatiman ajan vuoksi tässä työssä ei käytetty kliinistä dataa. Mallin kehitystä tämä ei kuitenkaan estänyt, koska mallin toimintaa voidaan testata myös simuloidulla datalla.
 
 Ohjelmistoja emissiotomografiadatan simulointiin on kehitetty jo 1980-luvulta alkaen\cite{ljungberg_monte_1989}. Kirjallisuudessa esiintyviä, julkisesti saatavissa olevia, ohjelmistoja ovat muun muassa SIMIND\cite{ljungberg_monte_1989, taheri_monte_2017, giannone_monte_1999}, GATE (\textit{Geant4 Application for Tomographic Emission})\cite{jan_gate_2004, taheri_monte_2017}, MCNPX (\textit{Monte Carlo N-Particle Transport})\cite{taheri_monte_2017}, SIMSET\cite{giannone_monte_1999}, MCMATV3D\cite{giannone_monte_1999} ja SIMSPECT\cite{giannone_monte_1999}.
 
@@ -159,7 +159,7 @@ IQ NEMA -fantomi koostuu vesisäiliöstä, jossa on kuusi radioaktiivisella nest
 
 Zubal-fantomi on puolestaan malli ihmiskehosta, joka on tässä tilanteessa rajattu pään alueelle. Simuloinnin kontekstissa fantomit ovat TT-kuvia, joiden jokainen pikseli on luokiteltu kuuluvaksi tiettyyn elimeen tai kudostyyppiin.\cite{zubal_computerized_1994} Jokaista elintä tai kudostyyppiä puolestaan vastaa tietty aktiivisuus, jonka perusteella määritetään simuloitujen gammafotonien määrä.
 
-Detektorin tuikeaineen ja kollimaattorin parametrit asetettiin vastaamaan Precedence 6 -laitteen parametreja\cite{peters_towards_2019}. Nämä ja muut kuvantamisen parametrit ovat esitetty \hyperref[tbl:simulaation_parametrit]{taulukossa \ref*{tbl:simulaation_parametrit}}. Esimerkiksi IQ NEMA -fantomin tapauksessa yhteen projektioon simuloitiin 12579273 fotonia ja havaittuja fotoneja oli yhteensä 31521520, joka vastaa noin \qty{3.9}{\percent} kokonaismäärästä.
+Detektorin tuikeaineen ja kollimaattorin parametrit asetettiin vastaamaan \hyperref[tbl:precedence-parametrit]{taulukossa \ref*{tbl:precedence-parametrit}} esitettyjä Precedence 6 -laitteen parametreja\cite{peters_towards_2019}. Loput kuvantamisen parametrit ovat esitetty \hyperref[tbl:simulaation_parametrit]{taulukossa \ref*{tbl:simulaation_parametrit}}. Esimerkiksi IQ NEMA -fantomin tapauksessa yhteen projektioon simuloitiin 12579273 fotonia ja havaittuja fotoneja oli yhteensä 31521520, joka vastaa noin \qty{3.9}{\percent} kokonaismäärästä.
 \begin{table}[H]
     \centering
     \captionsetup{width=.9\linewidth}
@@ -169,19 +169,13 @@ Detektorin tuikeaineen ja kollimaattorin parametrit asetettiin vastaamaan Preced
             \toprule
             Parametri & Arvo & \\
             \midrule
-            Tuikeaineen materiaali & \ce{NaI}\\
-            Tuikeaineen paksuus & \qty{9.525}{\milli\meter}\\
-            Tuikeaineen pikselin koko & \qty{4.664}{\milli\meter}\\
-            Kollimaattorin reiän muoto & kuusikulmainen\\
-            Kollimaattorin reiän halkaisija & \qty{1.40}{\milli\meter}\\
-            Kollimaattorin reiän pituus & \qty{32.8}{\milli\meter}\\
-            Kollimaattorin reikien väli & \qty{0.152}{\milli\meter}\\
             Energiaikkuna & \qtyrange{129.5}{150.5}{\kilo\electronvolt}\\
             Projektioiden lukumäärä & 64\\
             Projektioita vastaavat kulmat & \qtyrange{0}{360}{\degree}\\
             %Simuloitujen fotonien lukumäärä & 805073472\\
             %Havaittujen fotonien lukumäärä & 31521520\\
             Kuvantamisaika per projektio & \qty{1}{\second}\\
+            Projektiokuvan koko (pikseliä) & $128\cdot 128$\\
             \bottomrule
         \end{tabular}
     %}
