@@ -1,14 +1,29 @@
 \begin{titlepage}
-    \section*{Tiivistelmä}
-    %Yksifotoniemissiotomografia (\textit{single photon emission computed tomography}, SPECT) on isotooppilääketieteen kuvantamismenetelmä, jossa pyritään selvittämään gammasäteilyä lähettävän radioaktiivisen merkkiaineen jakauma kehossa. Menetelmää käytetään muun muassa sydän- ja verisuonitautien, aivohalvauksen, infektioiden ja syövän diagnosointiin ja seurantaan.
+    \noindent
+    Itä-Suomen yliopisto, luonnontieteiden, metsätieteiden ja tekniikan tiedekunta\\
+    Teknillisen fysiikan koulutusohjelma\\
+    Niilo Saarlemo: Yksifotoniemissiotomografiakuvan rekonstruktion toteuttaminen OMEGA-ohjelmistoon\\
+    Diplomityö, 57 sivua, 2 liitettä (10 sivua)\\
+    Tutkielman ohjaajat: FT Ville-Veikko Wettenhovi, FT Matti Kortelainen\\
+    Syyskuu 2024\\
 
-    %Radioaktiivisen merkkiaineen jakaumaa ei voida mitata suoraan. Eri puolilta kehoa voidaan kuitenkin havaita säteilytapahtumia, jotka kerätään projektioiksi kutsuttuihin kuviin. Aktiivisuusjakauma on siten rekonstruoitava projektioista.
+    \hrule
 
-    %Kun radioaktiivisuuden jakauma kuvattavassa alueessa oletetaan paloittain vakioksi, alkuperäistä rekonstruktio-ongelmaa vastaa lineaarinen matriisiyhtälö $Af=g$. Yhtälössä $A$ on niin kutsuttu projektiomatriisi, joka määrittää kuvantamisen geometrian, $f$ on ratkaistava kuva ja vektori $g$ sisältää havaitut projektiot.
+    \vspace{4pt}\noindent
+    Avainsanat: yksifotoniemissiotomografia, SPECT, SPET, rekonstruktio, isotooppilääketiede\\
+    \vspace{24pt}\\
+    \noindent
+    Yksifotoniemissiotomografia (\textit{single photon emission computed tomography}, SPECT) on isotooppilääketieteen kuvantamismenetelmä, jossa pyritään selvittämään gammasäteilyä lähettävän radioaktiivisen merkkiaineen jakauma kehossa. Menetelmää käytetään muun muassa sydän- ja verisuonitautien, aivohalvauksen, infektioiden ja syövän diagnosointiin ja seurantaan. Radioaktiivisen merkkiaineen jakaumaa ei voida mitata suoraan. Eri puolilta kehoa voidaan kuitenkin havaita säteilytapahtumia, jotka kerätään projektioiksi kutsuttuihin kaksiulotteisiin histogrammeihin. Aktiivisuusjakauma on siten rekonstruoitava projektioista.
 
-    %Projektiomatriisi $A$ voidaan laskea useammalla eri tavalla. Eräs yksinkertainen menetelmä on ajatella laitteen detektoripaneelin pysyvän paikoillaan kuva-alueen pyöriessä. Niin kutsutut sädepohjaiset menetelmät perustuvat havaittujen gammafotonien kulkemien polkujen määritykseen.
+    Kun radioaktiivisuuden jakauma kuvattavassa alueessa oletetaan paloittain vakioksi, alkuperäistä rekonstruktio-ongelmaa vastaa lineaarinen matriisiyhtälö $Af=g$. Yhtälössä $A$ on niin kutsuttu projektiomatriisi, joka määrittää kuvantamisen geometrian, $f$ on ratkaistava kuva ja vektori $g$ sisältää havaitut projektiot.
 
-    %OMEGA on tomografiakuvan rekonstruktioon tarkoitettu avoimen lähdekoodin ohjelmisto. Nykyisellään OMEGA tukee ainoastaan kuva-alueen rotaatioon pohjautuvaa menetelmää SPECT-tutkimuksen projektiomatriisin laskemiselle. Menetelmä voi kuitenkin osoittautua hankalaksi toteuttaa uusille SPECT-laitteille. Siten tässä diplomityössä on kehitetty malli SPECT-laitteen havaitsemien gammafotonien kulkemien polkujen määrittämiseen.
+    Projektiomatriisi $A$ voidaan laskea useammalla eri tavalla. Eräs yksinkertainen menetelmä on ajatella laitteen detektoripaneelin pysyvän paikoillaan kuva-alueen pyöriessä. Niin kutsutut sädepohjaiset menetelmät perustuvat havaittujen gammafotonien kulkemien polkujen ja vokseleiden leikkausten määritykseen.
 
-    %Simuloidulla datalla suoritettujen testien tulokset osoittautuivat lupaaviksi, mutta mallin toimivuutta olisi myös syytä testata kliinisellä datalla. Työssä käsitellään myös SPECT-laitteen geometrian täsmällisen mallinnuksen laskentatehokkuutta, siihen liittyviä haasteita ja mallin approksimaatiota.
+    OMEGA on tomografiakuvan rekonstruktioon tarkoitettu avoimen lähdekoodin ohjelmisto. Nykyisellään OMEGA tukee ainoastaan kuva-alueen rotaatioon pohjautuvaa menetelmää SPECT-tutkimuksen projektiomatriisin laskemiselle. Menetelmä voi kuitenkin osoittautua hankalaksi toteuttaa uusille SPECT-laitteille. Siten tässä diplomityössä on kehitetty malli SPECT-laitteen havaitsemien gammafotonien kulkemien polkujen määrittämiseen.
+
+    \newpage\thispagestyle{empty}
+
+    Mallin laskentatehokkuutta sekä kuvan rekonstruktion laatua testattiin sekä simuloidulla että oikealla datalla. Kuvan laadun analysointiin käytettiin SSIM-mittaria sekä keskivirhettä. Työssä kehitetyllä sädepohjaisella mallilla rekonstruoitu kuva vastasi laadultaan kuva-alueen rotaatioon perustuvalla projektorilla rekonstruoitua kuvaa, mutta laskenta oli huomattavasti nopeampaa. Sädepohjainen malli on siten toimiva vaihtoehto SPECT-kuvan rekonstruktioon. Mallin toimintaa olisi kuitenkin syytä testata myös laajalla potilasdatalla.
+
+    Työssä käsitellään myös jatkokehityksen kohteita, kuten mallin säteiden jakaumaa, rinnakkaislaskentaa näytönohjaimella sekä \textit{a priori} -tiedon hyödyntämistä kuvan rekonstruktiossa.
 \end{titlepage}

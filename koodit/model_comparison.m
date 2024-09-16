@@ -7,6 +7,8 @@ nema_arr = calculate_metrics('nema_phantom_proj1_model3_nRay', ...
     "data/nema_phantom/results/nema_ground_truth.mat", n_images, rays);
 cbf_arr = calculate_metrics('brain_phantom_proj1_model3_nRay', ...
     "data/brain_phantom/results/cbf1_ground_truth.mat", n_images, rays);
+pro_arr = calculate_metrics('pro_specta_proj1_model3_nRay', ...
+    "data/pro_specta/pro_specta_ground_truth.mat", n_images, rays);
 
 function res_arr = calculate_metrics(fpath, gtpath, n_images, rays)
     options = {};
@@ -58,6 +60,17 @@ pz = pz ./ max(pz, [], 'all');
 
 brain_proj6 = [immse(pz, phantom), ssim(pz, phantom)];
 
+load("data/pro_specta/pro_specta_ground_truth.mat")
+phantom = single(phantom);
+phantom = phantom ./ max(phantom, [], 'all');
+
+load('pro_specta_proj6.mat')
+pz = single(pz);
+pz = pz ./ max(pz, [], 'all');
+pz = padarray(pz, [0 0 16]);
+
+pro_proj6 = [immse(pz, phantom), ssim(pz, phantom)];
+
 %% Plot
 f1 = figure(1);
 set(f1, 'defaulttextinterpreter', 'latex')
@@ -65,13 +78,15 @@ set(f1, 'defaulttextinterpreter', 'latex')
 p1 = semilogx(rays.^2, nema_arr(:, 2));
 hold on
 p2 = semilogx(rays.^2, cbf_arr(:, 2));
+p5 = semilogx(rays.^2, pro_arr(:, 2));
 yline(nema_proj6(2), '--', 'Color', p1.Color)
 yline(brain_proj6(2), '--', 'Color', p2.Color)
+yline(pro_proj6(2), '--', 'Color', p5.Color)
 hold off
 ylabel('SSIM')
 ylim([0.9 1])
 xlabel('$N$')
-legend('NEMA IQ', 'Zubal', 'Location', 'southeast', 'interpreter', 'latex')
+legend('NEMA IQ', 'Zubal', 'Pro.specta', 'Location', 'southeast', 'interpreter', 'latex')
 grid on
 
 f1.Position = [100 100 640 480];
@@ -83,14 +98,16 @@ set(f2, 'defaulttextinterpreter', 'latex')
 p3 = semilogx(rays.^2, nema_arr(:, 1));
 hold on
 p4 = semilogx(rays.^2, cbf_arr(:, 1));
+p6 = semilogx(rays.^2, pro_arr(:, 1));
 yline(nema_proj6(1), '--', 'Color', p3.Color)
 yline(brain_proj6(1), '--', 'Color', p4.Color)
+yline(pro_proj6(1), '--', 'Color', p6.Color)
 hold off
 ylabel('MSE')
 xlabel('$N$')
-legend('NEMA IQ', 'Zubal', 'Location', 'northeast', 'interpreter', 'latex')
+legend('NEMA IQ', 'Zubal', 'Pro.specta', 'Location', 'northeast', 'interpreter', 'latex')
 grid on
-ylim([0 0.001])
+ylim([0 0.003])
 
 f2.Position = [100 100 640 480];
 exportgraphics(f2, strcat("kuvat/vertailu_MSE.pdf"), 'resolution', 1500, 'contenttype', 'vector')
